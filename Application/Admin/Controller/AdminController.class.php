@@ -18,14 +18,14 @@ class AdminController extends Controller {
 	protected function _initialize() {
 		// 
 		// 是否是超级管理员
-        define('IS_ROOT',   false);
+        define('IS_ROOT',   false); 
 		// 检测访问权限
         $access =   $this->accessControl();
 
         if ($access === false) {
         	$this->error('403:禁止访问');
         } else {
-        	# code...
+        	// 
         }
         
 	}

@@ -29,6 +29,12 @@
 	}
 	</style>
 
+	<script type="text/javascript">
+		// 初始化全局变量定义
+		var MODULE_NAME = '/index.php/Admin';
+		
+	</script>
+
 
 </head>
 <body class="easyui-layout">
@@ -42,15 +48,15 @@
 			</span>
 			<a href="#" class="easyui-menubutton" data-options="menu:'#mm1',iconCls:'icon-control-panel'">控制面板</a>
 		</div>
-	</div>
-	<div id="layout-west" data-options="region:'west',title:'菜单导航',width:180,split:true" >
+	</div> <!-- /layout-north -->
+	<div id="layout-west" data-options="region:'west',title:'导航菜单',width:180,split:true" >
 		<div id="acc-nav"></div>
-		
-	</div>
+	</div> <!-- /layout-west -->
+
 	<div id="layout-center" data-options="region:'center'">
 		<div class="easyui-tabs" id="main-tabs" data-options="fit:true,border:false,tools:'#tab-tools'"  >
 			<div title="后台首页" style="line-height:0;">
-				<iframe width="100%" scrolling="auto" height="100%" frameborder="0" src="http://www.baidu.com/"></iframe>
+				<iframe width="100%" scrolling="auto" height="100%" frameborder="0" src=""></iframe>
 			</div>
 		</div>
 	</div>
@@ -84,5 +90,6 @@
 	<script type="text/javascript" src="/Public/Static/jquery-2.0.3.min.js"></script>
 <!--<![endif]-->
 <script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/Public/Admin/js/index.js"></script>
 </body>
 </html>

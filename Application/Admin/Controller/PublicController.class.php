@@ -8,7 +8,7 @@
 namespace Admin\Controller;
 
 
-class PublicController extends \Think\Controller {
+class PublicController extends AdminController {
 
 	public function index() {
 	
@@ -25,6 +25,13 @@ class PublicController extends \Think\Controller {
 		}
 		
 	}
+
+	
+
+	public function verify(){
+        $verify = new \COM\Verify();
+        $verify->entry(1);
+    }
 }
 
 ?>

@@ -26,7 +26,7 @@
 			margin-top:40px;
 			border-radius:5px;
 			background:#25547E;
-			box-shadow:0 0 8px #143865;
+			box-shadow:0 0 8px #143865; /*#3477AD*/
 			position:absolute;
 			left:50%;
 			top:50%;

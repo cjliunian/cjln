@@ -13,7 +13,7 @@
 			margin:0;
 			padding:0;
 		}
-		body,h1 {
+		body {
 			/*background: none repeat scroll 0 0 #25547E;*/
 			background:url('/Public/Admin/images/login/bg.jpg') repeat scroll 0 0 rgba(0, 0, 0, 0);
 		}
@@ -22,15 +22,11 @@
 			height:300px;
 			padding:0 20px;
 			border:none;
-			color:#000;
+			color:#fff;
 			margin-top:40px;
 			border-radius:5px;
-			background:#DBEAF9;
-			box-shadow:0 0 10px #222;
-			/*background:-moz-linear-gradient(top,#fff,#efefef 8%);
-			background:-webkit-gradient(linear,0 0,0 100%,from(#f6f6f6),to(#f4f4f4));
-			background:url('/Public/Admin/images/login/bg.jpg') repeat scroll 0 0 rgba(0, 0, 0, 0);*/
-			/*font:11px/1.5em 'Microsoft YaHei';*/
+			background:#25547E;
+			box-shadow:0 0 8px #143865; /*#3477AD*/
 			position:absolute;
 			left:50%;
 			top:50%;
@@ -47,6 +43,32 @@
 
 <div class="container">
 	
+	<div class="login-box">
+		<form  role="form" method="post">
+        <h1>
+    		<!-- <a href="#"><img src="/Public/Admin/images/login/logo.png" alt="logo" ></a> -->
+    		cjln
+    	</h1>
+        <div class="form-group">
+        	<input type="password" class="form-control" placeholder="用户名" required>
+        </div>
+
+        <div class="form-group">
+        	<input type="password" class="form-control" placeholder="密码" required>
+        </div>
+		<!-- 
+        <div class="form-group">
+        	<input type="text" class="form-control" placeholder="验证码" required>
+        </div>
+
+        <div class="form-group">
+        	<img src="/Public/Admin/images/login/verifyimg.png" alt="点击切换" width="360" height="32" class="verifyimg reloadverify">
+        </div> -->
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登 录</button>
+      </form>
+	</div>
+	<!-- /login-box -->
 </div>
 <!-- /container -->
 
@@ -59,8 +81,5 @@
 
 <script type="text/javascript" src="/Public/Static/bootstrap/js/bootstrap.min.js"></script>
 
-<script type="text/javascript">
-	$(function($){});
-</script>
 </body>
 </html>
