@@ -19,30 +19,6 @@ class IndexController extends AdminController {
 		$this->display();
     }
 
-    public function userList() {
-    
-    	
-    }
-
-    public function getTopMenuJson() {
-        $topMenu = D('Menu')->getTopMenu();
-        if(!empty($topMenu)) $this->ajaxReturn($topMenu,'JSON');
-    }
-
-    public function getMenuJson($id) {
-        $pid = I('id',$id,'int');
-        $menus = D('Menu')->field('id,name as text,icon,url')->where('pid='.$pid.' and status = 0')->select();
-        foreach ($menus as $key => $line) {
-            // if($this->authcheck($line['url'],session('uid'))){
-                $hasChild = D('Menu')->field('id')->where('pid='.$line['id'])->find();
-                $menus[$key]['state'] = empty($hasChild) ? 'open' : 'closed';
-                $menus[$key]['iconCls'] = $line['icon'];
-                $menus[$key]['attributes'] = array('url'=> U($line['url']));
-            // }
-        }
-        if(!empty($menus)) $this->ajaxReturn($menus,'JSON');
-    }
-
 
     public function getMenu($id) {
         $pid = I('id',$id,'int');
