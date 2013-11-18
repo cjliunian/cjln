@@ -38,6 +38,13 @@ class IndexController extends AdminController {
         
     }
 
+    public function add() {
+    
+        # code...
+        echo "string";
+        $this->display();
+    }
+
     public function test() {
 
 

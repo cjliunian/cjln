@@ -23,7 +23,7 @@ $(function($){
 
 
 });
-
+var mainTabs = $('#main-tabs').tabs();
 /**
  * 菜单操作
  *
@@ -36,7 +36,37 @@ function menuAc(node){
 			$(this).tree('collapse',node.target);
 		}
 	}else {
-		// addTab(node);
-		console.info(node);
+		// 
+		if(mainTabs.tabs('exists',node.text)) {
+			mainTabs.tabs('select',node.text);
+		} else {
+			mainTabs.tabs('add',{
+				title: node.text,
+				href: node.attributes.url,
+				useiframe:true,
+				closable: true
+			});
+		}
+		
+		console.info(node.attributes.url);
 	}
+}
+
+/**
+ *
+ * 刷新tab
+ */
+function refresh () {
+	console.info(mainTabs);
+	var sltTab = mainTabs.tabs('getSelected');
+	console.info(sltTab);
+	mainTabs.tabs('update',{
+		tab:sltTab,
+		options:{
+			href:sltTab.href,
+			useiframe:true,
+			title:'xxxxx'
+		}
+
+	});
 }

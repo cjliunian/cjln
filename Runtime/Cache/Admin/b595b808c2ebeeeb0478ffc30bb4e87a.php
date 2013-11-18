@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html>
 <head>
 	<title> 后台管理</title>
-	<link rel="stylesheet" type="text/css" href="__STATIC__/easyui/themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="__STATIC__/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/default/easyui.css">
 
 	<style type="text/css">
 	.easyui-layout .layout-panel-west .panel-header {
@@ -31,7 +31,7 @@
 
 	<script type="text/javascript">
 		// 初始化全局变量定义
-		var MODULE_NAME = '__MODULE__';
+		var MODULE_NAME = '/index.php/Admin';
 		
 	</script>
 
@@ -84,13 +84,13 @@
 
 
 <!--[if lt IE 9]>
-	<script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="/Public/Static/jquery-1.10.2.min.js"></script>
 <![endif]-->
 <!--[if gte IE 9]><!-->
-	<script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript" src="/Public/Static/jquery-2.0.3.min.js"></script>
 <!--<![endif]-->
-<script type="text/javascript" src="__STATIC__/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="__STATIC__/easyui/extends/jquery.easyui.tabs.extend.js"></script>
-<script type="text/javascript" src="__JS__/index.js"></script>
+<script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/Public/Static/easyui/extends/jquery.easyui.tabs.extend.js"></script>
+<script type="text/javascript" src="/Public/Admin/js/index.js"></script>
 </body>
 </html>
