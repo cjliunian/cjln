@@ -43,7 +43,6 @@ function menuAc(node){
 			mainTabs.tabs('add',{
 				title: node.text,
 				href: node.attributes.url,
-				// css: {'margin-left':'2px'},
 				useiframe:true,
 				showMask: true,
 				loadMsg: '加载中,请稍后....',
@@ -58,23 +57,11 @@ function menuAc(node){
  * 刷新tab
  */
 function refresh () {
-	// var sltTab = mainTabs.tabs('getSelected');
-	// console.info(sltTab);
-	// var sltTabIndex = mainTabs.tabs('getTabIndex',sltTab);
-	// var tmp = mainTabs.tabs('select',sltTabIndex);
-	// console.info(tmp);
-	// console.info('sltTabIndex:'+sltTabIndex);
-	
-	// mainTabs.tabs('update',{
-	// 	tab:sltTab,
-	// 	options:{
-	// 		// useiframe:true,
-	// 		// href:'www.baidu.com',
-	// 		// content: 'url:http://www.baidu.com'
-	// 	}
-
-	// });
-	// mainTabs.tabs('updateIframeTab',{'which':sltTabIndex});
+	var sltTab = mainTabs.tabs('getSelected');
+	$('iframe', sltTab.panel('body')).each(function(){
+		$.mask({loadMsg: '加载中,请稍后....', target: sltTab});
+        this.contentWindow.location.reload();
+    });
 }
 
 

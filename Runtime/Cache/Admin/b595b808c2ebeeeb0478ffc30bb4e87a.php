@@ -91,7 +91,7 @@
 <!--<![endif]-->
 <script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="/Public/Static/jquery.cookie.js"></script>
-<script type="text/javascript" src="/Public/Static/easyui/extends/jquery.easyui.tabs.extend.js"></script>
+<script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.extend.min.js"></script>
 <script type="text/javascript" src="/Public/Admin/js/index.js"></script>
 </body>
 </html>

@@ -19,6 +19,11 @@ class MenuController extends AdminController
 
 		$this->display('index');
 	}
+
+	public function getJson()
+	{
+		exit('xxxx');
+	}
 }
 
 ?>

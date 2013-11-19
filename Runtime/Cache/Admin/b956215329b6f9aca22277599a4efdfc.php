@@ -12,8 +12,8 @@
 
 
 </head>
-<body>
-<div style="margin: 5px;">
+<body style="margin: 5px;">
+
 
 	
 	<div style="height:40px;border: 1px solid gray;margin-bottom: 5px;">
@@ -21,7 +21,7 @@
 	</div>
 	
 	<table class="easyui-datagrid" title="Basic DataGrid" style="height:250px"
-			data-options="singleSelect:true,collapsible:true,url:'../datagrid/datagrid_data1.json'">
+			data-options="singleSelect:true,collapsible:true,url:'/index.php/Admin/Menu/getJson'">
 		<thead>
 			<tr>
 				<th data-options="field:'itemid',width:80">Item ID</th>
@@ -33,7 +33,7 @@
 			</tr>
 		</thead>
 	</table>
-
+<hr>
 
 	<div id="p" class="easyui-panel" title="Basic Panel" style="height:200px;padding:10px;">
 		<p style="font-size:14px">jQuery EasyUI framework help you build your web page easily.</p>
@@ -49,7 +49,6 @@
 	
 	
 
-</div>
 
 <!--[if lt IE 9]>
 	<script type="text/javascript" src="/Public/Static/jquery-1.10.2.min.js"></script>
@@ -67,7 +66,6 @@
 	$(function($){
 		$(".easyui-datagrid").datagrid('resize');
 		$(window).resize(function(){
-			// $('#wrap').css('margin-right','5px');
 			$(".easyui-datagrid").datagrid('resize');
 			$(".easyui-panel").panel('resize');
 		});

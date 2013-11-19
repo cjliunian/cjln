@@ -12,10 +12,9 @@
 
 
 </head>
-<body>
-<div style="margin: 5px;">
+<body style="margin: 5px;">
+
 <block name="body"></block>
-</div>
 
 <!--[if lt IE 9]>
 	<script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js"></script>
@@ -29,7 +28,6 @@
 	$(function($){
 		$(".easyui-datagrid").datagrid('resize');
 		$(window).resize(function(){
-			// $('#wrap').css('margin-right','5px');
 			$(".easyui-datagrid").datagrid('resize');
 			$(".easyui-panel").panel('resize');
 		});
