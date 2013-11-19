@@ -3,7 +3,7 @@
 <head>
 	<title> 后台管理</title>
 	<link rel="stylesheet" type="text/css" href="__STATIC__/easyui/themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="__STATIC__/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" id="theme" href="__STATIC__/easyui/themes/<php>echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default';</php>/easyui.css">
 
 	<style type="text/css">
 	.easyui-layout .layout-panel-west .panel-header {
@@ -90,6 +90,7 @@
 	<script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
 <!--<![endif]-->
 <script type="text/javascript" src="__STATIC__/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="__STATIC__/jquery.cookie.js"></script>
 <script type="text/javascript" src="__STATIC__/easyui/extends/jquery.easyui.tabs.extend.js"></script>
 <script type="text/javascript" src="__JS__/index.js"></script>
 </body>

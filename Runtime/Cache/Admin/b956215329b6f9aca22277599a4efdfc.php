@@ -1,6 +1,20 @@
-<extend name="Public/base"/>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html>
+<head>
+	<title> 后台管理</title>
+	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" id="theme" href="/Public/Static/easyui/themes/<?php echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default'; ?>/easyui.css">
+	
+	<script type="text/javascript">
+		// 初始化全局变量定义
+		var MODULE_NAME = '/index.php/Admin';
+	</script>
 
-<block name="body">
+
+</head>
+<body>
+<div style="margin: 5px;">
+
 	
 	<div style="height:40px;border: 1px solid gray;margin-bottom: 5px;">
 		xxxxxxxxxx
@@ -34,10 +48,30 @@
 	</div>
 	
 	
-</block>
 
-<block name="script">
+</div>
+
+<!--[if lt IE 9]>
+	<script type="text/javascript" src="/Public/Static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<!--[if gte IE 9]><!-->
+	<script type="text/javascript" src="/Public/Static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.min.js"></script>
+
     <script type="text/javascript">
         
     </script>
-</block>
+
+<script type="text/javascript">
+	$(function($){
+		$(".easyui-datagrid").datagrid('resize');
+		$(window).resize(function(){
+			// $('#wrap').css('margin-right','5px');
+			$(".easyui-datagrid").datagrid('resize');
+			$(".easyui-panel").panel('resize');
+		});
+	});
+</script>
+</body>
+</html>

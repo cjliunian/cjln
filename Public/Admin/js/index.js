@@ -43,12 +43,13 @@ function menuAc(node){
 			mainTabs.tabs('add',{
 				title: node.text,
 				href: node.attributes.url,
+				// css: {'margin-left':'2px'},
 				useiframe:true,
+				showMask: true,
+				loadMsg: '加载中,请稍后....',
 				closable: true
 			});
 		}
-		
-		console.info(node.attributes.url);
 	}
 }
 
@@ -57,16 +58,62 @@ function menuAc(node){
  * 刷新tab
  */
 function refresh () {
-	console.info(mainTabs);
-	var sltTab = mainTabs.tabs('getSelected');
-	console.info(sltTab);
-	mainTabs.tabs('update',{
-		tab:sltTab,
-		options:{
-			href:sltTab.href,
-			useiframe:true,
-			title:'xxxxx'
-		}
+	// var sltTab = mainTabs.tabs('getSelected');
+	// console.info(sltTab);
+	// var sltTabIndex = mainTabs.tabs('getTabIndex',sltTab);
+	// var tmp = mainTabs.tabs('select',sltTabIndex);
+	// console.info(tmp);
+	// console.info('sltTabIndex:'+sltTabIndex);
+	
+	// mainTabs.tabs('update',{
+	// 	tab:sltTab,
+	// 	options:{
+	// 		// useiframe:true,
+	// 		// href:'www.baidu.com',
+	// 		// content: 'url:http://www.baidu.com'
+	// 	}
 
-	});
+	// });
+	// mainTabs.tabs('updateIframeTab',{'which':sltTabIndex});
+}
+
+
+/**
+ * 全屏 
+ */
+function fullscreen(){
+	// console.info('fullscreen');
+	// var fullscreen = $("#fullscreen").linkbutton('options');
+	
+	// if(fullscreen.iconCls == "icon-fullscreen"){
+	// 	$("body").layout('hidden','all');
+	// 	$("#fullscreen").linkbutton({iconCls: 'icon-normalscreen'});
+	// 	$("#fullscreen").attr('title','退出全屏');
+	// }else {
+	// 	$("body").layout('show','all');
+	// 	$("#fullscreen").linkbutton({iconCls: 'icon-fullscreen'});
+	// 	$("#fullscreen").attr('title','全屏');
+	// }
+}
+
+
+function changeTheme (theme) {
+	var $theme = $("#theme");
+	var oldtheme = $theme.attr("href");
+	var newtheme = oldtheme.substring(0,oldtheme.indexOf('themes')) + 'themes/'+theme+'/easyui.css';
+
+	$theme.attr("href",newtheme);
+
+
+	var $iframes = $("iframe");
+
+	if($iframes.length > 0){
+		for (var i = 0; i < $iframes.length; i++) {
+			$($iframes[i]).contents().find("#theme").attr("href",newtheme);
+		};
+	}
+
+	$.cookie('theme',theme,{expires:7});
+
+	// console.info(newtheme);
 }

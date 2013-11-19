@@ -14,6 +14,11 @@ class MenuController extends AdminController
 
 		$this->display();
 	}
+
+	public function mlist() {
+
+		$this->display('index');
+	}
 }
 
 ?>
