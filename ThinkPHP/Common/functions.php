@@ -142,13 +142,12 @@ function T($template='',$layer=''){
     $auto   =   C('AUTOLOAD_NAMESPACE');
     if($auto && isset($auto[$extend])){ // 扩展资源
         $baseUrl    =   $auto[$extend].$module.$layer.'/';
+    }elseif(C('VIEW_PATH')){ // 指定视图目录
+        $baseUrl    =   C('VIEW_PATH').$module.'/';
     }else{
-        if(C('VIEW_PATH')){
-            $baseUrl    =   C('VIEW_PATH').$module;
-        }else{
-            $baseUrl    =   APP_PATH.$module.$layer.'/';
-        }
+        $baseUrl    =   APP_PATH.$module.$layer.'/';
     }
+
     // 获取主题
     $theme  =   substr_count($file,'/')<2 ? C('DEFAULT_THEME') : '';
 
@@ -351,7 +350,7 @@ function import($class, $baseUrl = '', $ext=EXT) {
             //加载当前模块的类库
             $baseUrl = MODULE_PATH;
             $class   = substr_replace($class, '', 0, strlen($class_strut[0]) + 1);
-        }if (in_array(strtolower($class_strut[0]), array('think','org', 'com'))) {
+        }elseif (is_dir(LIB_PATH.$class_strut[0])) {
             // org 第三方公共类库 com 企业公共类库
             $baseUrl = LIB_PATH;
         }else { // 加载其他模块的类库
@@ -442,7 +441,7 @@ function M($name='', $tablePrefix='',$connection='') {
     }else{
         $class      =   'Think\\Model';
     }
-    $guid           =   $tablePrefix . $name . '_' . $class;
+    $guid           =   (is_array($connection)?implode('',$connection):$connection).$tablePrefix . $name . '_' . $class;
     if (!isset($_model[$guid]))
         $_model[$guid] = new $class($name,$tablePrefix,$connection);
     return $_model[$guid];
@@ -758,7 +757,9 @@ function U($url='',$vars='',$suffix=true,$redirect=false,$domain=false) {
                 $var[C('VAR_MODULE')]    =   array_pop($path);
             }else{
                 if(C('MULTI_MODULE')) {
-                    $var[C('VAR_MODULE')]=   MODULE_NAME;
+                    if(MODULE_NAME != C('DEFAULT_MODULE') || !C('MODULE_ALLOW_LIST')){
+                        $var[C('VAR_MODULE')]=   MODULE_NAME;
+                    }
                 }
             }
             if($maps = C('URL_MODULE_MAP')) {
