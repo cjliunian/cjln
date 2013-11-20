@@ -3,6 +3,7 @@
 <head>
 	<title> 后台管理</title>
 	<link rel="stylesheet" type="text/css" href="__STATIC__/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="__STATIC__/easyui/themes/icon.extend.css">
 	<link rel="stylesheet" type="text/css" id="theme" href="__STATIC__/easyui/themes/<php>echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default';</php>/easyui.css">
 	<block name="css"></block>
 	<script type="text/javascript">
@@ -12,10 +13,10 @@
 
 
 </head>
-<body style="margin: 5px;">
-
-<block name="body"></block>
-
+<body>
+<div class="wrap" style="margin: 5px;">
+	<block name="body"></block>
+</div>
 <!--[if lt IE 9]>
 	<script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js"></script>
 <![endif]-->
@@ -27,6 +28,7 @@
 <script type="text/javascript">
 	$(function($){
 		$(".easyui-datagrid").datagrid('resize');
+		$(".easyui-panel").panel('resize');
 		$(window).resize(function(){
 			$(".easyui-datagrid").datagrid('resize');
 			$(".easyui-panel").panel('resize');

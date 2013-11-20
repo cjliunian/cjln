@@ -45,11 +45,11 @@ class IndexController extends AdminController {
         $this->display();
     }
 
-    public function test() {
-
+    public function dashboard() {
 
         // $menus = D('Menu')->getMenu();
         
-        // echo $menus;   
+        // echo $menus;
+        $this->display();
     }
 }

@@ -59,7 +59,7 @@ function menuAc(node){
 function refresh () {
 	var sltTab = mainTabs.tabs('getSelected');
 	$('iframe', sltTab.panel('body')).each(function(){
-		$.mask({loadMsg: '加载中,请稍后....', target: sltTab});
+		if(sltTab.panel('options').useiframe) $.mask({loadMsg: '加载中,请稍后....', target: sltTab});
         this.contentWindow.location.reload();
     });
 }
@@ -69,6 +69,8 @@ function refresh () {
  * 全屏 
  */
 function fullscreen(){
+
+
 	// console.info('fullscreen');
 	// var fullscreen = $("#fullscreen").linkbutton('options');
 	
@@ -90,8 +92,6 @@ function changeTheme (theme) {
 	var newtheme = oldtheme.substring(0,oldtheme.indexOf('themes')) + 'themes/'+theme+'/easyui.css';
 
 	$theme.attr("href",newtheme);
-
-
 	var $iframes = $("iframe");
 
 	if($iframes.length > 0){
@@ -103,4 +103,9 @@ function changeTheme (theme) {
 	$.cookie('theme',theme,{expires:7});
 
 	// console.info(newtheme);
+}
+
+
+function updateCache() {
+	alert('些功能未开放');
 }
