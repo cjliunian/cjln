@@ -24,16 +24,9 @@
 	<script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
 <!--<![endif]-->
 <script type="text/javascript" src="__STATIC__/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="__STATIC__/easyui/jquery.easyui.extend.min.js"></script>
+<script type="text/javascript" src="__JS__/common.js"></script>
 <block name="script"></block>
-<script type="text/javascript">
-	$(function($){
-		$(".easyui-datagrid").datagrid('resize');
-		$(".easyui-panel").panel('resize');
-		$(window).resize(function(){
-			$(".easyui-datagrid").datagrid('resize');
-			$(".easyui-panel").panel('resize');
-		});
-	});
-</script>
+
 </body>
 </html>
