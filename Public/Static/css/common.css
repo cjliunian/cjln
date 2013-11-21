@@ -114,7 +114,7 @@
 /* form */
 
 .inputxt {
-    /*border: 1px solid #DBEAF9;*/
+    border: 1px solid #95B8E7;
 }
 
 textarea,input {
@@ -125,3 +125,6 @@ textarea,input {
 	display: inline-block;
 }
 
+/*input {
+  border: 1px solid #95B8E7;
+}*/

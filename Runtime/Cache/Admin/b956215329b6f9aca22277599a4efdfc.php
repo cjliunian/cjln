@@ -65,7 +65,7 @@
 		            rowediting: true,
 		            onConfirmEdit: function(rowIndex){
                      return confirm('提交修改？');
-                   }
+                    }
 		        },
 		        onDblClickRow: function(row){
 		            var editingRow = $('#tt').treegrid('getEditingRow');
