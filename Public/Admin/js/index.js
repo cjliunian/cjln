@@ -12,7 +12,7 @@ $(function($){
 			$.each(rsp,function(i,val){
 				nav.accordion('add',{
 					title: val.text,
-					iconCls: val.icon,
+					iconCls: val.iconCls,
 					content:'<ul id="menu-'+val.id+'" class="easyui-tree" data-options="lines:true,onClick:menuAc" url="'+MODULE_NAME+'/Index/getMenu?id='+val.id+'"></ul>'
 				});
 			});
@@ -108,4 +108,46 @@ function changeTheme (theme) {
 
 function updateCache() {
 	alert('些功能未开放');
+}
+
+function lockScreen () {
+	$.showModalDialog({
+		title:'屏幕锁',
+		content:'<div style="margin-top:50px;margin-right: auto; margin-left: auto;text-align:center;">请输入密码:<input type="text" id="pwd" /><p id="pwd-tip" style="display:none;color:red;">密码错误!</p></div>',
+		closable:false,
+		iconCls:'icon-lock',
+		width:'400',height:'200',
+		buttons:[{
+			text:'解锁',
+			iconCls:'icon-lock_open',
+			handler:function(win){
+				var pwd = $("#pwd").val();
+				if(pwd == ''){
+					$("#pwd-tip").css('display','');
+					return false;
+				} else {
+					$.post('/index.php/Admin/Public/checkpwd',{uid:1,pwd:pwd},function(rsp){
+						if(rsp == 'y') {
+							win.close();
+						} else {
+							$("#pwd-tip").css('display','');
+							return false;
+						}
+					});
+				}
+			}
+		}]
+	});
+
+}
+
+
+function logout () {
+	$.messager.confirm('退出', '确定要退出系统吗?', function(r){
+		if (r){
+			$.post(MODULE_NAME+'/Public/logout',{uid:'1'},function(rsp){
+				location.href= MODULE_NAME+'/Public/login';
+			});
+		}
+	});
 }

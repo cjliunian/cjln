@@ -25,12 +25,11 @@ class IndexController extends AdminController {
         if (!$pid) { // 获取顶级菜谱
             $menus = D('Menu')->getTopMenu();
         } else {
-            $menus = D('Menu')->field('id,name as text,icon,url')->where('pid='.$pid.' and status = 0')->select();
+            $menus = D('Menu')->field('id,name as text,iconCls,url')->where('pid='.$pid.' and status = 0')->select();
             foreach ($menus as $key => $line) {
                 // 后面可增加权限检测
                 $hasChild = D('Menu')->field('id')->where('pid='.$line['id'])->find();
                 $menus[$key]['state'] = empty($hasChild) ? 'open' : 'closed';
-                $menus[$key]['iconCls'] = $line['icon'];
                 $menus[$key]['attributes'] = array('url'=> U($line['url']));
             }
         }

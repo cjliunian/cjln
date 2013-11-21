@@ -66,8 +66,10 @@
 
 .icon{padding-left:18px;display:inline-block; line-height:18px;}
 .icon32{padding-left:34px;display:inline-block; line-height:34px;}
+/*
 .icon-add{background:url('extend/16/add.png')  no-repeat !important;}
 .icon-edit{background:url('extend/16/edit.gif') no-repeat }
+*/
 .icon-clear{background:url('extend/16/edit-clear.png') no-repeat }
 .icon-checkbox_yes{background:url('extend/16/checkbox_yes.png') no-repeat }
 .icon-checkbox_no{background:url('extend/16/checkbox_no.png') no-repeat }
@@ -107,9 +109,6 @@
 .icon-org{background:url('extend/16/organization.png') no-repeat;}
 .icon-clock{background:url('extend/16/clock.png') no-repeat;}
 .icon-rihtarrow{ background:url('extend/16/menu_rightarrow.png') no-repeat 10px center;}
-
-.icon-accept{background:url('extend/16/accept.png') no-repeat;}
-.icon-add{background:url('extend/16/add.png') no-repeat;}
 .icon-anchor{background:url('extend/16/anchor.png') no-repeat;}
 .icon-application{background:url('extend/16/application.png') no-repeat;}
 .icon-application_add{background:url('extend/16/application_add.png') no-repeat;}
@@ -1571,3 +1570,5 @@
 .icon-zoom_out{background:url('extend/16/zoom_out.png') no-repeat;}
 .icon-logout{background:url('extend/16/logout.png') no-repeat;}
 .icon-control{background:url('extend/16/control.png') no-repeat;}
+.icon-status0{background:url('extend/16/status0.gif') no-repeat;}
+.icon-status1{background:url('extend/16/status1.gif') no-repeat;}

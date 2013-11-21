@@ -3,12 +3,14 @@
 <head>
 	<title> 后台管理</title>
 	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/icon.extend.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/css/common.css">
 	<link rel="stylesheet" type="text/css" id="theme" href="/Public/Static/easyui/themes/<?php echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default'; ?>/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/icon.extend.css">
 	
 	<script type="text/javascript">
 		// 初始化全局变量定义
 		var MODULE_NAME = '/index.php/Admin';
+		var CONTROLLER = '/index.php/Admin/Index';
 	</script>
 
 
@@ -43,6 +45,10 @@
 <script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.extend.min.js"></script>
 <script type="text/javascript" src="/Public/Admin/js/common.js"></script>
 
-
+<script type="text/javascript">
+	$(function($){
+		eyResize();
+	});
+</script>
 </body>
 </html>

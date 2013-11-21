@@ -6,13 +6,13 @@ use Think\Model;
 class MenuModel extends Model {
 
 
-	public function getMenu()
-	{
+	public function getMenu() {
+	
 		echo "menus";
 	}
 
 	public function getTopMenu() {
-		$fields = "id,name as text,icon,url,status";
+		$fields = "id,name as text,iconCls,url,status";
 		$data = $this->field($fields)->where('pid=0 and status=0')->select();
 		return $data;
 	}

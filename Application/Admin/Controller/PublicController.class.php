@@ -26,7 +26,14 @@ class PublicController extends AdminController {
 		
 	}
 
+	public function logout() {
 	
+		
+	}
+
+	public function checkpwd() {
+		echo "y";
+	}
 
 	public function verify(){
         $verify = new \COM\Verify();

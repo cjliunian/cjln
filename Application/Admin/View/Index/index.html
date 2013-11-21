@@ -3,9 +3,9 @@
 <head>
 	<title> 后台管理</title>
 	<link rel="stylesheet" type="text/css" href="__STATIC__/easyui/themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="__STATIC__/easyui/themes/icon.extend.css">
+	<link rel="stylesheet" type="text/css" href="__STATIC__/css/common.css">
 	<link rel="stylesheet" type="text/css" id="theme" href="__STATIC__/easyui/themes/<php>echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default';</php>/easyui.css">
-
+	<link rel="stylesheet" type="text/css" href="__STATIC__/easyui/themes/icon.extend.css">
 	<style type="text/css">
 	.easyui-layout .layout-panel-west .panel-header {
 		border-top:none;
@@ -81,7 +81,7 @@
 			</div>
 		</div>
 		<div data-options="iconCls:'icon-lock'" onclick="lockScreen();">锁屏</div>
-		<div data-options="iconCls:'icon-logout'" id="logout">退出</div>
+		<div data-options="iconCls:'icon-logout'" id="logout" onclick="logout();">退出</div>
 	</div>
 
 
@@ -93,6 +93,7 @@
 	<script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
 <!--<![endif]-->
 <script type="text/javascript" src="__STATIC__/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="__STATIC__/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="__STATIC__/jquery.cookie.js"></script>
 <script type="text/javascript" src="__STATIC__/easyui/jquery.easyui.extend.min.js"></script>
 <script type="text/javascript" src="__JS__/index.js"></script>
