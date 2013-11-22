@@ -24,11 +24,33 @@ class MenuController extends AdminController
 	}
 
 	public function add() {
-		$id = I('get.id') ? I('get.id'): 1;
+		$id = I('get.id',0);
 		$this->id = $id;
 		$this->display();
 	}
 
+	public function addMenuSave() {
+		$post = I('post.');
+
+		$rs = M('Menu')->add($post);
+
+		if($rs) {
+			$info['status'] =   true;
+	        $info['info']   =   '添加成功!';
+			
+		} else {
+			$info['status'] =   false;
+	        $info['info']   =   '添加失败!';
+		}
+		$this->ajaxReturn($info);
+	}
+
+	public function editSave () {
+		var_dump($_POST);
+		var_dump($_GET);
+
+		exit('xxxxxxxxxxx......');
+	}
 	public function mlist() {
 
 		$this->display('index');

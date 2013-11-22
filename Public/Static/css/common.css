@@ -128,3 +128,7 @@ textarea,input {
 /*input {
   border: 1px solid #95B8E7;
 }*/
+
+/* 表单元素 */
+
+.required{ color:#b20202;}

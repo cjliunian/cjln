@@ -43,6 +43,7 @@
 <!--<![endif]-->
 <script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.extend.min.js"></script>
+<script type="text/javascript" src="/Public/Static/jquery.json.min.js"></script>
 <script type="text/javascript" src="/Public/Admin/js/common.js"></script>
 
 <script type="text/javascript">

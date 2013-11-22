@@ -32,6 +32,7 @@
 <!--<![endif]-->
 <script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.extend.min.js"></script>
+<script type="text/javascript" src="/Public/Static/jquery.json.min.js"></script>
 <script type="text/javascript" src="/Public/Admin/js/common.js"></script>
 
     <script type="text/javascript">
@@ -49,6 +50,7 @@
 				title:'菜单列表',
 				url: CONTROLLER+'/getMenuJson',
 				idField:'id',
+				height:550,
 				treeField:'text',
 				toolbar:toolbar,
 				columns:[[
@@ -63,8 +65,15 @@
 				]],
 				customAttr: {
 		            rowediting: true,
-		            onConfirmEdit: function(rowIndex){
-                     return confirm('提交修改？');
+		            onConfirmEdit: function(row){
+		            	// console.info(row);
+
+		            	
+		            	return true;
+		            	
+		            	var updated = $("#tt").treegrid('getChanges', "updated");
+		            	console.info(updated.length); // 结果为0
+                     // return confirm('提交修改？');
                     }
 		        },
 		        onDblClickRow: function(row){
@@ -85,12 +94,11 @@
 			$.showModalDialog({
 				title:'增加菜单',
 				width:600,height:300,
+				data:{tt:$("#tt")},
 				href:CONTROLLER+'/Add?id='+id,
 				buttons:[{
 					text:'增加',
-					handler:function(win){
-						console.info(win);
-					}
+					handler:'doOK'
 				},{
 					text:'取消',
 					handler:function(win){ win.close();}

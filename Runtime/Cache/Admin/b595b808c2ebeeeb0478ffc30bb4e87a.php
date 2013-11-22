@@ -96,6 +96,7 @@
 <script type="text/javascript" src="/Public/Static/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="/Public/Static/jquery.cookie.js"></script>
 <script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.extend.min.js"></script>
+<script type="text/javascript" src="/Public/Static/jquery.json.min.js"></script>
 <script type="text/javascript" src="/Public/Admin/js/index.js"></script>
 </body>
 </html>
