@@ -24,7 +24,7 @@ class MenuController extends AdminController
 	}
 
 	public function add() {
-		$id = I('get.id',0);
+		$id = I('get.id');
 		$this->id = $id;
 		$this->display();
 	}
@@ -46,10 +46,19 @@ class MenuController extends AdminController
 	}
 
 	public function editSave () {
-		var_dump($_POST);
-		var_dump($_GET);
-
-		exit('xxxxxxxxxxx......');
+		$data = I('post.');
+		$data['name'] = $data['text'];
+		$rs = M('Menu')->where('id='.$data['id'])->save($data);
+		// $sql = M()->_sql();
+		// $info['tip']   =   $sql;
+		if($rs >= 0) {
+			$info['status'] =   true;
+	        $info['info']   =   '修改成功!';
+		} else {
+			$info['status'] =   false;
+	        $info['info']   =   '修改失败!';
+		}
+		$this->ajaxReturn($info);
 	}
 	public function mlist() {
 

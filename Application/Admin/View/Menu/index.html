@@ -14,10 +14,14 @@
 				iconCls:'icon-add',
 				handler:addMenu
 			},'-',{
-			text:'Save',
-			iconCls:'icon-save',
-			handler:function(){alert('save')}
-		}];
+				text:'Save',
+				iconCls:'icon-save',
+				handler:function(){alert('save')}
+			},{
+				text:'刷新',
+				iconCls:'icon-reload',
+				handler:function(){$("#tt").treegrid('reload');}
+			}];
 		$(function($){
 			$('#tt').treegrid({
 				title:'菜单列表',
@@ -39,31 +43,31 @@
 				customAttr: {
 		            rowediting: true,
 		            onConfirmEdit: function(row){
-		            	// console.info(row);
-
-		            	
+		            	$(this).treegrid('endEdit',row.id);
+		            	var changes = $(this).treegrid('getChanges','updated');
+						$.post("__URL__/editSave",changes[0],function(rsp){
+							if(rsp.status) {
+								$.messager.show({title:'提示信息',msg:rsp.info,showType:'show'});
+							}
+						});
 		            	return true;
-		            	
-		            	var updated = $("#tt").treegrid('getChanges', "updated");
-		            	console.info(updated.length); // 结果为0
-                     // return confirm('提交修改？');
                     }
 		        },
 		        onDblClickRow: function(row){
-		            var editingRow = $('#tt').treegrid('getEditingRow');
+		            var editingRow = $(this).treegrid('getEditingRow');
 		            if(!editingRow){
-		                $('#tt').treegrid('beginEdit', row.id);
+		                $(this).treegrid('beginEdit', row.id);
 		            }else{
-		                $('#tt').treegrid('select', editingRow.id);
+		                $(this).treegrid('select', editingRow.id);
 		            }
 		        }
-			}).treegrid('followCustomHandle');;
+			}).treegrid('followCustomHandle');
 			eyResize({'#tt':'treegrid'});
 		});
 
 		function addMenu () {
 			var sltRow = $("#tt").treegrid('getSelected');
-			var id = sltRow ? sltRow.id : 0;
+			var id = sltRow ? sltRow.id : '';
 			$.showModalDialog({
 				title:'增加菜单',
 				width:600,height:300,

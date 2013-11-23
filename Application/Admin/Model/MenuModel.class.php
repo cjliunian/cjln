@@ -5,7 +5,9 @@ use Think\Model;
 
 class MenuModel extends Model {
 
-
+	protected $_map = array(
+        'text' =>'name',
+    );
 	public function getMenu() {
 	
 		echo "menus";
