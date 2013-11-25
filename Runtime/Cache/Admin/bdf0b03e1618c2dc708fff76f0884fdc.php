@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" id="theme" href="/Public/Static/easyui/themes/<?php echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default'; ?>/easyui.css">
 	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/icon.extend.css">
 	
+	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/portal.css">
 	<script type="text/javascript">
 		// 初始化全局变量定义
 		var MODULE_NAME = '/index.php/Admin';
@@ -15,24 +16,33 @@
 
 
 </head>
-<body>
+<body> <!-- style="margin: 5px;" -->
 <div class="wrap" style="margin: 5px;">
 	
-	
 
-<div id="p" class="easyui-panel" title="服务器信息" style="height:200px;padding:10px;">
-	<p style="font-size:14px">jQuery EasyUI framework help you build your web page easily.</p>
-	<ul>
-		<li>easyui is a collection of user-interface plugin based on jQuery.</li>
-		<li>easyui provides essential functionality for building modem, interactive, javascript applications.</li>
-		<li>using easyui you don't need to write many javascript code, you usually defines user-interface by writing some HTML markup.</li>
-		<li>complete framework for HTML5 web page.</li>
-		<li>easyui save your time and scales while developing your products.</li>
-		<li>easyui is very easy but powerful.</li>
-	</ul>
-</div>
-	
-	
+	<div id="portal" style="position: relative;">
+		<div style="width:33%">
+			<div class="easyui-panel" data-options="title:'会员信息',border:false,iconCls:'icon-group',collapsible:true">ss</div>
+			<div class="easyui-panel" data-options="title:'xxxx',border:false">ss</div>
+			<div class="easyui-panel" data-options="title:'xxxx',border:false">ss</div>
+			<div class="easyui-panel" data-options="title:'xxxx',border:false">ss</div>
+		</div>
+
+		<div style="width:33%">
+			<div class="easyui-panel" data-options="title:'服务器信息',border:false">ss</div>
+			<div class="easyui-panel" data-options="title:'xxxx',border:false">ss</div>
+			<div class="easyui-panel" data-options="title:'xxxx',border:false">ss</div>
+		</div>
+
+		<div style="width:33%">
+			<div class="easyui-panel" data-options="title:'xxxx',border:false">ss</div>
+			<div class="easyui-panel" data-options="title:'xxxx',border:false">ss</div>
+			<div class="easyui-panel" data-options="title:'版本信息',border:false">当前版本:cjln.v1.0</div>
+			<div class="easyui-panel" data-options="title:'xxxx',border:false">ss</div>
+		</div>
+
+	</div>
+
 
 </div>
 <!--[if lt IE 9]>
@@ -41,10 +51,24 @@
 <!--[if gte IE 9]><!-->
 	<script type="text/javascript" src="/Public/Static/jquery-2.0.3.min.js"></script>
 <!--<![endif]-->
+
 <script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/Public/Static/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.extend.min.js"></script>
 <script type="text/javascript" src="/Public/Static/jquery.json.min.js"></script>
 <script type="text/javascript" src="/Public/Admin/js/common.js"></script>
+
+	<script type="text/javascript" src="/Public/Static/easyui/plugins/jquery.portal.js"></script>
+	<script type="text/javascript">
+		$(function($){
+			$("#portal").portal({
+				border:false
+			});
+
+			eyResize({'#portal':'portal'});
+		});
+		
+	</script>
 
 <script type="text/javascript">
 	$(function($){

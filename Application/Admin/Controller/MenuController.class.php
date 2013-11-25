@@ -45,6 +45,19 @@ class MenuController extends AdminController
 		$this->ajaxReturn($info);
 	}
 
+	public function delMenu() {
+		$id = I('post.id');
+		$rs = M('Menu')->delete($id);
+		if($rs) {
+			$info['status'] =   true;
+	        $info['info']   =   '删除成功!';
+		} else {
+			$info['status'] =   false;
+	        $info['info']   =   '删除失败!';
+		}
+		$this->ajaxReturn($info);
+	}
+
 	public function editSave () {
 		$data = I('post.');
 		$data['name'] = $data['text'];

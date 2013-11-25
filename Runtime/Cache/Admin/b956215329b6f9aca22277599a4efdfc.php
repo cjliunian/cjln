@@ -15,13 +15,10 @@
 
 
 </head>
-<body>
+<body> <!-- style="margin: 5px;" -->
 <div class="wrap" style="margin: 5px;">
 	
-
-	<table id="tt" ></table>
-
-		
+	<table id="tt" ></table>	
 
 </div>
 <!--[if lt IE 9]>
@@ -30,7 +27,9 @@
 <!--[if gte IE 9]><!-->
 	<script type="text/javascript" src="/Public/Static/jquery-2.0.3.min.js"></script>
 <!--<![endif]-->
+
 <script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/Public/Static/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.extend.min.js"></script>
 <script type="text/javascript" src="/Public/Static/jquery.json.min.js"></script>
 <script type="text/javascript" src="/Public/Admin/js/common.js"></script>
@@ -40,11 +39,11 @@
 				text:'增加',
 				iconCls:'icon-add',
 				handler:addMenu
-			},'-',{
-				text:'Save',
-				iconCls:'icon-save',
-				handler:function(){alert('save')}
 			},{
+				text:'删除',
+				iconCls:'icon-remove',
+				handler:delMenu
+			},'-',{
 				text:'刷新',
 				iconCls:'icon-reload',
 				handler:function(){$("#tt").treegrid('reload');}
@@ -55,29 +54,32 @@
 				url: CONTROLLER+'/getMenuJson',
 				idField:'id',
 				height:550,
+				fitColumns:true,
 				treeField:'text',
 				toolbar:toolbar,
+				// fit:true,
 				columns:[[
 					{title:'名称',field:'text',editor:'text'},
-					{title:'URL',field:'url',width:180,editor:'text'},
-					{title:'图标',field:'iconCls',editor:'text',formatter:function(value,row,index){
+					{title:'URL',field:'url',editor:'text'},
+					{title:'图标',field:'iconCls',align:'center',editor:'text',formatter:function(value,row,index){
 						return '<span class="icons '+value+'">&nbsp;&nbsp;&nbsp;</span>';
 					}},
-					{title:'状态',field:'status',editor:'text',formatter:function(value,row,index){
+					{title:'状态',field:'status',align:'center',editor:'text',formatter:function(value,row,index){
 						return '<span class="icons icon-status'+value+'">&nbsp;&nbsp;&nbsp;</span>';
 					}}
 				]],
 				customAttr: {
 		            rowediting: true,
 		            onConfirmEdit: function(row){
-		            	$(this).treegrid('endEdit',row.id);
+		            	   
+				        $(this).treegrid('endEdit',row.id);
 		            	var changes = $(this).treegrid('getChanges','updated');
 						$.post("/index.php/Admin/Menu/editSave",changes[0],function(rsp){
 							if(rsp.status) {
 								$.messager.show({title:'提示信息',msg:rsp.info,showType:'show'});
 							}
 						});
-		            	return true;
+						return true;
                     }
 		        },
 		        onDblClickRow: function(row){
@@ -109,6 +111,30 @@
 				}]
 				
 			});
+		}
+
+		function delMenu () {
+			var sltRow = $("#tt").treegrid('getSelected');
+			if(sltRow == null) {
+				$.messager.alert('提示','请选择要删除的数据！','warning');
+			} else {
+				// console.info(sltRow.children);
+				if(sltRow.children) {
+					$.messager.alert('提示',sltRow.text+'还有下级菜单,不能直接删除!','warning');
+				} else {
+					$.messager.confirm('确认','确定要删除选中的菜单吗?',function(r){
+						if(r) {
+							$.post('/index.php/Admin/Menu/delMenu',{id:sltRow.id},function(rsp){
+								console.info(rsp);
+								if(rsp.status) {
+									$("#tt").treegrid('remove',sltRow.id);
+									$.messager.show({title:'提示',msg:rsp.info,showType:'show'});
+								}
+							});
+						}
+					});
+				}
+			}
 		}
     </script>
 

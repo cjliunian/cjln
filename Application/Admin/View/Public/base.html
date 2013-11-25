@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="__STATIC__/css/common.css">
 	<link rel="stylesheet" type="text/css" id="theme" href="__STATIC__/easyui/themes/<php>echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default';</php>/easyui.css">
 	<link rel="stylesheet" type="text/css" href="__STATIC__/easyui/themes/icon.extend.css">
-	<block name="css"></block>
+	<block name="link"></block>
 	<script type="text/javascript">
 		// 初始化全局变量定义
 		var MODULE_NAME = '__MODULE__';
@@ -15,7 +15,7 @@
 
 
 </head>
-<body>
+<body> <!-- style="margin: 5px;" -->
 <div class="wrap" style="margin: 5px;">
 	<block name="body"></block>
 </div>
@@ -25,7 +25,9 @@
 <!--[if gte IE 9]><!-->
 	<script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
 <!--<![endif]-->
+
 <script type="text/javascript" src="__STATIC__/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="__STATIC__/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="__STATIC__/easyui/jquery.easyui.extend.min.js"></script>
 <script type="text/javascript" src="__STATIC__/jquery.json.min.js"></script>
 <script type="text/javascript" src="__JS__/common.js"></script>
