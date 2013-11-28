@@ -7,9 +7,9 @@ namespace Admin\Controller;
 */
 class UserController extends AdminController
 {
-	public function index()
-	{	
-		echo "string";
+	public function index() {
+		
+		
 		$this->display();
 	}
 }

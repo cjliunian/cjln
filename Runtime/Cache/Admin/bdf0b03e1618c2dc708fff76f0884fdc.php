@@ -24,13 +24,10 @@
 		<div style="width:33%">
 			<div class="easyui-panel" data-options="title:'会员信息',border:false,iconCls:'icon-group',collapsible:true">ss</div>
 			<div class="easyui-panel" data-options="title:'xxxx',border:false">ss</div>
-			<div class="easyui-panel" data-options="title:'xxxx',border:false">ss</div>
-			<div class="easyui-panel" data-options="title:'xxxx',border:false">ss</div>
 		</div>
 
 		<div style="width:33%">
-			<div class="easyui-panel" data-options="title:'服务器信息',border:false">ss</div>
-			<div class="easyui-panel" data-options="title:'xxxx',border:false">ss</div>
+			<div class="easyui-panel" data-options="title:'服务器信息',border:false,iconCls:'icon-server',href:'/index.php/Admin/Index/board',collapsible:true"></div>
 			<div class="easyui-panel" data-options="title:'xxxx',border:false">ss</div>
 		</div>
 
@@ -38,7 +35,6 @@
 			<div class="easyui-panel" data-options="title:'xxxx',border:false">ss</div>
 			<div class="easyui-panel" data-options="title:'xxxx',border:false">ss</div>
 			<div class="easyui-panel" data-options="title:'版本信息',border:false">当前版本:cjln.v1.0</div>
-			<div class="easyui-panel" data-options="title:'xxxx',border:false">ss</div>
 		</div>
 
 	</div>
@@ -61,13 +57,9 @@
 	<script type="text/javascript" src="/Public/Static/easyui/plugins/jquery.portal.js"></script>
 	<script type="text/javascript">
 		$(function($){
-			$("#portal").portal({
-				border:false
-			});
-
+			$("#portal").portal({border:false});
 			eyResize({'#portal':'portal'});
 		});
-		
 	</script>
 
 <script type="text/javascript">
