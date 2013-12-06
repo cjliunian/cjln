@@ -21,7 +21,7 @@ class PublicController extends AdminController {
 			$this->redirect('Index/index');
 		} else {
 			
-			$this->display();
+			$this->display('login2');
 		}
 		
 	}
