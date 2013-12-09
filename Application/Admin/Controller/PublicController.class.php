@@ -22,6 +22,7 @@ class PublicController extends AdminController {
 		} else {
 			
 			$this->display('login2');
+			// $this->display();
 		}
 		
 	}
@@ -37,13 +38,15 @@ class PublicController extends AdminController {
 
 	public function verify(){
         $verify = new \COM\Verify();
-        $verify->imageL = 165;
-        $verify->fontSize = 20;
+        // $verify->imageL = 120;
+        // $verify->imageH = 35;
+        $verify->fontSize = 16;
         $verify->useCurve = false;
         $verify->useNoise = false;
         $verify->length = 4;
         $verify->fontttf = '4.ttf';
-        $verify->bg = array(249,249,249);
+        // $verify->bg = array(255,255,255);
+        // $verify->bg = array(0,0,0);
         $verify->entry(1);
     }
 }

@@ -4,42 +4,76 @@
 	<title>系统后台</title>
 	<link rel="stylesheet" type="text/css" href="/Public/Static/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/Public/Static/font-awesome/css/font-awesome.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="/Public/Admin/css/login/main.css"> -->
+	<link rel="stylesheet" type="text/css" href="/Public/Static/css/responsive.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Admin/css/login/login.css">
+	
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="/Public/Static/html5shiv.js"></script>
 		<script type="text/javascript" src="/Public/Static/respond.min.js"></script>
 	<![endif]-->
 
-	<style type="text/css">
-		html,body{
-			background-color: #F9F9F9;
-			margin:0;
-			padding: 0;
-		}
-		#login {
-			
-    		padding-top: 60px;
-		}
-		#login-box {
-			border: 1px solid #ccc;
-			height: 200px;
-			width: 350px;
-			margin: 0 auto;
-		}
-	</style>
-
-
-
 </head>
-<body>
+<body class="login">
+
+  <div class="logo">
+    <img src="bs-login_files/logo.png" alt="logo"> <strong></strong>
+  </div>
+
+  <div class="box">
+    <div class="content">
+      <form class="form-vertical login-form" action="" method="post">
+        <h3 class="form-title">管理登录</h3>
 
 
+      <div class="alert alert-danger alert-dismissable" style="display: ;">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>错误!</strong>
+        请输入用户名和密码!
+      </div>
 
-<div class="center-block">
-	
-	sdfsdfsfsf
-</div>
 
+        <div class="form-group">
+          <div class="input-icon"> <i class="fa fa-user"></i>
+            <input name="username" class="form-control" placeholder="用户名" autofocus="autofocus" data-rule-required="true" data-msg-required="请输入用户名." type="text">
+            <label for="username" generated="true" class="has-error help-block">请输入用户名.</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-icon">
+            <i class="fa fa-lock"></i>
+            <input name="password" class="form-control" placeholder="密码" data-rule-required="true" data-msg-required="请输入密码." type="password"></div>
+        </div>
+        <div class="form-group">
+          <div class="input-icon">
+            <i class="fa fa-barcode"></i>
 
+            <input type="text" name="password" class="form-control" style="width: 60%;" placeholder="验证码" data-rule-required="true" data-msg-required="请输入验证码." > 
+            <img src='/index.php/Admin/Public/verify/'  
+                   title="点击刷新" style="width: 40%;margin-top: -32px;height: 32px;" class="pull-right" 
+          onclick="this.src=this.src+'?'+Math.random()"  /> 
+
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <label class="checkbox pull-left">
+            <div class="checker">
+              <span>
+                <input class="uniform" name="remember" type="checkbox"></span>
+            </div>
+            记住密码
+          </label>
+          <button type="submit" class="submit btn btn-primary pull-right">
+            登录
+            <i class="fa fa-angle-right"></i>
+          </button>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
 
 
 <!--[if lt IE 9]>

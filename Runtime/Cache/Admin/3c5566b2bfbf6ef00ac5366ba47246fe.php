@@ -82,12 +82,12 @@
 
 			<div class="form-group">
 				<div class="input-icon">
-					<label>
+					
 					<i class="fa fa-barcode"></i>
-					<input type="password" class="form-control" placeholder="验证码" required>
-					</label>
-					<img src='/index.php/Admin/Public/verify/' style="margin-top: -40px;" title="点击刷新" 
-						onclick="this.src=this.src+'?'+Math.random()"  />
+					<input type="password" class="form-control" style="width: 60%;" placeholder="验证码" required>
+					
+					<img src='/index.php/Admin/Public/verify/' style="width: 40%;margin-top: -32px;height: 32px;" title="点击刷新" 
+						onclick="this.src=this.src+'?'+Math.random()" class="pull-right"  />
 				</div>
 			</div>
 
