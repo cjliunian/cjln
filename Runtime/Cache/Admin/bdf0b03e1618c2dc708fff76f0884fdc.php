@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="/Public/Static/css/common.css">
 	<link rel="stylesheet" type="text/css" id="theme" href="/Public/Static/easyui/themes/<?php echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default'; ?>/easyui.css">
 	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/icon.extend.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/easyui.extend.css">
 	
 	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/portal.css">
 	<script type="text/javascript">

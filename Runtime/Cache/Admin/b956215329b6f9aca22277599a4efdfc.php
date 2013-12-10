@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="/Public/Static/css/common.css">
 	<link rel="stylesheet" type="text/css" id="theme" href="/Public/Static/easyui/themes/<?php echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default'; ?>/easyui.css">
 	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/icon.extend.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/easyui.extend.css">
 	
 	<script type="text/javascript">
 		// 初始化全局变量定义
@@ -55,9 +56,9 @@
 				idField:'id',
 				height:550,
 				fitColumns:true,
+				rownumbers:true,
 				treeField:'text',
 				toolbar:toolbar,
-				// fit:true,
 				columns:[[
 					{title:'名称',field:'text',editor:'text'},
 					{title:'URL',field:'url',editor:'text'},
@@ -65,13 +66,16 @@
 						return '<span class="icons '+value+'">&nbsp;&nbsp;&nbsp;</span>';
 					}},
 					{title:'状态',field:'status',align:'center',editor:'text',formatter:function(value,row,index){
-						return '<span class="icons icon-status'+value+'">&nbsp;&nbsp;&nbsp;</span>';
+						if(value == 1) {
+							return '<span class="icons icon-status0">&nbsp;&nbsp;&nbsp;</span>';
+						} else {
+							return '<span class="icons icon-status1">&nbsp;&nbsp;&nbsp;</span>';
+						}
 					}}
 				]],
 				customAttr: {
 		            rowediting: true,
 		            onConfirmEdit: function(row){
-		            	   
 				        $(this).treegrid('endEdit',row.id);
 		            	var changes = $(this).treegrid('getChanges','updated');
 						$.post("/index.php/Admin/Menu/editSave",changes[0],function(rsp){
