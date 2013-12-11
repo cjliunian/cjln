@@ -35,6 +35,18 @@ function getImg(img,path) {
 	return '<img src="'+path+img+'" />';
 }
 
+/*
+ * 提示消息函数 noty
+ *
+ */
+function noty(rsp) {
+	if (rsp.status) {
+		$.messager.show({title:'提示信息',msg:rsp.info,showType:'show'});
+	} else{
+		parent.$.messager.alert('提示信息',rsp.info,'error');
+	}
+}
+
 /**
  * 将表单序列化成json数据 扩展
  *

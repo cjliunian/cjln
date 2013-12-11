@@ -1,5 +1,5 @@
 <?php if (!defined('THINK_PATH')) exit();?><link rel="stylesheet" type="text/css" href="/Public/Static/Validform/Validform.css">
-<form id="add-fm" method="post" action="/index.php/Admin/User/Add?_=1386667655035" >
+<form id="add-fm" method="post" action="/index.php/Admin/User/Add?_=1386751959415" >
 
     <table class="fm-tb">
         <tr>
@@ -12,14 +12,14 @@
         <tr>
             <td class="w100 tar"><label class="label" for="password"><span class="required">*</span>密码：</label></td>
             <td>
-                <input type="text" class="inputxt" name="password" id="password" />
+                <input type="password" class="inputxt" name="password" id="password" />
             </td>
         </tr>
 
         <tr>
             <td class="w100 tar"><label class="label" for="repassword"><span class="required">*</span>确认密码：</label></td>
             <td>
-                <input class="inputxt" type="text" id="repassword" name="repassword" data-options="required:true" recheck="password" />
+                <input class="inputxt" type="password" id="repassword" name="repassword" data-options="required:true" recheck="password" />
             </td>
         </tr>
         <tr>
@@ -59,16 +59,11 @@
             nullmsg:"请填写邮箱！",
             errormsg:"邮箱格式错误！"
         }]);
-
-       
-        
     });
 
     
     function doOK (win) {
-        
         var ele = win.getData('ele');
-        // console.info(ele);return false;
         if(vdfm.check()) {
             var fmdata = vdfm.forms.serializejson();
             $.ajax({

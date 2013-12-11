@@ -98,5 +98,13 @@ class UserApi extends Api{
 		}
 		return $return;
 	}
+	/**
+	 * 删除用户
+	 * @param int $uid
+	 * @return 
+	 */
+	public function delete($uid) {
+		return $this->model->delete($uid);
+	}
 
 }

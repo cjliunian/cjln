@@ -103,7 +103,7 @@
 			var id = sltRow ? sltRow.id : '';
 			$.showModalDialog({
 				title:'增加菜单',
-				width:600,height:300,
+				// width:600,height:300,
 				data:{tt:$("#tt")},
 				href:CONTROLLER+'/Add?id='+id,
 				buttons:[{

@@ -1,0 +1,59 @@
+<link rel="stylesheet" type="text/css" href="__STATIC__/Validform/Validform.css">
+<form id="add-fm" method="post" action="__SELF__" >
+
+    <table class="fm-tb">
+        <tr>
+            <td class="w100 tar"><label class="label" for="title"><span class="required">*</span>用户组：</label></td>
+            <td>
+                <input type="text" class="inputxt" name="title" id="title" />
+            </td>
+        </tr>
+
+        <tr>
+            <td class="w100 tar"><label class="label" for="description"><span class="required">*</span>描述：</label></td>
+            <td>
+                <textarea name="description" class="inputxt" id="description"></textarea>
+            </td>
+        </tr>
+
+    </table>
+</form>
+
+<script type="text/javascript" src="__STATIC__/Validform/Validform.min.js"></script>
+<script type="text/javascript" src="__JS__/common.js"></script>
+
+<script type="text/javascript">
+    var vdfm = $("#add-fm").Validform({tiptype:3});
+    $(function($){
+        
+        vdfm.addRule([{
+            ele:"#title",
+            datatype:"*2-16",
+            nullmsg:"请填写用户组！",
+            errormsg:"用户组范围在2~16个字符之间！"
+        }]);
+    });
+
+    
+    function doOK (win) {
+        var ele = win.getData('ele');
+        if(vdfm.check()) {
+            var fmdata = vdfm.forms.serializejson();
+            $.ajax({
+                type:'post',
+                url:'__SELF__',
+                data:fmdata,
+                success:function(rsp){
+                    console.info(rsp);
+                    if(rsp.status) {
+                        win.close();
+                        ele.datagrid('reload');
+                    }
+                    noty(rsp);
+                }
+            });
+        }
+    }
+
+    
+</script>

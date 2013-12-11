@@ -11,7 +11,7 @@
 	<script type="text/javascript">
 		// 初始化全局变量定义
 		var MODULE_NAME = '/index.php/Admin';
-		var CONTROLLER = '/index.php/Admin/User';
+		var CONTROLLER = '/index.php/Admin/AuthManager';
 	</script>
 
 
@@ -49,12 +49,12 @@
 				iconCls:'icon-reload',
 				handler:function(){$("#dg").datagrid('reload');}
 			}];
-		var ulist;
+		var dlist;
 		$(function($){
-			ulist = $('#dg').datagrid({
-				title:'用户列表',
+			dlist = $('#dg').datagrid({
+				title:'用户组',
 				toolbar:toolbar,
-				url:'/index.php/Admin/User/getUserJson',
+				url:'/index.php/Admin/AuthManager/get_usergroup_json',
 				rownumbers:true,
 				pagination:true,
 				singleSelect: true,
@@ -63,15 +63,8 @@
 				},
 				idField:'id',
 				columns:[[
-					{title:'UID',field:'uid'},
-					{title:'用户名',field:'nickname'},
-					{title:'登录次数',field:'login_num'},
-					{title:'最后登录IP',field:'last_login_ip'},
-					{title:'最后登录时间',field:'last_login_time'},
-					{title:'生日',field:'birthday'},
-					{title:'QQ',field:'qq'},
-					{title:'性别',field:'sex'},
-					{title:'注册时间',field:'reg_time'},
+					{title:'用户组',field:'title'},
+					{title:'描述',field:'description'},
 					{title:'状态',field:'status',editor:'text',formatter:function(value,row,index){
 						return '<span class="icons icon-status'+value+'">&nbsp;&nbsp;&nbsp;</span>';
 					}}
@@ -83,9 +76,8 @@
 
 		function add() {
 			$.showModalDialog({
-				title:'增加用户',
-				// width:600,height:300,
-				href:CONTROLLER+'/Add',
+				title:'增加用户组',
+				href:CONTROLLER+'/addUsergroup',
 				data:{ele:$("#dg")},
 				buttons:[{
 					text:'增加',
@@ -98,7 +90,7 @@
 		}
 
 		function del() {
-			var sltRow = ulist.datagrid('getSelected');
+			var sltRow = dlist.datagrid('getSelected');
 			if(sltRow) {
 				console.info(sltRow);
 				$.messager.confirm('确认对话框', '您想要删除选择中的数据吗？', function(r){
@@ -106,7 +98,7 @@
 					    $.post(CONTROLLER+'/del',{uid:sltRow.uid},function(rsp){
 							console.info(rsp);
 							noty(rsp);
-							if(rsp.status) ulist.datagrid('reload');
+							if(rsp.status) dlist.datagrid('reload');
 						});
 					}
 				});
@@ -114,8 +106,6 @@
 				parent.$.messager.alert('提示信息','未选择数据!','warning');
 			}
 		}
-
-		
 
 	</script>
 

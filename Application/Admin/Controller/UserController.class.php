@@ -21,9 +21,13 @@ class UserController extends AdminController
             if(0 < $uid){ //注册成功
                 $user = array('uid' => $uid, 'nickname' => $username, 'status' => 1);
                 if(!M('Member')->add($user)){
-                    $this->error('用户添加失败！');
+                    $rsp['info'] = '用户添加失败！';
+                    $rsp['status'] = 0;
+                    $this->ajaxReturn($rsp);
                 } else { 
-                    $this->success('用户添加成功！');
+                	$rsp['info'] = '用户添加成功！';
+                    $rsp['status'] = 1;
+                    $this->ajaxReturn($rsp);
                 }
             } else { //注册失败，显示错误信息
                 $this->error($this->showRegError($uid));
@@ -33,11 +37,23 @@ class UserController extends AdminController
 		}
 	}
 
+	public function del($uid='') {
+		if (empty($uid)) {
+			return false;
+		}
+		$User = new UserApi;
+		$rs = $User->delete($uid);
+		if($rs) {
+			if (M('Member')->delete($uid)) {
+				$this->success('删除成功!');
+			} else {
+				$this->error('删除失败!');
+			}
+		}
+	}
+
 
 	public function getUserJson($page =1,$rows=10) {
-		// $post = I('post.');
-		// $this->ajaxReturn($post);
-		// exit();
 		$data['total'] = M('Member')->count();
 		$data['rows'] = M('Member')->limit(($page-1)*$rows,$rows)->select();
 		$this->ajaxReturn($data);

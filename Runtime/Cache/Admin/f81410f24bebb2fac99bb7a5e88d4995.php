@@ -3,7 +3,7 @@
 
     <table class="fm-tb">
         <tr>
-            <td class="w100 tar"><label class="label" for="m-pid"><span class="required">*</span>父级：</label></td>
+            <td class="w200 tar"><label class="label" for="m-pid"><span class="required">*</span>父级：</label></td>
             <td>
                 <input class="easyui-combotree" name="pid" id="m-pid"
                     data-options="url:'/index.php/Admin/Menu/getMenuJson',width:300,required:true,novalidate:true,value:'<?php echo ($id); ?>'" />
@@ -11,7 +11,7 @@
         </tr>
 
         <tr>
-            <td class="w100 tar"><label class="label" for="m-name"><span class="required">*</span>名称：</label></td>
+            <td class="w200 tar"><label class="label" for="m-name"><span class="required">*</span>名称：</label></td>
             <td>
                 <input type="text" class="inputxt" name="name" id="m-name" />
                     
@@ -19,13 +19,13 @@
         </tr>
 
         <tr>
-            <td class="w100 tar"><label class="label" for="m-url"><span class="required">*</span>链接：</label></td>
+            <td class="w200 tar"><label class="label" for="m-url"><span class="required">*</span>链接：</label></td>
             <td>
                 <input class="inputxt" type="text" id="m-url" name="url" data-options="required:true" />
             </td>
         </tr>
         <tr>
-            <td class="w100 tar"><label class="label" for="m-iconCls"><span class="required">*</span>图标：</label></td>
+            <td class="w200 tar"><label class="label" for="m-iconCls"><span class="required">*</span>图标：</label></td>
             <td>
                 <input class="inputxt" type="text" name="iconCls" id="m-iconCls" data-options="" />
             </td>
@@ -50,9 +50,9 @@
             errormsg:"菜单名称范围在2~16个字符之间！"
         },{
             ele:"#m-url",
-            datatype:"*2-16",
+            datatype:"*2-50",
             nullmsg:"请填写URL！",
-            errormsg:"URL范围在2~100个字符之间！"
+            errormsg:"URL范围在2~50个字符之间！"
         },{
             ele:"#m-iconCls",
             datatype:"*2-16",
@@ -93,13 +93,6 @@
                 }
             });
         }
-       
-
-        
-        
-        
-        
-        
         // vdfm.submitForm();
 
     }
