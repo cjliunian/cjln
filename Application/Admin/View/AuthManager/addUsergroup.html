@@ -5,16 +5,19 @@
         <tr>
             <td class="w100 tar"><label class="label" for="title"><span class="required">*</span>用户组：</label></td>
             <td>
-                <input type="text" class="inputxt" name="title" id="title" />
+                <input type="text" class="inputxt" name="title" id="title" value="{$data.title}" />
             </td>
         </tr>
 
         <tr>
             <td class="w100 tar"><label class="label" for="description"><span class="required">*</span>描述：</label></td>
             <td>
-                <textarea name="description" class="inputxt" id="description"></textarea>
+                <textarea name="description" class="inputxt" id="description">{$data.description}</textarea>
             </td>
         </tr>
+        <notempty name="data">
+            <input type="hidden" name="id" value="{$data.id}" />
+        </notempty>
 
     </table>
 </form>
@@ -44,12 +47,11 @@
                 url:'__SELF__',
                 data:fmdata,
                 success:function(rsp){
-                    console.info(rsp);
+                    noty(rsp);
                     if(rsp.status) {
                         win.close();
                         ele.datagrid('reload');
                     }
-                    noty(rsp);
                 }
             });
         }

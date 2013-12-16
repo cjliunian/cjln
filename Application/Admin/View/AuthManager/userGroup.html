@@ -11,9 +11,19 @@
 				iconCls:'icon-add',
 				handler:add
 			},{
+				text:'修改',
+				iconCls:'icon-edit',
+				handler:edit
+			},{
 				text:'删除',
 				iconCls:'icon-remove',
 				handler:del
+			},'-',{
+				text:'成员管理',
+				handler:groupMebManager
+			},{
+				text:'权限设置',
+				handler:qxset
 			},'-',{
 				text:'刷新',
 				iconCls:'icon-reload',
@@ -27,15 +37,17 @@
 				url:'__URL__/get_usergroup_json',
 				rownumbers:true,
 				pagination:true,
-				singleSelect: true,
-				onLoadSuccess:function(){
-					$(this).datagrid('clearSelections');
+				onLoadSuccess:function(data){
+					$(".acs").linkbutton({
+						plain:true
+					});
 				},
+				singleSelect: true,
 				idField:'id',
 				columns:[[
 					{title:'用户组',field:'title'},
 					{title:'描述',field:'description'},
-					{title:'状态',field:'status',editor:'text',formatter:function(value,row,index){
+					{title:'状态',field:'status',formatter:function(value,row,index){
 						return '<span class="icons icon-status'+value+'">&nbsp;&nbsp;&nbsp;</span>';
 					}}
 				]]
@@ -61,20 +73,67 @@
 
 		function del() {
 			var sltRow = dlist.datagrid('getSelected');
+			isSlted(sltRow);
+			
+			console.info(sltRow);
+			$.messager.confirm('确认对话框', '您想要删除选择中的数据吗？', function(r){
+				if (r){
+				    $.post(CONTROLLER+'/delUserGroup',{id:sltRow.id},function(rsp){
+						console.info(rsp);
+						noty(rsp);
+						if(rsp.status) dlist.datagrid('reload');
+					});
+				}
+			});
+			
+		}
+
+		function edit() {
+			var sltRow = dlist.datagrid('getSelected');
+			isSlted(sltRow);
+			$.showModalDialog({
+				title:'修改用户组',
+				href:CONTROLLER+'/addUsergroup?id='+sltRow.id,
+				data:{ele:$("#dg")},
+				buttons:[{
+					text:'确定',
+					handler:'doOK'
+				},{
+					text:'取消',
+					handler:function(win){ win.close();}
+				}]
+			});
+			
+		}
+		// 成员管理
+		function groupMebManager() {
+			var sltRow = dlist.datagrid('getSelected');
 			if(sltRow) {
-				console.info(sltRow);
-				$.messager.confirm('确认对话框', '您想要删除选择中的数据吗？', function(r){
-					if (r){
-					    $.post(CONTROLLER+'/del',{uid:sltRow.uid},function(rsp){
-							console.info(rsp);
-							noty(rsp);
-							if(rsp.status) dlist.datagrid('reload');
-						});
-					}
+				$.showModalDialog({
+					title: sltRow.title+'-成员管理',
+					height:397,
+					href:'__URL__/groupMebManager?groupid='+sltRow.id,
+					buttons:[{
+						text:'取消',
+						handler:function(win){ win.close();}
+					}]
 				});
 			} else {
 				parent.$.messager.alert('提示信息','未选择数据!','warning');
 			}
+			
+		}
+
+		function qxset() {
+
+		}
+
+		function isSlted(sltRow){
+			if(!sltRow) {
+				parent.$.messager.alert('提示信息','未选择数据!','warning');
+				return false;
+			}
+				
 		}
 
 	</script>

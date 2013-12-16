@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50614
 File Encoding         : 65001
 
-Date: 2013-12-11 18:03:08
+Date: 2013-12-16 18:03:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,12 +28,68 @@ CREATE TABLE `cj_auth_group` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '用户组状态：为1正常，为0禁用,-1为删除',
   `rules` varchar(500) NOT NULL DEFAULT '' COMMENT '用户组拥有的规则id，多个规则 , 隔开',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cj_auth_group
 -- ----------------------------
-INSERT INTO `cj_auth_group` VALUES ('4', '', '0', '1312', '123', '1', '');
+INSERT INTO `cj_auth_group` VALUES ('8', 'admin', '0', 'xxxxxxxx', '看你怎么写都可以', '1', '');
+INSERT INTO `cj_auth_group` VALUES ('6', 'admin', '1', '管理组', '系统管理组拥有一定的权限', '1', '');
+INSERT INTO `cj_auth_group` VALUES ('7', 'admin', '1', '默认组', '默认组', '1', '');
+INSERT INTO `cj_auth_group` VALUES ('9', 'admin', '1', '123', '123123', '1', '');
+INSERT INTO `cj_auth_group` VALUES ('10', 'admin', '1', 'ssssssssss', '1111111111', '1', '');
+INSERT INTO `cj_auth_group` VALUES ('11', 'admin', '1', '1123', '123', '1', '');
+INSERT INTO `cj_auth_group` VALUES ('12', 'admin', '1', 'qqqqqqqqqqq', '123', '1', '');
+INSERT INTO `cj_auth_group` VALUES ('13', 'admin', '1', '123123', '122', '1', '');
+INSERT INTO `cj_auth_group` VALUES ('14', 'module', '1', 'sdfsdfsdf', 'sdfsd', '1', '');
+
+-- ----------------------------
+-- Table structure for cj_auth_group_access
+-- ----------------------------
+DROP TABLE IF EXISTS `cj_auth_group_access`;
+CREATE TABLE `cj_auth_group_access` (
+  `uid` int(10) unsigned NOT NULL COMMENT '用户id',
+  `group_id` mediumint(8) unsigned NOT NULL COMMENT '用户组id',
+  UNIQUE KEY `uid_group_id` (`uid`,`group_id`),
+  KEY `uid` (`uid`),
+  KEY `group_id` (`group_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cj_auth_group_access
+-- ----------------------------
+INSERT INTO `cj_auth_group_access` VALUES ('4', '6');
+INSERT INTO `cj_auth_group_access` VALUES ('4', '10');
+INSERT INTO `cj_auth_group_access` VALUES ('4', '11');
+INSERT INTO `cj_auth_group_access` VALUES ('4', '12');
+INSERT INTO `cj_auth_group_access` VALUES ('15', '6');
+INSERT INTO `cj_auth_group_access` VALUES ('15', '10');
+INSERT INTO `cj_auth_group_access` VALUES ('15', '11');
+INSERT INTO `cj_auth_group_access` VALUES ('15', '12');
+INSERT INTO `cj_auth_group_access` VALUES ('16', '12');
+INSERT INTO `cj_auth_group_access` VALUES ('17', '6');
+INSERT INTO `cj_auth_group_access` VALUES ('17', '11');
+INSERT INTO `cj_auth_group_access` VALUES ('17', '12');
+INSERT INTO `cj_auth_group_access` VALUES ('18', '6');
+INSERT INTO `cj_auth_group_access` VALUES ('18', '12');
+INSERT INTO `cj_auth_group_access` VALUES ('20', '6');
+INSERT INTO `cj_auth_group_access` VALUES ('20', '12');
+INSERT INTO `cj_auth_group_access` VALUES ('21', '6');
+INSERT INTO `cj_auth_group_access` VALUES ('21', '12');
+INSERT INTO `cj_auth_group_access` VALUES ('22', '6');
+INSERT INTO `cj_auth_group_access` VALUES ('22', '12');
+INSERT INTO `cj_auth_group_access` VALUES ('23', '6');
+INSERT INTO `cj_auth_group_access` VALUES ('23', '11');
+INSERT INTO `cj_auth_group_access` VALUES ('23', '12');
+INSERT INTO `cj_auth_group_access` VALUES ('24', '11');
+INSERT INTO `cj_auth_group_access` VALUES ('24', '12');
+INSERT INTO `cj_auth_group_access` VALUES ('25', '6');
+INSERT INTO `cj_auth_group_access` VALUES ('25', '12');
+INSERT INTO `cj_auth_group_access` VALUES ('26', '6');
+INSERT INTO `cj_auth_group_access` VALUES ('26', '11');
+INSERT INTO `cj_auth_group_access` VALUES ('26', '12');
+INSERT INTO `cj_auth_group_access` VALUES ('27', '6');
+INSERT INTO `cj_auth_group_access` VALUES ('27', '12');
 
 -- ----------------------------
 -- Table structure for cj_member
@@ -54,7 +110,7 @@ CREATE TABLE `cj_member` (
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '会员状态',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `ix_uid` (`uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='会员表\r\n@author   麦当苗儿\r\n@version  2013-05-27';
+) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COMMENT='会员表\r\n@author   麦当苗儿\r\n@version  2013-05-27';
 
 -- ----------------------------
 -- Records of cj_member
@@ -62,11 +118,16 @@ CREATE TABLE `cj_member` (
 INSERT INTO `cj_member` VALUES ('15', '那一年', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('4', '错过丶流年', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('16', 'imya', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
-INSERT INTO `cj_member` VALUES ('19', '测试一', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('26', '12323', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('24', '12312312', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('17', '1111', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('23', 'wrqwerwr', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('22', '111111111111111', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('25', '12323', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('20', '2312312', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('21', 'ASDFDFDFDF', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('18', '12424', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('27', '123123zzzzzzzzzz', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 
 -- ----------------------------
 -- Table structure for cj_menu
@@ -162,7 +223,7 @@ CREATE TABLE `cj_ucenter_member` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   KEY `status` (`status`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of cj_ucenter_member
@@ -171,10 +232,14 @@ INSERT INTO `cj_ucenter_member` VALUES ('15', '那一年', 'a129b591bd914facca99
 INSERT INTO `cj_ucenter_member` VALUES ('4', '错过丶流年', 'fdcc07798c1e03ed1f4d769d668e4863', 'cjliunian@163.com', '', '1386661607', '2130706433', '0', '0', '1386661607', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('16', 'imya', 'a129b591bd914facca99a0152a2d37aa', '123456@163.com', '', '1386744916', '2130706433', '0', '0', '1386744916', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('18', '12424', 'a129b591bd914facca99a0152a2d37aa', '124@qq.com', '', '1386751177', '2130706433', '0', '0', '1386751177', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('23', 'wrqwerwr', 'a129b591bd914facca99a0152a2d37aa', 'mdfgg@163.com', '', '1386811471', '2130706433', '0', '0', '1386811471', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('25', '1111xxxxx', 'a129b591bd914facca99a0152a2d37aa', '12323123@qq.com', '', '1386820301', '2130706433', '0', '0', '1386820301', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('22', '111111111111111', 'a129b591bd914facca99a0152a2d37aa', '1xvsddsfd@163.com', '', '1386811439', '2130706433', '0', '0', '1386811439', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('21', 'ASDFDFDFDF', 'a129b591bd914facca99a0152a2d37aa', 'qqqqwerewrr@163.com', '', '1386751865', '2130706433', '0', '0', '1386751865', '1');
-INSERT INTO `cj_ucenter_member` VALUES ('19', '测试一', 'a129b591bd914facca99a0152a2d37aa', 'fffsfdf@163.com', '', '1386751770', '2130706433', '0', '0', '1386751770', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('24', '12312312', 'a129b591bd914facca99a0152a2d37aa', '11111@qqwer.com', '', '1386811497', '2130706433', '0', '0', '1386811497', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('20', '2312312', 'a129b591bd914facca99a0152a2d37aa', '11111@qq.com', '', '1386751815', '2130706433', '0', '0', '1386751815', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('17', '1111', 'a129b591bd914facca99a0152a2d37aa', 'wr@qq.com', '', '1386751160', '2130706433', '0', '0', '1386751160', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('27', '123123zzzzzzzzzz', 'a129b591bd914facca99a0152a2d37aa', '2424234@qqq.com', '', '1386820705', '2130706433', '0', '0', '1386820705', '1');
 
 -- ----------------------------
 -- Table structure for cj_ucenter_setting

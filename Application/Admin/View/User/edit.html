@@ -3,31 +3,37 @@
 
     <table class="fm-tb">
         <tr>
-            <td class="w100 tar"><label class="label" for="username"><span class="required">*</span>用户名：</label></td>
+            <td class="w200 tar"><label class="label" for="username"><span class="required">*</span>用户名：</label></td>
             <td>
                 <input type="text" class="inputxt" name="username" id="username" />
             </td>
         </tr>
 
         <tr>
-            <td class="w100 tar"><label class="label" for="password"><span class="required">*</span>密码：</label></td>
+            <td class="w200 tar"><label class="label" for="password"><span class="required">*</span>密码：</label></td>
             <td>
                 <input type="password" class="inputxt" name="password" id="password" />
             </td>
         </tr>
 
         <tr>
-            <td class="w100 tar"><label class="label" for="repassword"><span class="required">*</span>确认密码：</label></td>
+            <td class="w200 tar"><label class="label" for="repassword"><span class="required">*</span>确认密码：</label></td>
             <td>
                 <input class="inputxt" type="password" id="repassword" name="repassword" data-options="required:true" recheck="password" />
             </td>
         </tr>
         <tr>
-            <td class="w100 tar"><label class="label" for="email"><span class="required">*</span>邮箱：</label></td>
+            <td class="w200 tar"><label class="label" for="email"><span class="required">*</span>邮箱：</label></td>
             <td>
                 <input class="inputxt" type="text" name="email" id="email" data-options="" />
             </td>
         </tr>
+        <!-- <tr>
+            <td class="w200 tar"><label class="label" for="email">用户组：</label></td>
+            <td>
+                <input id="cc" class="easyui-combobox" name="group_id" data-options="valueField:'id',textField:'title',url:'{:U('AuthManager/get_usergroup_json')}'" />
+            </td>
+        </tr> -->
     </table>
 </form>
 

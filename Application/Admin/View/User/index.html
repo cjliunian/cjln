@@ -28,10 +28,7 @@
 				rownumbers:true,
 				pagination:true,
 				singleSelect: true,
-				onLoadSuccess:function(){
-					$(this).datagrid('clearSelections');
-				},
-				idField:'id',
+				idField:'uid',
 				columns:[[
 					{title:'UID',field:'uid'},
 					{title:'用户名',field:'nickname'},
@@ -54,7 +51,6 @@
 		function add() {
 			$.showModalDialog({
 				title:'增加用户',
-				// width:600,height:300,
 				href:CONTROLLER+'/Add',
 				data:{ele:$("#dg")},
 				buttons:[{

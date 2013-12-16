@@ -30,6 +30,15 @@ class AuthGroupModel extends Model {
         array('description','require','描述不能为空',Model::EXISTS_VALIDATE,'regex',Model::MODEL_INSERT),
     );
 
+    /* 自动完成规则 */
+    protected $_auto = array(
+        array('type', 1, self::MODEL_INSERT, 'string'),
+        array('module', 'module', self::MODEL_INSERT, 'string'),
+    );
+
+    
+
+
     
 
 }

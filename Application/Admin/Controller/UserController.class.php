@@ -20,14 +20,16 @@ class UserController extends AdminController
             $uid = $User->register($username, $password, $email);
             if(0 < $uid){ //注册成功
                 $user = array('uid' => $uid, 'nickname' => $username, 'status' => 1);
-                if(!M('Member')->add($user)){
-                    $rsp['info'] = '用户添加失败！';
-                    $rsp['status'] = 0;
-                    $this->ajaxReturn($rsp);
+                if(!D('Member')->create($user)){
+                    $this->error(D('Member')->getError());
                 } else { 
-                	$rsp['info'] = '用户添加成功！';
-                    $rsp['status'] = 1;
-                    $this->ajaxReturn($rsp);
+                    
+                    if(D('Member')->add()) {
+                        $this->success('用户添加成功！');
+                    } else {
+                        $this->error('用户添加失败！');
+                    }
+                	
                 }
             } else { //注册失败，显示错误信息
                 $this->error($this->showRegError($uid));
