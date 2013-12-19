@@ -90,7 +90,11 @@ class AuthManagerController extends AdminController{
 
     // 将用户从用户组中移除
     public function removeUserFromGroup($uid,$groupid){
-        $rs = M('AuthGroupAccess')->where("uid ='".$uid."' and group_id ='".$groupid."'")->delete();
+        $map['uid'] = array('in',$uid);
+        $map['group_id'] = $groupid;
+        $rs = M('AuthGroupAccess')->where($map)->delete();
+        // echo M('AuthGroupAccess')->_sql();
+        // var_dump($rs);exit();
         if($rs) {
             // $rsp['status'] = 1;
             // $rsp['info'] = '移除成功！';

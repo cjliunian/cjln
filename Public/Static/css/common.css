@@ -26,6 +26,7 @@
 
 
 .w150 { width: 150px;}
+.w180 { width: 180px;}
 .w200 { width: 200px;}
 .w250 { width: 250px;}
 .w300 { width: 300px;}
@@ -65,7 +66,7 @@
 /* bg */
 
 .bg1{
-    background: none repeat scroll 0 0 #DCE8F3; /
+    background: none repeat scroll 0 0 #DCE8F3;
     /*
     DCE8F3 F0F8FF
      */
@@ -132,4 +133,4 @@ textarea,input {
 
 /* 表单元素 */
 
-.required{ color:#b20202;}
+.required{ color:#b20202;margin-right: 5px;}

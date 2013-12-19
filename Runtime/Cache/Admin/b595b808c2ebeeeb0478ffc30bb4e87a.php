@@ -5,7 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="/Public/Static/css/common.css">
 	<link rel="stylesheet" type="text/css" id="theme" href="/Public/Static/easyui/themes/<?php echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default'; ?>/easyui.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/icon.extend.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/extend.icon.css">
 	<style type="text/css">
 	.easyui-layout .layout-panel-west .panel-header {
 		border-top:none;
@@ -47,7 +47,7 @@
 			<span>
 				欢迎你,<strong>Admin</strong>
 			</span>
-			<a href="#" class="easyui-menubutton" data-options="menu:'#mm1',iconCls:'icon-control'">控制面板</a>
+			<a href="#" class="easyui-menubutton" data-options="menu:'#mm1',iconCls:'icon-advancedsettings'">控制面板</a>
 		</div>
 	</div> <!-- /layout-north -->
 	<div id="layout-west" data-options="region:'west',title:'导航菜单',width:180,split:true" >
@@ -64,7 +64,7 @@
 
 	<div id="tab-tools" style="border-top:none;">
 		<a href="javascript:void(0)" class="easyui-linkbutton" title="刷新" data-options="plain:true,iconCls:'icon-reload'" onclick="refresh()"></a>
-		<a href="javascript:void(0)" id="fullscreen" class="easyui-linkbutton" title="全屏" data-options="plain:true,iconCls:'icon-arrow_nw_ne_sw_se'" onclick="fullscreen()"></a>
+		<a href="javascript:void(0)" id="fullscreen" class="easyui-linkbutton" title="全屏" data-options="plain:true,iconCls:'icon-arrow-out'" onclick="fullscreen()"></a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" title="更新缓存" data-options="plain:true" onclick="updateCache()">更新缓存</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" title="后台地图" data-options="plain:true" onclick="updateCache()">后台地图</a>
 	</div>
@@ -94,8 +94,9 @@
 <!--<![endif]-->
 <script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="/Public/Static/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="/Public/Static/locale/lang-zh_CN.js"></script>
 <script type="text/javascript" src="/Public/Static/jquery.cookie.js"></script>
-<script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.extend.min.js"></script>
+<script type="text/javascript" src="/Public/Static/easyui/extends/jquery.easyui.extend.min.js"></script>
 <script type="text/javascript" src="/Public/Static/jquery.json.min.js"></script>
 <script type="text/javascript" src="/Public/Admin/js/index.js"></script>
 </body>

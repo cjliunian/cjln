@@ -79,16 +79,15 @@ class Db {
         if(empty($db_config['dbms']))
             E(L('_NO_DB_CONFIG_'));
         // 数据库类型
-        $this->dbType = ucwords(strtolower($db_config['dbms']));
-        $class = 'Think\\Db\\Driver\\'. $this->dbType;
+        if(strpos($db_config['dbms'],'\\')){
+            $class  =   $db_config['dbms'];
+        }else{
+            $dbType =   ucwords(strtolower($db_config['dbms']));
+            $class  =   'Think\\Db\\Driver\\'. $dbType;            
+        }
         // 检查驱动类
         if(class_exists($class)) {
             $db = new $class($db_config);
-            // 获取当前的数据库类型
-            if( 'pdo' != strtolower($db_config['dbms']) )
-                $db->dbType = strtoupper($this->dbType);
-            else
-                $db->dbType = $this->_getDsnType($db_config['dsn']);
         }else {
             // 类没有定义
             E(L('_NO_DB_DRIVER_').': ' . $class);
@@ -508,7 +507,7 @@ class Db {
                 }
             }else {
                 $count = count($val);
-                $rule  = isset($val[$count-1])?strtoupper($val[$count-1]):'';
+                $rule  = isset($val[$count-1]) ? (is_array($val[$count-1]) ? strtoupper($val[$count-1][0]) : strtoupper($val[$count-1]) ) : '' ; 
                 if(in_array($rule,array('AND','OR','XOR'))) {
                     $count  = $count -1;
                 }else{
@@ -519,7 +518,6 @@ class Db {
                     if('exp'==strtolower($val[$i][0])) {
                         $whereStr .= '('.$key.' '.$data.') '.$rule.' ';
                     }else{
-                        $op = is_array($val[$i])?$this->comparison[strtolower($val[$i][0])]:'=';
                         $whereStr .= '('.$this->parseWhereItem($key,$val[$i]).') '.$rule.' ';
                     }
                 }

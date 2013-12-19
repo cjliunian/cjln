@@ -125,9 +125,7 @@ function compile($filename) {
  * @return string
  */
 function T($template='',$layer=''){
-    if(is_file($template)) {
-        return $template;
-    }
+
     // 解析模版资源地址
     if(false === strpos($template,'://')){
         $template   =   'http://'.str_replace(':', '/',$template);
@@ -350,8 +348,8 @@ function import($class, $baseUrl = '', $ext=EXT) {
             //加载当前模块的类库
             $baseUrl = MODULE_PATH;
             $class   = substr_replace($class, '', 0, strlen($class_strut[0]) + 1);
-        }elseif (is_dir(LIB_PATH.$class_strut[0])) {
-            // org 第三方公共类库 com 企业公共类库
+        }elseif (in_array($class_strut[0],array('Think','Org','Behavior','Com','Vendor')) || is_dir(LIB_PATH.$class_strut[0])) {
+            // 系统类库包和第三方类库包
             $baseUrl = LIB_PATH;
         }else { // 加载其他模块的类库
             $baseUrl = APP_PATH;
@@ -377,13 +375,13 @@ function import($class, $baseUrl = '', $ext=EXT) {
 function load($name, $baseUrl='', $ext='.php') {
     $name = str_replace(array('.', '#'), array('/', '.'), $name);
     if (empty($baseUrl)) {
-        if (0 === strpos($name, '@/')) {
-            //加载当前项目函数库
-            $baseUrl    = COMMON_PATH.'Common/';
-            $name       = substr($name, 2);
-        } else {
-            //加载ThinkPHP 系统函数库
-            $baseUrl    = EXTEND_PATH . 'Function/';
+        if (0 === strpos($name, '@/')) {//加载当前模块函数库
+            $baseUrl    =   MODULE_PATH.'Common/';
+            $name       =   substr($name, 2);
+        } else { //加载其他模块函数库
+            $array      =   explode('/', $name);
+            $baseUrl    =   APP_PATH . array_shift($array).'/Common/';
+            $name       =   implode('/',$array);
         }
     }
     if (substr($baseUrl, -1) != '/')
@@ -419,6 +417,10 @@ function D($name='',$layer='') {
     $class          =   parse_res_name($name,$layer);
     if(class_exists($class)) {
         $model      =   new $class(basename($name));
+    }elseif(false === strpos($name,'/')){
+        // 自动加载公共模块下面的模型
+        $class      =   '\\Common\\'.$layer.'\\'.$name.$layer;
+        $model      =   class_exists($class)? new $class($name) : new Think\Model($name);
     }else {
         Think\Log::record('D方法实例化没找到模型类'.$class,Think\Log::NOTICE);
         $model      =   new Think\Model(basename($name));
@@ -501,7 +503,7 @@ function A($name,$layer='',$level='') {
 }
 
 /**
- * 远程调用控制器的操作方法 URL 参数格式 [项目://][模块/]控制器/操作
+ * 远程调用控制器的操作方法 URL 参数格式 [资源://][模块/]控制器/操作
  * @param string $url 调用地址
  * @param string|array $vars 调用参数 支持字符串和数组
  * @param string $layer 要调用的控制层名称
@@ -667,11 +669,10 @@ function layout($layout) {
  * @param string $url URL表达式，格式：'[模块/控制器/操作#锚点@域名]?参数1=值1&参数2=值2...'
  * @param string|array $vars 传入的参数，支持数组和字符串
  * @param string $suffix 伪静态后缀，默认为true表示获取配置值
- * @param boolean $redirect 是否跳转，如果设置为true则表示跳转到该URL地址
  * @param boolean $domain 是否显示域名
  * @return string
  */
-function U($url='',$vars='',$suffix=true,$redirect=false,$domain=false) {
+function U($url='',$vars='',$suffix=true,$domain=false) {
     // 解析URL
     $info   =  parse_url($url);
     $url    =  !empty($info['path'])?$info['path']:ACTION_NAME;
@@ -781,15 +782,14 @@ function U($url='',$vars='',$suffix=true,$redirect=false,$domain=false) {
             $url    =   strtolower($url);
         }        
         if(!empty($vars)) {
-            $vars   =   urldecode(http_build_query($vars));
+            $vars   =   http_build_query($vars);
             $url   .=   '&'.$vars;
         }
     }else{ // PATHINFO模式或者兼容URL模式
+        $module =   defined('BIND_MODULE') ? '' : $module;
         if(isset($route)) {
-            $module =   defined('BIND_MODULE') ? '' : MODULE_NAME;
             $url    =   __APP__.'/'.($module?$module.MODULE_PATHINFO_DEPR:'').rtrim($url,$depr);
         }else{
-            $module =   defined('BIND_MODULE') ? '' : $module;
             $url    =   __APP__.'/'.($module?$module.MODULE_PATHINFO_DEPR:'').implode($depr,array_reverse($var));
         }
         if(C('URL_CASE_INSENSITIVE')){
@@ -816,10 +816,7 @@ function U($url='',$vars='',$suffix=true,$redirect=false,$domain=false) {
     if($domain) {
         $url   =  (is_ssl()?'https://':'http://').$domain.$url;
     }
-    if($redirect) // 直接跳转URL
-        redirect($url);
-    else
-        return $url;
+    return $url;
 }
 
 /**
@@ -1025,7 +1022,9 @@ function session($name,$value='') {
         }elseif(isset($name['id'])) {
             session_id($name['id']);
         }
-        ini_set('session.auto_start', 0);
+        if('common' != APP_MODE){ // 其它模式可能不支持
+            ini_set('session.auto_start', 0);
+        }
         if(isset($name['name']))            session_name($name['name']);
         if(isset($name['path']))            session_save_path($name['path']);
         if(isset($name['domain']))          ini_set('session.cookie_domain', $name['domain']);
@@ -1253,4 +1252,9 @@ function filter_exp(&$value){
     if (in_array(strtolower($value),array('exp','or'))){
         $value .= ' ';
     }
+}
+
+// 不区分大小写的in_array实现
+function in_array_case($value,$array){
+    return in_array(strtolower($value),array_map('strtolower',$array));
 }

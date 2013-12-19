@@ -20,6 +20,7 @@
 				handler:del
 			},'-',{
 				text:'成员管理',
+				iconCls:'icon-user',
 				handler:groupMebManager
 			},{
 				text:'权限设置',
@@ -37,11 +38,6 @@
 				url:'__URL__/get_usergroup_json',
 				rownumbers:true,
 				pagination:true,
-				onLoadSuccess:function(data){
-					$(".acs").linkbutton({
-						plain:true
-					});
-				},
 				singleSelect: true,
 				idField:'id',
 				columns:[[
@@ -111,7 +107,7 @@
 			if(sltRow) {
 				$.showModalDialog({
 					title: sltRow.title+'-成员管理',
-					height:397,
+					height:406,
 					href:'__URL__/groupMebManager?groupid='+sltRow.id,
 					buttons:[{
 						text:'取消',

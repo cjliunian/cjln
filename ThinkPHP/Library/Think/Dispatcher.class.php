@@ -118,7 +118,7 @@ class Dispatcher {
         }
         $depr = C('URL_PATHINFO_DEPR');
         define('MODULE_PATHINFO_DEPR',  $depr);
-        define('__INFO__',              trim($_SERVER['PATH_INFO'],'/'));
+        define('__INFO__',              trim($_SERVER['PATH_INFO'],$depr));
         // URL后缀
         define('__EXT__', strtolower(pathinfo($_SERVER['PATH_INFO'],PATHINFO_EXTENSION)));
 
@@ -126,12 +126,14 @@ class Dispatcher {
             $paths      =   explode($depr,__INFO__,2);
             $allowList  =   C('MODULE_ALLOW_LIST');
             $module     =   preg_replace('/\.' . __EXT__ . '$/i', '',$paths[0]);
-            if( empty($allowList) || (is_array($allowList) && in_array($module, $allowList))){
+            if( empty($allowList) || (is_array($allowList) && in_array_case($module, $allowList))){
                 $_GET[$varModule]       =   $module;
                 $_SERVER['PATH_INFO']   =   isset($paths[1])?$paths[1]:'';     
-            };
+            }else{
+                $_SERVER['PATH_INFO'] = __INFO__;
+            }
         }else{
-            $_SERVER['PATH_INFO'] = trim($_SERVER['PATH_INFO'],'/');
+            $_SERVER['PATH_INFO'] = __INFO__;
         }
 
         // URL常量
@@ -140,7 +142,7 @@ class Dispatcher {
         // 获取模块名称
         define('MODULE_NAME', self::getModule($varModule));
         // 检测模块是否存在
-        if( MODULE_NAME && (!in_array(MODULE_NAME,C('MODULE_DENY_LIST')) || $domainModule ) && is_dir(APP_PATH.MODULE_NAME)){
+        if( MODULE_NAME && (!in_array_case(MODULE_NAME,C('MODULE_DENY_LIST')) || $domainModule ) && is_dir(APP_PATH.MODULE_NAME)){
             
             // 定义当前模块路径
             define('MODULE_PATH', APP_PATH.MODULE_NAME.'/');
@@ -166,20 +168,17 @@ class Dispatcher {
         }
         if(!IS_CLI){
             $urlMode        =   C('URL_MODEL');
-            if($urlMode == URL_COMPAT ){
-                // 兼容模式判断
+            if($urlMode == URL_COMPAT ){// 兼容模式判断
                 define('PHP_FILE',_PHP_FILE_.'?'.$varPath.'=');
             }elseif($urlMode == URL_REWRITE ) {
-                //当前项目地址
                 $url    =   dirname(_PHP_FILE_);
                 if($url == '/' || $url == '\\')
                     $url    =   '';
                 define('PHP_FILE',$url);
             }else {
-                //当前项目地址
                 define('PHP_FILE',_PHP_FILE_);
             }
-            // 当前项目地址
+            // 当前应用地址
             define('__APP__',strip_tags(PHP_FILE));
             // 模块URL地址
             $moduleName    =   defined('MODULE_ALIAS')?MODULE_ALIAS:MODULE_NAME;

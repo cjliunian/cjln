@@ -41,20 +41,15 @@
 		}];
 		$(function($){
 			dlist = $('#dg').datagrid({
-				// url:"{:U('User/getUserJson')}?groupid={$groupid}",
 				url:"__URL__/get_group_user_json?groupid="+groupid,
-				rownumbers:true,
-				height:326,
+				height:335,
 				pagination:true,
-				singleSelect: true,
 				border:false,
 				toolbar:$("#toolbar"),
 				fitColumns:true,
 				idField:'uid',
-				onLoadSuccess:function(data){
-					$(".acs").linkbutton({plain:true});
-				},
 				columns:[[
+					{field:'ck',checkbox:true},
 					{title:'UID',field:'uid'},
 					{title:'用户名',field:'nickname'},
 					{title:'登录次数',field:'login_num'},
@@ -86,15 +81,26 @@
 		}
 
 		function del () {
-			var sltRow = dlist.datagrid('getSelected');
-			if(!sltRow) {
+			var sltRows = dlist.datagrid('getSelections');
+			
+			// return false;
+			if(sltRows.length == 0) {
 				$.messager.alert('提示信息','未选择数据!','warning');
 			} else {
 				$.messager.confirm('确认对话框', '您确定要把选择中的用户移除该组吗？', function(r){
 					if (r) {
-						$.post("{:U('AuthManager/removeUserFromGroup')}",{groupid:groupid,uid:sltRow.uid},function(rsp){
+						var uids = '';
+						for (var i = 0; i < sltRows.length; i++) {
+							uids += sltRows[i]['uid']+",";
+						};
+						uids = uids.substring(0,uids.length-1);
+						$.post("{:U('AuthManager/removeUserFromGroup')}",{groupid:groupid,uid:uids},function(rsp){
+							// console.info(rsp);
 							noty(rsp);
-							if(rsp.status) dlist.datagrid('reload');
+							if(rsp.status) {
+								dlist.datagrid('reload');
+								$("#cc").combogrid('grid').datagrid('reload');
+							}
 						});
 					}
 				});

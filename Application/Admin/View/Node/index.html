@@ -1,0 +1,95 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<table id="data-list" ></table>	
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+		var toolbar = [{
+				text:'增加',
+				iconCls:'icon-add',
+				handler:add
+			},{
+				text:'删除',
+				iconCls:'icon-remove',
+				handler:del
+			},'-',{
+				text:'刷新',
+				iconCls:'icon-reload',
+				handler:function(){$("#data-list").treegrid('reload');}
+			}];
+		$(function($){
+			$('#data-list').treegrid({
+				title:'节点列表',
+				url: CONTROLLER+'/get_node_json',
+				idField:'id',
+				treeField:'text',
+				height:550,
+				pagination:true,
+				rownumbers:true,
+				toolbar:toolbar,
+				onBeforeLoad: function(row,param){
+					if (!row) { param.id = 0;}
+				},
+				columns:[[
+					{title:'名称',field:'text'},
+					{title:'模块',field:'module'},
+					{title:'URL',field:'name'},
+					{title:'状态',field:'status',align:'center',editor:'text',formatter:function(value,row,index){
+						if(value == 1) {
+							return '<span class="icons icon-status0">&nbsp;&nbsp;&nbsp;</span>';
+						} else {
+							return '<span class="icons icon-status1">&nbsp;&nbsp;&nbsp;</span>';
+						}
+					}}
+				]],
+		        onDblClickRow: function(row){
+		        	console.info(row);
+		        }
+			});
+			eyResize({'#data-list':'treegrid'});
+		});
+
+		function add () {
+			var sltRow = $("#data-list").treegrid('getSelected');
+			var id = sltRow ? sltRow.id : '';
+			$.showModalDialog({
+				title:'增加节点',
+				data:{ele:$("#data-list")},
+				href:CONTROLLER+'/Add?id='+id,
+				buttons:[{
+					text:'增加',
+					handler:'doOK'
+				},{
+					text:'取消',
+					handler:function(win){ win.close();}
+				}]
+			});
+		}
+
+		function del () {
+			var sltRow = $("#data-list").treegrid('getSelected');
+			if(sltRow == null) {
+				$.messager.alert(lang.tipTitle,'请选择要删除的数据！','warning');
+			} else {
+				if(sltRow.children) {
+					$.messager.alert(lang.tipTitle,sltRow.text+'还有下级节点,不能直接删除!','warning');
+				} else {
+					$.messager.confirm('确认','确定要删除选中的节点吗?',function(r){
+						if(r) {
+							$.post('__URL__/del',{id:sltRow.id},function(rsp){
+								console.info(rsp);
+								if(rsp.status) {
+									$("#data-list").treegrid('remove',sltRow.id);
+									$.messager.show({title:lang.tipTitle,msg:rsp.info,showType:'show'});
+								}
+							});
+						}
+					});
+				}
+			}
+		}
+		
+    </script>
+</block>

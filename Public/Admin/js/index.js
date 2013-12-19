@@ -24,30 +24,29 @@ $(function($){
 
 });
 var mainTabs = $('#main-tabs').tabs();
+
 /**
  * 菜单操作
  *
  */
-function menuAc(node){
-	if(node.state){ // undefined
-		if(node.state == "closed"){
-			$(this).tree('expand',node.target);
-		}else { // open
-			$(this).tree('collapse',node.target);
-		}
-	}else {
-		// 
-		if(mainTabs.tabs('exists',node.text)) {
-			mainTabs.tabs('select',node.text);
-		} else {
-			mainTabs.tabs('add',{
-				title: node.text,
-				href: node.attributes.url,
-				useiframe:true,
-				showMask: true,
-				loadMsg: '加载中,请稍后....',
-				closable: true
-			});
+function menuAc (node) {
+	if(node.state == 'closed') {
+		$(this).tree('expand',node.target);
+	} else {
+		$(this).tree('collapse',node.target);
+		if(node.children == undefined) {
+			if(mainTabs.tabs('exists',node.text)) {
+				mainTabs.tabs('select',node.text);
+			} else {
+				mainTabs.tabs('add',{
+					title: node.text,
+					href: node.attributes.url,
+					useiframe:true,
+					showMask: true,
+					loadMsg: lang.loadMsg,
+					closable: true
+				});
+			}
 		}
 	}
 }
@@ -59,7 +58,7 @@ function menuAc(node){
 function refresh () {
 	var sltTab = mainTabs.tabs('getSelected');
 	$('iframe', sltTab.panel('body')).each(function(){
-		if(sltTab.panel('options').useiframe) $.mask({loadMsg: '加载中,请稍后....', target: sltTab});
+		if(sltTab.panel('options').useiframe) $.mask({loadMsg: lang.loadMsg, target: sltTab});
         this.contentWindow.location.reload();
     });
 }
@@ -70,7 +69,7 @@ function refresh () {
  */
 function fullscreen(){
 
-
+	alert('些功能未开放');
 	// console.info('fullscreen');
 	// var fullscreen = $("#fullscreen").linkbutton('options');
 	
@@ -115,7 +114,7 @@ function lockScreen () {
 		title:'屏幕锁',
 		content:'<div style="margin-top:50px;margin-right: auto; margin-left: auto;text-align:center;">请输入密码:<input type="text" id="pwd" /><p id="pwd-tip" style="display:none;color:red;">密码错误!</p></div>',
 		closable:false,
-		iconCls:'icon-lock',
+		iconCls:'icon-unlock',
 		width:'400',height:'200',
 		buttons:[{
 			text:'解锁',
