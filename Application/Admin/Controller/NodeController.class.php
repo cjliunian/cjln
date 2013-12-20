@@ -54,30 +54,36 @@ class NodeController extends AdminController {
 	public function get_node_json($page="1",$row="10",$id=0) {
 		
 		$fields = "id,pid,title as text,name,module,status";
-		$map = array('pid'=>$id);
-		if($id == 0) {
-			$offset = ($page-1)*$row;
-			$data['total'] = M('AuthRule')->where($map)->count();
-			$list = M('AuthRule')->field($fields)->where($map)->limit($offset,$row)->select();
-			foreach ($list as $key => $line) {
-				if(M('AuthRule')->where('pid ='.$line['id'])->find()) {
-					$list[$key]['state']  = 'closed';
-				} else {
-					$list[$key]['state']  = 'open';
-				}
-			}
-			$data['rows'] = list_to_tree($list,'id','pid','children');
+		if(I('get.isCombo')) {
+			$data = M('AuthRule')->field($fields)->select();
+			$data = list_to_tree($data,'id','pid','children');
 		} else {
-			$data = M('AuthRule')->field($fields)->where($map)->select();
-			foreach ($data as $key => $line) {
-				if(M('AuthRule')->where('pid ='.$line['id'])->find()) {
-					$data[$key]['state']  = 'closed';
-				} else {
-					$data[$key]['state']  = 'open';
+
+
+			$map = array('pid'=>$id);
+			if($id == 0) {
+				$offset = ($page-1)*$row;
+				$data['total'] = M('AuthRule')->where($map)->count();
+				$list = M('AuthRule')->field($fields)->where($map)->limit($offset,$row)->select();
+				foreach ($list as $key => $line) {
+					if(M('AuthRule')->where('pid ='.$line['id'])->find()) {
+						$list[$key]['state']  = 'closed';
+					} else {
+						$list[$key]['state']  = 'open';
+					}
+				}
+				$data['rows'] = list_to_tree($list,'id','pid','children');
+			} else {
+				$data = M('AuthRule')->field($fields)->where($map)->select();
+				foreach ($data as $key => $line) {
+					if(M('AuthRule')->where('pid ='.$line['id'])->find()) {
+						$data[$key]['state']  = 'closed';
+					} else {
+						$data[$key]['state']  = 'open';
+					}
 				}
 			}
 		}
-		
 		$this->ajaxReturn($data);
 	}
 

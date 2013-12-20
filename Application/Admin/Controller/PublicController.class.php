@@ -18,7 +18,8 @@ class PublicController extends AdminController {
 	public function login() {
 		
 		if (IS_POST) {
-			$this->redirect('Index/index');
+			// $this->redirect('Index/index');
+			echo "xxxxxx";
 		} else {
 			
 			$this->display('login2');
@@ -37,7 +38,7 @@ class PublicController extends AdminController {
 	}
 
 	public function verify(){
-        $verify = new \COM\Verify();
+        $verify = new \Think\Verify();
         // $verify->imageL = 120;
         // $verify->imageH = 35;
         $verify->fontSize = 16;

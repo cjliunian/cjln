@@ -241,3 +241,7 @@ select,textarea,input[type="text"],input[type="password"],input[type="datetime"]
 }
 
 
+.Validform_checktip{
+	color: #843534;
+	/*font-weight: bold;*/
+}

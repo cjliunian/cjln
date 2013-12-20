@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html>
 <head>
 	<title>系统后台</title>
-	<link rel="stylesheet" type="text/css" href="__STATIC__/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="__STATIC__/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="__STATIC__/css/responsive.css">
-	<link rel="stylesheet" type="text/css" href="__CSS__/login/login.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/css/responsive.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Admin/css/login/login.css">
 	
 	<!--[if lt IE 9]>
-		<script type="text/javascript" src="__STATIC__/html5shiv.js"></script>
-		<script type="text/javascript" src="__STATIC__/respond.min.js"></script>
+		<script type="text/javascript" src="/Public/Static/html5shiv.js"></script>
+		<script type="text/javascript" src="/Public/Static/respond.min.js"></script>
 	<![endif]-->
 
 </head>
@@ -21,7 +21,7 @@
 
   <div class="box">
     <div class="content">
-      <form class="form-vertical login-form" action="__URL__/login" method="post">
+      <form class="form-vertical login-form" action="/index.php/Admin/Public/login" method="post">
         <h3 class="form-title">管理登录</h3>
 
 
@@ -44,7 +44,7 @@
             <i class="fa fa-barcode"></i>
 
             <input type="text" name="verifycode" id="verifycode" class="form-control" style="width: 60%;" placeholder="验证码" data-rule-required="true" data-msg-required="请输入验证码." > 
-            <img src='{:U('Public/verify')}'
+            <img src='<?php echo U('Public/verify');?>'
                   title="点击刷新" style="width: 40%;margin-top: -32px;height: 32px;" class="pull-right verifyimg reloadverify"/>
             <span class="help-block Validform_checktip"></span>
           </div>
@@ -78,15 +78,15 @@
 
 
 <!--[if lt IE 9]>
-	<script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="/Public/Static/jquery-1.10.2.min.js"></script>
 <![endif]-->
 <!--[if gte IE 9]><!-->
-	<script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript" src="/Public/Static/jquery-2.0.3.min.js"></script>
 <!--<![endif]-->
 
-<script type="text/javascript" src="__STATIC__/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="__STATIC__/Validform/Validform.min.js"></script>
-<script type="text/javascript" src="__JS__/login/login.js"></script>
+<script type="text/javascript" src="/Public/Static/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/Public/Static/Validform/Validform.min.js"></script>
+<script type="text/javascript" src="/Public/Admin/js/login/login.js"></script>
 
 </body>
 </html>
