@@ -16,17 +16,29 @@ class AdminController extends Controller {
     static protected $allow = array();
 	
 	protected function _initialize() {
-		// 
-		// 是否是超级管理员
-        define('IS_ROOT',   false); 
-		// 检测访问权限
-        $access =   $this->accessControl();
-
-        if ($access === false) {
-        	$this->error('403:禁止访问');
-        } else {
-        	// 
+		// 获取当前用户ID
+        define('UID',is_login());
+        if( !UID ){// 还没登录 跳转到登录页面
+            $this->redirect('Public/login');
         }
+        /* 读取数据库中的配置 */
+        // $config =   S('DB_CONFIG_DATA');
+        // if(!$config){
+        //     $config =   api('Config/lists');
+        //     S('DB_CONFIG_DATA',$config);
+        // }
+        // C($config); //添加配置
+
+        // 是否是超级管理员
+        define('IS_ROOT',   is_administrator());
+        if(!IS_ROOT && C('ADMIN_ALLOW_IP')){
+            // 检查IP地址访问
+            if(!in_array(get_client_ip(),explode(',',C('ADMIN_ALLOW_IP')))){
+                $this->error('403:禁止访问');
+            }
+        }
+        // 检测访问权限
+        $access =   $this->accessControl();
         
 	}
 

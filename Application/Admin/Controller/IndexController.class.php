@@ -13,9 +13,10 @@ class IndexController extends AdminController {
     static protected $allow = array();
 
     public function index(){
-		
 
-
+        
+        // 屏幕锁        
+        $this->isLockScreen = session('?lockscreen') && session('lockscreen') == 1 ? 1 : 0;
 		$this->display();
     }
 

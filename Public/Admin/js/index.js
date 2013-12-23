@@ -110,41 +110,43 @@ function updateCache() {
 }
 
 function lockScreen () {
-	$.showModalDialog({
-		title:'屏幕锁',
-		content:'<div style="margin-top:50px;margin-right: auto; margin-left: auto;text-align:center;">请输入密码:<input type="text" id="pwd" /><p id="pwd-tip" style="display:none;color:red;">密码错误!</p></div>',
-		closable:false,
-		iconCls:'icon-unlock',
-		width:'400',height:'200',
-		buttons:[{
-			text:'解锁',
-			iconCls:'icon-lock_open',
-			handler:function(win){
-				var pwd = $("#pwd").val();
-				if(pwd == ''){
-					$("#pwd-tip").css('display','');
-					return false;
-				} else {
-					$.post('/index.php/Admin/Public/checkpwd',{uid:1,pwd:pwd},function(rsp){
-						if(rsp == 'y') {
-							win.close();
-						} else {
-							$("#pwd-tip").css('display','');
-							return false;
-						}
-					});
+	$.post('/index.php/Admin/Public/lockScreen',{islock:1,password:0},function(){
+		$.showModalDialog({
+			title:'屏幕锁',
+			content:'<div style="margin-top:50px;margin-right: auto; margin-left: auto;text-align:center;">请输入密码:<input type="password" id="pwd" /><p id="pwd-tip" style="display:none;color:red;">密码错误!</p></div>',
+			closable:false,
+			iconCls:'icon-unlock',
+			width:'400',height:'200',
+			buttons:[{
+				text:'解锁',
+				iconCls:'icon-lock_open',
+				handler:function(win){
+					var pwd = $("#pwd").val();
+					if(pwd == ''){
+						$("#pwd-tip").css('display','');
+						return false;
+					} else {
+						$.post('/index.php/Admin/Public/lockScreen',{islock:0,password:pwd},function(rsp){
+							if(rsp.status) {
+								win.close();
+							} else {
+								$("#pwd-tip").css('display','');
+								return false;
+							}
+						});
+					}
 				}
-			}
-		}]
+			}]
+		});
 	});
-
 }
 
 
 function logout () {
 	$.messager.confirm('退出', '确定要退出系统吗?', function(r){
 		if (r){
-			$.post(MODULE_NAME+'/Public/logout',{uid:'1'},function(rsp){
+			$.post(MODULE_NAME+'/Public/logout',function(rsp){
+				// console.info(rsp);
 				location.href= MODULE_NAME+'/Public/login';
 			});
 		}

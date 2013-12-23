@@ -107,4 +107,10 @@ class UserApi extends Api{
 		return $this->model->delete($uid);
 	}
 
+	public function verifyUserPwd($uid,$password) {
+		return $this->model->verifyUser($uid,$password);
+	}
+
+
+
 }

@@ -45,7 +45,7 @@
 		</div>
 		<div style="position: absolute; right: 0px; bottom: 0px;">
 			<span>
-				欢迎你,<strong>Admin</strong>
+				欢迎您,<strong>{$Think.session.user_auth.username}</strong>
 			</span>
 			<a href="#" class="easyui-menubutton" data-options="menu:'#mm1',iconCls:'icon-advancedsettings'">控制面板</a>
 		</div>
@@ -99,5 +99,10 @@
 <script type="text/javascript" src="__STATIC__/easyui/extends/jquery.easyui.extend.min.js"></script>
 <script type="text/javascript" src="__STATIC__/jquery.json.min.js"></script>
 <script type="text/javascript" src="__JS__/index.js"></script>
+<script type="text/javascript">
+	if ({$isLockScreen}) {
+		lockScreen();	
+	}
+</script>
 </body>
 </html>
