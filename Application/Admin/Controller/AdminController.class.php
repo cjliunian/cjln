@@ -22,15 +22,16 @@ class AdminController extends Controller {
             $this->redirect('Public/login');
         }
         /* 读取数据库中的配置 */
-        // $config =   S('DB_CONFIG_DATA');
-        // if(!$config){
-        //     $config =   api('Config/lists');
-        //     S('DB_CONFIG_DATA',$config);
-        // }
-        // C($config); //添加配置
+        $config =   S('DB_CONFIG_DATA');
+        if(!$config){
+            $config =   api('Config/lists');
+            S('DB_CONFIG_DATA',$config);
+        }
+        C($config); //添加配置
 
         // 是否是超级管理员
         define('IS_ROOT',   is_administrator());
+        // 非管理员IP访问控制
         if(!IS_ROOT && C('ADMIN_ALLOW_IP')){
             // 检查IP地址访问
             if(!in_array(get_client_ip(),explode(',',C('ADMIN_ALLOW_IP')))){
@@ -39,9 +40,60 @@ class AdminController extends Controller {
         }
         // 检测访问权限
         $access =   $this->accessControl();
+        if ( $access === false ) {
+            $this->error('403:禁止访问');
+        }elseif( $access === null ){
+            $dynamic        =   $this->checkDynamic();//检测分类栏目有关的各项动态权限
+            if( $dynamic === null ){
+                //检测非动态权限
+                $rule  = strtolower(MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME);
+                // echo $rule;exit();
+                if ( !$this->checkRule($rule,array('in','1,2')) ){
+                    $this->error('提示:无权访问,您可能需要联系管理员为您授权!');
+                }
+            }elseif( $dynamic === false ){
+                $this->error('提示:无权访问,您可能需要联系管理员为您授权!');
+            }
+        }
         
 	}
 
+    /**
+     * 权限检测
+     * @param string  $rule    检测的规则
+     * @param string  $mode    check模式
+     * @return boolean
+     * @author 朱亚杰  <xcoolcc@gmail.com>
+     */
+    final protected function checkRule($rule, $type=AuthRuleModel::RULE_URL, $mode='url'){
+        if(IS_ROOT){
+            return true;//管理员允许访问任何页面
+        }
+        static $Auth    =   null;
+        if (!$Auth) {
+            $Auth       =   new \Think\Auth();
+        }
+        if(!$Auth->check($rule,UID,$type,$mode)){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 检测是否是需要动态判断的权限
+     * @return boolean|null
+     *      返回true则表示当前访问有权限
+     *      返回false则表示当前访问无权限
+     *      返回null，则会进入checkRule根据节点授权判断权限
+     *
+     * @author 朱亚杰  <xcoolcc@gmail.com>
+     */
+    protected function checkDynamic(){
+        if(IS_ROOT){
+            return true;//管理员允许访问任何页面
+        }
+        return null;//不明,需checkRule
+    }
 
 	/**
      * action访问控制,在 **登陆成功** 后执行的第一项权限检测任务

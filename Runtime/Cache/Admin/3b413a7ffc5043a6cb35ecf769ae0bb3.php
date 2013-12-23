@@ -66,6 +66,7 @@
 				columns:[[
 					{title:'名称',field:'text'},
 					{title:'模块',field:'module'},
+					{title:'RID',field:'id'},
 					{title:'URL',field:'name'},
 					{title:'状态',field:'status',align:'center',editor:'text',formatter:function(value,row,index){
 						if(value == 1) {

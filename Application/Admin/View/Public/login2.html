@@ -32,7 +32,7 @@
         <div class="form-group">
           <div class="input-icon">
             <i class="fa fa-lock"></i>
-            <input type="text" name="password" id="password" class="form-control" placeholder="密码" >
+            <input type="password" name="password" id="password" class="form-control" placeholder="密码" >
             <span class="help-block Validform_checktip"></span>
           </div>
         </div>

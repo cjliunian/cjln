@@ -39,8 +39,6 @@ class IndexController extends AdminController {
     }
 
     public function add() {
-    
-        # code...
         echo "string";
         $this->display();
     }
@@ -52,7 +50,6 @@ class IndexController extends AdminController {
     }
 
     public function board() {
-        // dump($_SERVER);
         echo '<p>服务器环境:' .$_SERVER['SERVER_SOFTWARE'].'</p>';
         echo "<p>PHP运行环境:" .PHP_SAPI. '   PHP'.PHP_VERSION.'</p>';
     }

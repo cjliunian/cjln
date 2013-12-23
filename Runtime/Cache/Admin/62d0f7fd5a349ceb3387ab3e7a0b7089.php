@@ -1,5 +1,5 @@
 <?php if (!defined('THINK_PATH')) exit();?><link rel="stylesheet" type="text/css" href="/Public/Static/Validform/Validform.css">
-<form id="add-fm" method="post" action="/index.php/Admin/AuthManager/addUsergroup?_=1387784584999" >
+<form id="add-fm" method="post" action="/index.php/Admin/AuthManager/addUsergroup?_=1387791102733" >
 
     <table class="fm-tb">
         <tr>
@@ -42,7 +42,7 @@
             var fmdata = vdfm.forms.serializejson();
             $.ajax({
                 type:'post',
-                url:'/index.php/Admin/AuthManager/addUsergroup?_=1387784584999',
+                url:'/index.php/Admin/AuthManager/addUsergroup?_=1387791102733',
                 data:fmdata,
                 success:function(rsp){
                     noty(rsp);
