@@ -5,7 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="/Public/Static/css/common.css">
 	<link rel="stylesheet" type="text/css" id="theme" href="/Public/Static/easyui/themes/<?php echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default'; ?>/easyui.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/extend.icon.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/extensions/icon/icon-all.css">
 	<style type="text/css">
 	.easyui-layout .layout-panel-west .panel-header {
 		border-top:none;
@@ -96,7 +96,8 @@
 <script type="text/javascript" src="/Public/Static/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="/Public/Static/locale/lang-zh_CN.js"></script>
 <script type="text/javascript" src="/Public/Static/jquery.cookie.js"></script>
-<script type="text/javascript" src="/Public/Static/easyui/extends/jquery.easyui.extend.min.js"></script>
+<script type="text/javascript" src="/Public/Static/easyui/extensions/jquery.jdirk.min.js"></script>
+<script type="text/javascript" src="/Public/Static/easyui/extensions/jeasyui.extensions.all.min.js"></script>
 <script type="text/javascript" src="/Public/Static/jquery.json.min.js"></script>
 <script type="text/javascript" src="/Public/Admin/js/index.js"></script>
 <script type="text/javascript">

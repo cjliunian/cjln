@@ -1,0 +1,29 @@
+
+<block name="body">
+	<table id="dl-tg"></table>
+</block>
+
+<block name="script">
+	<script type="text/javascript" src="__JS__/common.js"></script>
+	<script type="text/javascript">
+
+		$(function($){
+			$("#dl-tg").treegrid({
+				border:false,
+				height:379,
+				// width:600,
+				url:'__URL__/get_rules_json',
+				idField:'id',
+				treeField:'title',
+				checkbox:true,
+				columns:[[
+					{title:'名称',field:'title',formatter:function(value,row,index){
+						// console.info(row);
+						return '<input type="checkbox" name="rules" value="'+row.id+'" id="rule-'+row.id+'" pid="'+row.pid+'" /><label id="l-'+row.id+'" for="rule-'+row.id+'">'+value+'</label>';
+					}},
+					{title:'权限代码',field:'name'}
+				]]
+			});
+		});
+	</script>
+</block>

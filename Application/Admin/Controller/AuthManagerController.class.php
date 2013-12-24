@@ -119,6 +119,17 @@ class AuthManagerController extends AdminController{
         $this->ajaxReturn($rsp);
     }
 
+    public function authSet() {
+
+        if (IS_POST) {
+            
+        } else {
+            
+            $this->display();    
+        }
+        
+    }
+
     public function get_usergroup_json() {
     	$data = $this->AuthGroup->select();
 
@@ -175,12 +186,40 @@ class AuthManagerController extends AdminController{
         
     }
 
-    
+    public function get_rules_json() {
+        $list = $this->AuthRule->select();
+        $rules = list_to_tree($list,'id','pid','children');
+        $this->ajaxReturn($rules);
+    }
 
+    
+    public function temp() {
+        $menus = D('Menu')->select();
+        // dump($menus);exit();
+        $count = 0;
+        foreach ($menus as $key => $line) {
+            $data['name'] = empty($line['url']) ? $key.'aa': $line['url'];
+            $data['title'] = $line['name'];
+            $data['pid'] = $line['pid'];
+            $data['id'] = $line['id'];
+            $data['type'] = 1;
+            $data['status'] = 1;
+            $data['module'] = 'admin';
+            if($this->AuthRule->add($data)){
+                $count++;
+                echo $count.'<br>';
+            } else {
+                echo $this->AuthRule->_sql().'--<br>';
+            }
+
+        }
+        
+    }
     
 
     public function _initialize(){
         $this->AuthGroup = D('AuthGroup');
+        $this->AuthRule = D('AuthRule');
         // parent::_initialize();
     }
     

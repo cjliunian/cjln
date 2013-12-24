@@ -55,7 +55,7 @@
 				handler:groupMebManager
 			},{
 				text:'权限设置',
-				handler:qxset
+				handler:authSet
 			},'-',{
 				text:'刷新',
 				iconCls:'icon-reload',
@@ -151,8 +151,26 @@
 			
 		}
 
-		function qxset() {
-
+		function authSet() {
+			var sltRow = dlist.datagrid('getSelected');
+			if(!sltRow) {
+				parent.$.messager.alert('提示信息','未选择数据!','warning');
+				return false;
+			}
+			$.showModalDialog({
+				title:'权限设置',
+				// useiframe:true,
+				// content: 'url:'+CONTROLLER+'/authSet',
+				height:450,
+				href:CONTROLLER+'/authSet?groupid'+sltRow.id,
+				buttons:[{
+					text:'确定',
+					handler:'doOK'
+				},{
+					text:'取消',
+					handler:function(win){ win.close();}
+				}]
+			});
 		}
 
 		function isSlted(sltRow){
@@ -160,7 +178,8 @@
 				parent.$.messager.alert('提示信息','未选择数据!','warning');
 				return false;
 			}
-				
+
+
 		}
 
 	</script>

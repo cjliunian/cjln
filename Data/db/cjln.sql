@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50614
 File Encoding         : 65001
 
-Date: 2013-12-23 17:52:07
+Date: 2013-12-24 18:02:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -111,18 +111,31 @@ CREATE TABLE `cj_auth_rule` (
   `condition` varchar(300) NOT NULL DEFAULT '' COMMENT '规则附加条件',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`module`,`name`,`type`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cj_auth_rule
 -- ----------------------------
-INSERT INTO `cj_auth_rule` VALUES ('1', '0', 'admin', '1', 'Admin/Index/index', '后台首页', '1', '');
-INSERT INTO `cj_auth_rule` VALUES ('2', '0', 'admin', '1', 'Admin/Index/dashboard', '后台首页仪表盘', '1', '');
-INSERT INTO `cj_auth_rule` VALUES ('3', '0', 'admin', '1', 'Admin/Index/board', '服务器信息', '1', '');
-INSERT INTO `cj_auth_rule` VALUES ('4', '0', 'admin', '1', 'Admin/Menu/index', '菜单管理', '1', '');
-INSERT INTO `cj_auth_rule` VALUES ('5', '4', 'admin', '1', 'Admin/Menu/add', '增加菜单', '1', '');
-INSERT INTO `cj_auth_rule` VALUES ('6', '4', 'admin', '1', 'Admin/Menu/delMenu', '菜单删除', '1', '');
-INSERT INTO `cj_auth_rule` VALUES ('7', '4', 'admin', '1', 'Menu-refresh-btn', '菜单刷新', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('1', '0', 'admin', '1', '0aa', '全局', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('2', '0', 'admin', '1', '1aa', '设置', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('3', '0', 'admin', '1', '2aa', '扩展', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('4', '2', 'admin', '1', '3aa', '站点设置', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('5', '2', 'admin', '1', '4aa', '水印设置', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('6', '5', 'admin', '1', '5aa', '小调设置', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('7', '5', 'admin', '1', '6aa', '大小设置', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('8', '1', 'admin', '1', '7aa', '菜单项1', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('9', '1', 'admin', '1', 'Menu/index', '菜单管理', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('10', '8', 'admin', '1', '9aa', '菜单项1.1', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('11', '10', 'admin', '1', '10aa', '菜单项1.1.惺惺惜惺惺', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('12', '11', 'admin', '1', 'Menu/mlist', '菜单项', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('14', '1', 'admin', '1', 'User/index', '用户管理', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('22', '3', 'admin', '1', '12312', '123123', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('33', '32', 'admin', '1', 'AuthManager/userGroup', '用户组管理', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('35', '1', 'admin', '1', 'Node/index', '节点管理', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('32', '1', 'admin', '1', 'AuthManager/index', '权限管理', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('36', '33', 'admin', '1', 'user-group-add', '增加', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('37', '33', 'admin', '1', 'user-group-edit', '修改', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('38', '36', 'admin', '1', 'test-1', '测试1', '1', '');
 
 -- ----------------------------
 -- Table structure for cj_config
@@ -174,7 +187,7 @@ CREATE TABLE `cj_member` (
 -- Records of cj_member
 -- ----------------------------
 INSERT INTO `cj_member` VALUES ('15', '那一年', '0', '0000-00-00', '', '0', '0', '0', '0', '2130706433', '1387791641', '1');
-INSERT INTO `cj_member` VALUES ('1', 'admin', '0', '0000-00-00', '', '0', '0', '0', '0', '2130706433', '1387791653', '1');
+INSERT INTO `cj_member` VALUES ('1', 'admin', '0', '0000-00-00', '', '0', '0', '0', '0', '2130706433', '1387874744', '1');
 INSERT INTO `cj_member` VALUES ('16', 'imya', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('26', '12323', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('24', '12312312', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
@@ -289,7 +302,7 @@ CREATE TABLE `cj_ucenter_member` (
 -- Records of cj_ucenter_member
 -- ----------------------------
 INSERT INTO `cj_ucenter_member` VALUES ('15', '那一年', 'a129b591bd914facca99a0152a2d37aa', '1013385@163.com', '', '1386744697', '2130706433', '1387791641', '2130706433', '1386744697', '1');
-INSERT INTO `cj_ucenter_member` VALUES ('1', 'admin', 'a129b591bd914facca99a0152a2d37aa', 'cjliunian@163.com', '', '1386661607', '2130706433', '1387791653', '2130706433', '1386661607', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('1', 'admin', 'a129b591bd914facca99a0152a2d37aa', 'cjliunian@163.com', '', '1386661607', '2130706433', '1387874744', '2130706433', '1386661607', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('16', 'imya', 'a129b591bd914facca99a0152a2d37aa', '123456@163.com', '', '1386744916', '2130706433', '0', '0', '1386744916', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('18', '12424', 'a129b591bd914facca99a0152a2d37aa', '124@qq.com', '', '1386751177', '2130706433', '0', '0', '1386751177', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('23', 'wrqwerwr', 'a129b591bd914facca99a0152a2d37aa', 'mdfgg@163.com', '', '1386811471', '2130706433', '0', '0', '1386811471', '1');
