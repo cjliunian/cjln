@@ -3,10 +3,9 @@
 <head>
 	<title> 后台管理</title>
 	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/extensions/icons/icon-all.css">
 	<link rel="stylesheet" type="text/css" href="/Public/Static/css/common.css">
 	<link rel="stylesheet" type="text/css" id="theme" href="/Public/Static/easyui/themes/<?php echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default'; ?>/easyui.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/extend.icon.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/easyui.extend.css">
 	
 	<script type="text/javascript">
 		// 初始化全局变量定义
@@ -32,7 +31,8 @@
 <script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="/Public/Static/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="/Public/Static/locale/lang-zh_CN.js"></script>
-<script type="text/javascript" src="/Public/Static/easyui/extends/jquery.easyui.extend.min.js"></script>
+<script type="text/javascript" src="/Public/Static/easyui/extensions/jquery.jdirk.min.js"></script>
+<!-- <script type="text/javascript" src="/Public/Static/easyui/extensions/jeasyui.extensions.all.min.js"></script> -->
 <script type="text/javascript" src="/Public/Static/jquery.json.min.js"></script>
 <script type="text/javascript" src="/Public/Admin/js/common.js"></script>
 

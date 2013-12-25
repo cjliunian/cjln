@@ -1,3 +1,0 @@
-1.增加extends目录用于存放easyui的相关扩展
-2.增加themes/extend-icons目录及themes/extend.icon.css用于扩展图标
-3.修改themes/default/images部分图片

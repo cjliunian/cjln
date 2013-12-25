@@ -1,12 +1,12 @@
-<link rel="stylesheet" type="text/css" href="__STATIC__/Validform/Validform.css">
-<form id="addmenu-fm" method="post" action="__URL__/addMenuSave" >
+<?php if (!defined('THINK_PATH')) exit();?><link rel="stylesheet" type="text/css" href="/Public/Static/Validform/Validform.css">
+<form id="addmenu-fm" method="post" action="/index.php/Admin/Menu/addMenuSave" >
 
     <table class="fm-tb">
         <tr>
             <td class="w100 tar bdr-r"><label class="label" for="m-pid"><span class="required">*</span>父级：</label></td>
             <td>
                 <input class="easyui-combotree" name="pid" id="m-pid"
-                    data-options="url:'__URL__/getMenuJson',width:300,required:true,novalidate:true,value:'{$id}'" />
+                    data-options="url:'/index.php/Admin/Menu/getMenuJson',width:300,required:true,novalidate:true,value:'<?php echo ($id); ?>'" />
             </td>
         </tr>
 
@@ -33,8 +33,8 @@
     </table>
 </form>
 
-<script type="text/javascript" src="__STATIC__/Validform/Validform.min.js"></script>
-<script type="text/javascript" src="__JS__/common.js"></script>
+<script type="text/javascript" src="/Public/Static/Validform/Validform.min.js"></script>
+<script type="text/javascript" src="/Public/Admin/js/common.js"></script>
 
 <script type="text/javascript">
     var vdfm = $("#addmenu-fm").Validform({tiptype:3});
@@ -65,7 +65,7 @@
             var fmdata = vdfm.forms.serializejson();
             $.ajax({
                 type:'post',
-                url:'__URL__/addMenuSave',
+                url:'/index.php/Admin/Menu/addMenuSave',
                 data:fmdata,
                 success:function(rsp){
                     if(rsp.status) {

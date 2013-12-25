@@ -10,7 +10,7 @@ class MenuController extends AdminController
 	
 	public function index() {
 	
-		
+		// echo "string";exit();
 
 		$this->display();
 	}
@@ -26,7 +26,8 @@ class MenuController extends AdminController
 	public function add() {
 		$id = I('get.id');
 		$this->id = $id;
-		$this->display();
+		// echo "string";exit();
+		$this->display('add');
 	}
 
 	public function addMenuSave() {

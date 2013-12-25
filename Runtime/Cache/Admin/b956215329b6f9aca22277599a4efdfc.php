@@ -3,10 +3,9 @@
 <head>
 	<title> 后台管理</title>
 	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/extensions/icons/icon-all.css">
 	<link rel="stylesheet" type="text/css" href="/Public/Static/css/common.css">
 	<link rel="stylesheet" type="text/css" id="theme" href="/Public/Static/easyui/themes/<?php echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default'; ?>/easyui.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/extend.icon.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/easyui.extend.css">
 	
 	<script type="text/javascript">
 		// 初始化全局变量定义
@@ -32,7 +31,8 @@
 <script type="text/javascript" src="/Public/Static/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="/Public/Static/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="/Public/Static/locale/lang-zh_CN.js"></script>
-<script type="text/javascript" src="/Public/Static/easyui/extends/jquery.easyui.extend.min.js"></script>
+<script type="text/javascript" src="/Public/Static/easyui/extensions/jquery.jdirk.min.js"></script>
+<script type="text/javascript" src="/Public/Static/easyui/extensions/jeasyui.extensions.all.min.js"></script>
 <script type="text/javascript" src="/Public/Static/jquery.json.min.js"></script>
 <script type="text/javascript" src="/Public/Admin/js/common.js"></script>
 
@@ -74,19 +74,19 @@
 						}
 					}}
 				]],
-				customAttr: {
-		            rowediting: true,
-		            onConfirmEdit: function(row){
-				        $(this).treegrid('endEdit',row.id);
-		            	var changes = $(this).treegrid('getChanges','updated');
-						$.post("/index.php/Admin/Menu/editSave",changes[0],function(rsp){
-							if(rsp.status) {
-								$.messager.show({title:'提示信息',msg:rsp.info,showType:'show'});
-							}
-						});
-						return true;
-                    }
-		        },
+				// customAttr: {
+		  //           rowediting: true,
+		  //           onConfirmEdit: function(row){
+				//         $(this).treegrid('endEdit',row.id);
+		  //           	var changes = $(this).treegrid('getChanges','updated');
+				// 		$.post("/index.php/Admin/Menu/editSave",changes[0],function(rsp){
+				// 			if(rsp.status) {
+				// 				$.messager.show({title:'提示信息',msg:rsp.info,showType:'show'});
+				// 			}
+				// 		});
+				// 		return true;
+    //                 }
+		  //       },
 		        onDblClickRow: function(row){
 		            var editingRow = $(this).treegrid('getEditingRow');
 		            if(!editingRow){
@@ -95,27 +95,49 @@
 		                $(this).treegrid('select', editingRow.id);
 		            }
 		        }
-			}).treegrid('followCustomHandle');
+			});
+			// }).treegrid('followCustomHandle');
 			eyResize({'#tt':'treegrid'});
 		});
 
 		function addMenu () {
 			var sltRow = $("#tt").treegrid('getSelected');
 			var id = sltRow ? sltRow.id : '';
-			$.showModalDialog({
-				title:'增加菜单',
-				// width:600,height:300,
-				data:{tt:$("#tt")},
-				href:CONTROLLER+'/Add?id='+id,
-				buttons:[{
-					text:'增加',
-					handler:'doOK'
-				},{
-					text:'取消',
-					handler:function(win){ win.close();}
-				}]
+			// $.showModalDialog({
+			// 	title:'增加菜单',
+			// 	// width:600,height:300,
+			// 	data:{tt:$("#tt")},
+			// 	href:CONTROLLER+'/Add?id='+id,
+			// 	buttons:[{
+			// 		text:'增加',
+			// 		handler:'doOK'
+			// 	},{
+			// 		text:'取消',
+			// 		handler:function(win){ win.close();}
+			// 	}]
 				
-			});
+			// });
+
+			$.easyui.showDialog({
+	            title: "增加菜单",
+	            href:CONTROLLER+'/Add?id='+id,
+	            topMost: true,
+	            enableApplyButton:false,
+	            // iniframe:true,
+	            onSave:function(){
+	            	// console.info('保存数据');
+	            	// this.dialog('close');
+	            	// console.info(parent.vdfm);
+	            	parent.doOK(this);
+	            	
+	            	// console.info(opts);
+	            	// return false;
+	            }
+	        });
+
+	        // $.easyui.parent.closeDialog();
+
+
 		}
 
 		function delMenu () {

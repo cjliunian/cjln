@@ -2,7 +2,9 @@
  * 公用样式
  */
 
-
+html,body{
+  font-size: 12px;
+}
 
 
 /* margin */

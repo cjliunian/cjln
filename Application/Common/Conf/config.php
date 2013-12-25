@@ -6,7 +6,7 @@ return array(
 
 
 	/* 调试配置 */
-    'SHOW_PAGE_TRACE' => true,
+    // 'SHOW_PAGE_TRACE' => true,
 
 
     /* 用户相关设置 */

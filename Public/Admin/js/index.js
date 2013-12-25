@@ -20,10 +20,18 @@ $(function($){
 			nav.accordion('select',0);
 		}
 	});
-
-
 });
-var mainTabs = $('#main-tabs').tabs();
+
+var mainTabs = $('#main-tabs').tabs({
+	lineHeight:0
+});
+mainTabs.tabs('add',{
+	title: '后台首页',
+	href: '/index.php/Admin/Index/dashboard',
+	iniframe:true,
+	iconCls:false,
+	refreshable:false
+});
 
 /**
  * 菜单操作
@@ -41,9 +49,9 @@ function menuAc (node) {
 				mainTabs.tabs('add',{
 					title: node.text,
 					href: node.attributes.url,
-					useiframe:true,
-					showMask: true,
-					loadMsg: lang.loadMsg,
+					iniframe:true,
+					iconCls:false,
+					// refreshable:false,
 					closable: true
 				});
 			}
