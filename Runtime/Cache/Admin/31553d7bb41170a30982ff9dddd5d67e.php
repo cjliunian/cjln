@@ -3,7 +3,7 @@
 
     <table class="fm-tb">
         <tr>
-            <td class="w100 tar bdr-r"><label class="label" for="m-pid"><span class="required">*</span>父级：</label></td>
+            <td class="w100 tar bdr-r"><label class="label" for="m-pid">父级：</label></td>
             <td>
                 <input class="easyui-combotree" name="pid" id="m-pid"
                     data-options="url:'/index.php/Admin/Menu/getMenuJson',width:300,required:true,novalidate:true,value:'<?php echo ($id); ?>'" />
@@ -58,18 +58,28 @@
         }]);
     });
 
+    function testFn (ag1) {
+        console.info(ag1);
+    }
     
-    function doOK (dlg) {
+    function doOK () {
+
+
+        // console.info(dlg);
+        // dlg.dialog('close');
         // var tt = win.getData('tt');
+        // console.info(vdfm.check());
         if(vdfm.check()) {
             var fmdata = vdfm.forms.serializejson();
+            var isAdded = false;
             $.ajax({
                 type:'post',
                 url:'/index.php/Admin/Menu/addMenuSave',
+                async:false,
                 data:fmdata,
                 success:function(rsp){
                     if(rsp.status) {
-                        dlg.dialog('close');
+                        // dlg.dialog('close');
                         // tt.treegrid('reload');
                         $.messager.show({
                             title:'提示信息',
@@ -77,9 +87,15 @@
                             showType:'show',
                             position:'bottomRight'
                         });
+                        isAdded = true;
+                        // return false;
                     }
                 }
             });
+            console.info(isAdded);
+            return isAdded;
+        } else {
+            return false;
         }
     }
 

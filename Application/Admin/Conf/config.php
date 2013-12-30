@@ -1,11 +1,4 @@
 <?php
-// +----------------------------------------------------------------------
-// | OneThink [ WE CAN DO IT JUST THINK IT ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2013 http://www.onethink.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Author: 麦当苗儿 <zuojiazi@vip.qq.com> <http://www.thinkphp.cn>
-// +----------------------------------------------------------------------
 
 /**
  * 配置文件
@@ -16,10 +9,10 @@ return array(
 
     /* 模板相关配置 */
     'TMPL_PARSE_STRING' => array(
-        '__STATIC__' => __ROOT__ . '/Public/Static',
-        '__IMG__'    => __ROOT__ . '/Public/' . MODULE_NAME . '/images',
-        '__CSS__'    => __ROOT__ . '/Public/' . MODULE_NAME . '/css',
-        '__JS__'     => __ROOT__ . '/Public/' . MODULE_NAME . '/js',
+        '__STATIC__' => __ROOT__ . "/Public/Static",
+        '__IMG__'    => __ROOT__ . "/Public/" . MODULE_NAME . '/images',
+        '__CSS__'    => __ROOT__ . "/Public/" . MODULE_NAME . '/css',
+        '__JS__'     => __ROOT__ . "/Public/" . MODULE_NAME . '/js',
     ),
 
     /* SESSION 和 COOKIE 配置 */

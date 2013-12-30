@@ -118,7 +118,7 @@ class Dispatcher {
         }
         $depr = C('URL_PATHINFO_DEPR');
         define('MODULE_PATHINFO_DEPR',  $depr);
-        define('__INFO__',              trim($_SERVER['PATH_INFO'],$depr));
+        define('__INFO__',              trim($_SERVER['PATH_INFO'],'/'));
         // URL后缀
         define('__EXT__', strtolower(pathinfo($_SERVER['PATH_INFO'],PATHINFO_EXTENSION)));
 
@@ -152,6 +152,10 @@ class Dispatcher {
             // 加载模块配置文件
             if(is_file(MODULE_PATH.'Conf/config.php'))
                 C(include MODULE_PATH.'Conf/config.php');
+            // 加载应用模式对应的配置文件
+            if('common' != APP_MODE && is_file(MODULE_PATH.'Conf/config_'.APP_MODE.'.php'))
+                C(include MODULE_PATH.'Conf/config_'.APP_MODE.'.php');
+
             // 加载模块别名定义
             if(is_file(MODULE_PATH.'Conf/alias.php'))
                 Think::addMap(include MODULE_PATH.'Conf/alias.php');

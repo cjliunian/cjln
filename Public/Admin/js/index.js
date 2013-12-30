@@ -8,7 +8,6 @@ $(function($){
 		url: MODULE_NAME+'/Index/getMenu?id=0',
 		dataType:'json',
 		success: function(rsp) {
-			// console.info(rsp);
 			$.each(rsp,function(i,val){
 				nav.accordion('add',{
 					title: val.text,
@@ -25,6 +24,7 @@ $(function($){
 var mainTabs = $('#main-tabs').tabs({
 	lineHeight:0
 });
+
 mainTabs.tabs('add',{
 	title: '后台首页',
 	href: '/index.php/Admin/Index/dashboard',
@@ -32,6 +32,15 @@ mainTabs.tabs('add',{
 	iconCls:false,
 	refreshable:false
 });
+
+function lError(XMLHttpRequest, textStatus, errorThrown){
+	console.info(XMLHttpRequest);
+	// console.info(1);
+}
+
+function doSearch(value,name){
+alert(value+":"+name)
+}
 
 /**
  * 菜单操作
@@ -51,7 +60,7 @@ function menuAc (node) {
 					href: node.attributes.url,
 					iniframe:true,
 					iconCls:false,
-					// refreshable:false,
+					refreshable:false,
 					closable: true
 				});
 			}
@@ -64,11 +73,8 @@ function menuAc (node) {
  * 刷新tab
  */
 function refresh () {
-	var sltTab = mainTabs.tabs('getSelected');
-	$('iframe', sltTab.panel('body')).each(function(){
-		if(sltTab.panel('options').useiframe) $.mask({loadMsg: lang.loadMsg, target: sltTab});
-        this.contentWindow.location.reload();
-    });
+	var sltTabIndex = mainTabs.tabs('getSelectedIndex');
+	mainTabs.tabs('refresh',sltTabIndex);
 }
 
 
@@ -119,32 +125,40 @@ function updateCache() {
 
 function lockScreen () {
 	$.post('/index.php/Admin/Public/lockScreen',{islock:1,password:0},function(){
-		$.showModalDialog({
+		$.easyui.showDialog({
 			title:'屏幕锁',
 			content:'<div style="margin-top:50px;margin-right: auto; margin-left: auto;text-align:center;">请输入密码:<input type="password" id="pwd" /><p id="pwd-tip" style="display:none;color:red;">密码错误!</p></div>',
 			closable:false,
-			iconCls:'icon-unlock',
-			width:'400',height:'200',
-			buttons:[{
-				text:'解锁',
-				iconCls:'icon-lock_open',
-				handler:function(win){
-					var pwd = $("#pwd").val();
-					if(pwd == ''){
-						$("#pwd-tip").css('display','');
-						return false;
-					} else {
-						$.post('/index.php/Admin/Public/lockScreen',{islock:0,password:pwd},function(rsp){
-							if(rsp.status) {
-								win.close();
+			enableApplyButton:false,
+			enableCloseButton:false,
+			saveButtonText:'解锁',
+			saveButtonIconCls:'icon-standard-lock-open',
+			iconCls:'icon-standard-lock-open',
+			width:300,height:200,
+			onSave:function(){
+	        	var pwd = $("#pwd").val();
+				if(pwd == ''){
+					$("#pwd-tip").css('display','');
+					return false;
+				} else {
+					var islocked = true;
+					$.ajax({
+					   type: "POST",
+					   url: "/index.php/Admin/Public/lockScreen",
+					   async:false,
+					   data: {islock:0,password:pwd},
+					   success: function(rsp){
+						     if(rsp.status) {
+								islocked = false;
 							} else {
 								$("#pwd-tip").css('display','');
-								return false;
+								islocked = true;
 							}
-						});
-					}
+					   }
+					});
+					if(islocked) return false;
 				}
-			}]
+	        }
 		});
 	});
 }

@@ -35,14 +35,13 @@ class PublicController extends Controller {
 	                if($Member->login($uid)){ //登录用户
 	                    //TODO:跳转到登录前页面
 	                    $rsp['status'] = 1;
-	                    $rsp['info'] = '登录成功！';
+	                    $rsp['info'] = '登录成功,正在进入系统...';
 	                    $rsp['url'] = U('Index/index');
 	                } else {
 	                    // $this->error($Member->getError());
 	                    $rsp['status'] = 0;
 	                    $rsp['info'] = $Member->getError();
 	                }
-
 	            } else { //登录失败
 	                switch($uid) {
 	                    case -1: $error = '用户不存在或被禁用！'; break; //系统级别禁用

@@ -2,10 +2,11 @@
 <html>
 <head>
 	<title> 后台管理</title>
-	<link rel="stylesheet" type="text/css" href="__STATIC__/easyui/themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="__STATIC__/easyui/extensions/icons/icon-all.css">
 	<link rel="stylesheet" type="text/css" href="__STATIC__/css/common.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/css/common.css">
 	<link rel="stylesheet" type="text/css" id="theme" href="__STATIC__/easyui/themes/<php>echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default';</php>/easyui.css">
+	<link rel="stylesheet" type="text/css" href="__STATIC__/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="__STATIC__/easyui-extensions/icons/icon-all.css">
 	<style type="text/css">
 	.easyui-layout .layout-panel-west .panel-header {
 		border-top:none;
@@ -28,15 +29,12 @@
 	.north-style {
 		background:#DBEAF9;
 	}
-	#main-tabs .panel-body {
-		line-height: 0;
-	}
+	#main-tabs .panel-body { line-height: 0;}
 	</style>
 
 	<script type="text/javascript">
 		// 初始化全局变量定义
 		var MODULE_NAME = '__MODULE__';
-		
 	</script>
 
 
@@ -54,26 +52,24 @@
 		</div>
 	</div> <!-- /layout-north -->
 	<div id="layout-west" data-options="region:'west',title:'导航菜单',width:180,split:true" >
+
+		<!-- <input class="easyui-searchbox" data-options="prompt:'请输入查找的内容关键词',searcher:doSearch,border:false"  /> -->
 		<div id="acc-nav"></div>
 	</div> <!-- /layout-west -->
 
 	<div id="layout-center" data-options="region:'center'">
-		<div class="easyui-tabs" id="main-tabs" data-options="fit:true,border:false,tools:'#tab-tools'"  >
-			<!-- <div title="后台首页" style="line-height:0;" refreshable="false">
-				<iframe width="100%" height="100%" marginheight="0" marginwidth="0" frameborder="0" src="__URL__/dashboard"></iframe>
-			</div> -->
-		</div>
+		<div class="easyui-tabs" id="main-tabs" data-options="fit:true,border:false,tools:'#tab-tools'"></div>
 	</div>
 
 	<div id="tab-tools" style="border-top:none;">
 		<a href="javascript:void(0)" class="easyui-linkbutton" title="刷新" data-options="plain:true,iconCls:'icon-reload'" onclick="refresh()"></a>
-		<a href="javascript:void(0)" id="fullscreen" class="easyui-linkbutton" title="全屏" data-options="plain:true,iconCls:'icon-arrow-out'" onclick="fullscreen()"></a>
+		<a href="javascript:void(0)" id="fullscreen" class="easyui-linkbutton" title="全屏" data-options="plain:true,iconCls:'icon-standard-arrow-out'" onclick="fullscreen()"></a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" title="更新缓存" data-options="plain:true" onclick="updateCache()">更新缓存</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" title="后台地图" data-options="plain:true" onclick="updateCache()">后台地图</a>
 	</div>
 
 	<div id="mm1" style="width:100px;">
-		<div data-options="iconCls:'icon-theme'">
+		<div data-options="iconCls:'icon-standard-paintbrush'">
 			<span>切换主题</span>
 			<div style="width:150px;">
 				<div onclick="changeTheme('default');">default</div>
@@ -83,8 +79,8 @@
 				<div onclick="changeTheme('metro');">metro</div>
 			</div>
 		</div>
-		<div data-options="iconCls:'icon-lock'" onclick="lockScreen();">锁屏</div>
-		<div data-options="iconCls:'icon-logout'" id="logout" onclick="logout();">退出</div>
+		<div data-options="iconCls:'icon-standard-lock'" onclick="lockScreen();">锁屏</div>
+		<div data-options="iconCls:'icon-cologne-logout'" id="logout" onclick="logout();">退出</div>
 	</div>
 
 
@@ -99,10 +95,9 @@
 <script type="text/javascript" src="__STATIC__/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="__STATIC__/locale/lang-zh_CN.js"></script>
 <script type="text/javascript" src="__STATIC__/jquery.cookie.js"></script>
-<script type="text/javascript" src="__STATIC__/easyui/extensions/jquery.jdirk.min.js"></script>
-<script type="text/javascript" src="__STATIC__/easyui/extensions/jeasyui.extensions.all.min.js"></script>
-<!-- <script type="text/javascript" src="__STATIC__/easyui/extensions/jeasyui.icons.all.min.js"></script> -->
-<script type="text/javascript" src="__STATIC__/jquery.json.min.js"></script>
+<script type="text/javascript" src="__STATIC__/easyui-extensions/jquery.jdirk.min.js"></script>
+<script type="text/javascript" src="__STATIC__/easyui-extensions/jeasyui.extensions.all.min.js"></script>
+<script type="text/javascript" src="__STATIC__/easyui-extensions/jeasyui.icons.all.min.js"></script>
 <script type="text/javascript" src="__JS__/index.js"></script>
 <script type="text/javascript">
 	if ({$isLockScreen}) {

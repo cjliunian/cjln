@@ -27,14 +27,20 @@ class IndexController extends AdminController {
             $menus = D('Menu')->getTopMenu();
         } else {
             $menus = D('Menu')->field('id,name as text,iconCls,url')->where('pid='.$pid.' and status = 0')->select();
-            foreach ($menus as $key => $line) {
-                // 后面可增加权限检测
-                $hasChild = D('Menu')->field('id')->where('pid='.$line['id'].' and status = 0')->find();
-                $menus[$key]['state'] = empty($hasChild) ? 'open' : 'closed';
-                $menus[$key]['attributes'] = array('url'=> U($line['url']));
+            if($menus) {
+                foreach ($menus as $key => $line) {
+                    // 后面可增加权限检测
+                    $hasChild = D('Menu')->field('id')->where('pid='.$line['id'].' and status = 0')->find();
+                    $menus[$key]['state'] = empty($hasChild) ? 'open' : 'closed';
+                    $menus[$key]['attributes'] = array('url'=> U($line['url']));
+                }
             }
         }
-        if(!empty($menus)) $this->ajaxReturn($menus,'JSON');
+        if(empty($menus)) {
+            $this->error('无下级节点！');
+        } else {
+            $this->ajaxReturn($menus,'JSON');
+        }
         
     }
 
