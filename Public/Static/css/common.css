@@ -136,3 +136,11 @@ textarea,input {
 /* 表单元素 */
 
 .required{ color:#b20202;margin-right: 5px;}
+
+.status-yes{
+  color: green;
+}
+
+.status-no{
+  color: red;
+}

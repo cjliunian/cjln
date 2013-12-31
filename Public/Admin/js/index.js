@@ -39,7 +39,7 @@ function lError(XMLHttpRequest, textStatus, errorThrown){
 }
 
 function doSearch(value,name){
-alert(value+":"+name)
+	alert(value+":"+name);
 }
 
 /**
@@ -132,8 +132,8 @@ function lockScreen () {
 			enableApplyButton:false,
 			enableCloseButton:false,
 			saveButtonText:'解锁',
-			saveButtonIconCls:'icon-standard-lock-open',
-			iconCls:'icon-standard-lock-open',
+			saveButtonIconCls:'icon-cologne-lock',
+			iconCls:'icon-cologne-lock',
 			width:300,height:200,
 			onSave:function(){
 	        	var pwd = $("#pwd").val();

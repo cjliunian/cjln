@@ -14,24 +14,18 @@ class MenuController extends AdminController
 		$this->display();
 	}
 
-	public function getMenuJson() {
-		$fields = "id,pid,name as text,iconCls,url,status";
-		$list = M('menu')->field($fields)->select();
-		$tree = list_to_tree($list,'id','pid','children');
-		$this->ajaxReturn($tree);
+	
 
-	}
-
-	public function add() {
-		$id = I('get.id');
-		$ac = I('get.ac');
+	public function add($id='', $ac='') {
 		if($ac) {
 			$data = D('Menu')->where('id='.$id)->find();
 
-			$this->data = $data;
-			$this->id = $data['pid'];
+			$this->assign(array(
+				'id' => $data['pid'],
+				'data'=>$data
+			));
 		} else {
-			$this->id = $id;	
+			$this->assign('id',$id);
 		}
 		
 		// echo "string";exit();
@@ -72,6 +66,9 @@ class MenuController extends AdminController
 		$this->ajaxReturn($info);
 	}
 
+	/**
+	 * 菜单拖拽操作
+	 */
 	public function dnd(){
 		$data = I('post.');
 		$rs = M('Menu')->where('id='.$data['id'])->save($data);
@@ -87,10 +84,7 @@ class MenuController extends AdminController
 
 	public function editSave () {
 		$data = I('post.');
-		$data['name'] = $data['text'];
 		$rs = M('Menu')->where('id='.$data['id'])->save($data);
-		// $sql = M()->_sql();
-		// $info['tip']   =   $sql;
 		if($rs >= 0) {
 			$info['status'] =   true;
 	        $info['info']   =   '修改成功!';
@@ -100,14 +94,27 @@ class MenuController extends AdminController
 		}
 		$this->ajaxReturn($info);
 	}
-	public function mlist() {
-
-		$this->display('index');
-	}
+	
 
 	public function getJson()
 	{
 		exit('xxxx');
+	}
+
+	public function getMenuJson() {
+		$fields = "id,pid,name as text,iconCls,url,status";
+		$list = M('menu')->field($fields)->select();
+		$tree = list_to_tree($list,'id','pid','children');
+		$this->ajaxReturn($tree);
+
+	}
+
+	public function get_menu_json() {
+		$fields = "id,pid,name as text,iconCls,url,status";
+		$list = M('menu')->field($fields)->select();
+		// var_dump($list);exit();
+		$tree = list_to_tree($list,'id','pid','children');
+		$this->ajaxReturn($tree);
 	}
 }
 

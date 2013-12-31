@@ -15,7 +15,7 @@ class MenuModel extends Model {
 
 	public function getTopMenu() {
 		$fields = "id,name as text,iconCls,url,status";
-		$data = $this->field($fields)->where('pid=0 and status=0')->select();
+		$data = $this->field($fields)->where('pid=0 and status=1')->select();
 		return $data;
 	}
 

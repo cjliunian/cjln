@@ -63,7 +63,7 @@
 	</div>
 
 	<div id="tab-tools" style="border-top:none;">
-		<a href="javascript:void(0)" class="easyui-linkbutton" title="刷新" data-options="plain:true,iconCls:'icon-reload'" onclick="refresh()"></a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" title="刷新" data-options="plain:true,iconCls:'icon-cologne-refresh'" onclick="refresh()"></a>
 		<a href="javascript:void(0)" id="fullscreen" class="easyui-linkbutton" title="全屏" data-options="plain:true,iconCls:'icon-standard-arrow-out'" onclick="fullscreen()"></a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" title="更新缓存" data-options="plain:true" onclick="updateCache()">更新缓存</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" title="后台地图" data-options="plain:true" onclick="updateCache()">后台地图</a>
@@ -80,7 +80,7 @@
 				<div onclick="changeTheme('metro');">metro</div>
 			</div>
 		</div>
-		<div data-options="iconCls:'icon-standard-lock'" onclick="lockScreen();">锁屏</div>
+		<div data-options="iconCls:'icon-cologne-lock'" onclick="lockScreen();">锁屏</div>
 		<div data-options="iconCls:'icon-cologne-logout'" id="logout" onclick="logout();">退出</div>
 	</div>
 

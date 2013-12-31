@@ -3,9 +3,9 @@
 <head>
 	<title> 后台管理</title>
 	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui-extensions/icons/icon-all.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/css/common.css">
 	<link rel="stylesheet" type="text/css" id="theme" href="/Public/Static/easyui/themes/<?php echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default'; ?>/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/css/common.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui-extensions/icons/icon-all.css">
 	
 <link rel="stylesheet" type="text/css" href="/Public/Static/Validform/Validform.css">
 
@@ -28,7 +28,9 @@
             <td class="w100 tar bdr-r"><label class="label" for="m-pid">父级：</label></td>
             <td>
                 <input class="easyui-combotree" name="pid" id="m-pid"
-                    data-options="url:'/index.php/Admin/Menu/getMenuJson',width:300,required:true,novalidate:true,value:'<?php echo ($id); ?>'" />
+                    data-options="url:'/index.php/Admin/Menu/getMenuJson',width:300,value:'<?php echo ($id); ?>'" />
+                <?php if(!empty($data)): ?><input type="hidden" name="id" value="<?php echo ($data["id"]); ?>" />
+                <a id="btn-settop" href="javascript:void(0);" onclick="$('#m-pid').combotree('setValue',0);" class="easyui-linkbutton" data-options="plain:true">设置为顶级</a><?php endif; ?>
             </td>
         </tr>
 
@@ -89,6 +91,7 @@
     var vdfm = $("#addmenu-fm").Validform({tiptype:3});
     $(function($){
 
+        
         $("#iconCls").click(function(){
             $.easyui.icons.showSelector({
                 onSelect: function (val) {
@@ -124,6 +127,7 @@
         // console.info(vdfm.check());
         if(vdfm.check()) {
             var fmdata = vdfm.forms.serializejson();
+            console.info(fmdata);
             var isAdded = false;
             $.ajax({
                 type:'post',

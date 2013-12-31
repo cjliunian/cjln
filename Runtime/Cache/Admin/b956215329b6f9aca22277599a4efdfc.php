@@ -3,9 +3,9 @@
 <head>
 	<title> 后台管理</title>
 	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui-extensions/icons/icon-all.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/css/common.css">
 	<link rel="stylesheet" type="text/css" id="theme" href="/Public/Static/easyui/themes/<?php echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default'; ?>/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/css/common.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui-extensions/icons/icon-all.css">
 	
 	<script type="text/javascript">
 		// 初始化全局变量定义
@@ -54,7 +54,7 @@
 				handler:delMenu
 			},'-',{
 				text:lang.refresh,
-				iconCls:'icon-reload',
+				iconCls:'icon-cologne-refresh',
 				handler:function(){$("#tt").treegrid('reload');}
 			}];
 		$(function($){
@@ -89,14 +89,11 @@
 				columns:[[
 					{title:'名称',field:'text',editor:'text'},
 					{title:'URL',field:'url',editor:'text'},
-					{title:'图标',field:'iconCls',align:'center',editor:'text',formatter:function(value,row,index){
-						return '<span class="icons '+value+'">&nbsp;&nbsp;&nbsp;</span>';
-					}},
 					{title:'状态',field:'status',align:'center',editor:'text',formatter:function(value,row,index){
 						if(value == 1) {
-							return '<span class="icons icon-status0">&nbsp;&nbsp;&nbsp;</span>';
+							return '<span class="status-yes">√</span>';
 						} else {
-							return '<span class="icons icon-status1">&nbsp;&nbsp;&nbsp;</span>';
+							return '<span class="status-no">×</span>';
 						}
 					}}
 				]]
@@ -122,10 +119,11 @@
 	            		var fmdata = vdfm.forms.serializejson();
 			            $.ajax({
 			                type:'post',
-			                url:'/index.php/Admin/Menu/addMenuSave',
+			                url:'/index.php/Admin/Menu/editSave',
 			                async:false,
 			                data:fmdata,
 			                success:function(rsp){
+			                	console.info(rsp);
 			                    if(rsp.status) $("#tt").treegrid('reload');
 			                    $.messager.show({
 			                        title:lang.tip,
@@ -147,7 +145,6 @@
 			if(sltRow == null) {
 				$.messager.alert(lang.tip,'请选择要删除的数据！','warning');
 			} else {
-				console.info(sltRow);
 				$.easyui.showDialog({
 		            title: "编辑菜单",
 		            enableHeaderContextMenu:false,

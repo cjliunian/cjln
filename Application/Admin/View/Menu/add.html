@@ -12,7 +12,11 @@
             <td class="w100 tar bdr-r"><label class="label" for="m-pid">父级：</label></td>
             <td>
                 <input class="easyui-combotree" name="pid" id="m-pid"
-                    data-options="url:'__URL__/getMenuJson',width:300,required:true,novalidate:true,value:'{$id}'" />
+                    data-options="url:'__URL__/getMenuJson',width:300,value:'{$id}'" />
+                <notempty name="data">
+                <input type="hidden" name="id" value="{$data.id}" />
+                <a id="btn-settop" href="javascript:void(0);" onclick="$('#m-pid').combotree('setValue',0);" class="easyui-linkbutton" data-options="plain:true">设置为顶级</a>
+                </notempty>
             </td>
         </tr>
 
@@ -56,6 +60,7 @@
     var vdfm = $("#addmenu-fm").Validform({tiptype:3});
     $(function($){
 
+        
         $("#iconCls").click(function(){
             $.easyui.icons.showSelector({
                 onSelect: function (val) {
@@ -91,6 +96,7 @@
         // console.info(vdfm.check());
         if(vdfm.check()) {
             var fmdata = vdfm.forms.serializejson();
+            console.info(fmdata);
             var isAdded = false;
             $.ajax({
                 type:'post',
