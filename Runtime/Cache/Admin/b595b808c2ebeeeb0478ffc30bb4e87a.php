@@ -29,7 +29,8 @@
 	.north-style {
 		background:#DBEAF9;
 	}
-	#main-tabs .panel-body { line-height: 0;}
+	/*#main-tabs .panel-body { line-height: 0;}*/
+	.panel-body{line-height: 0;} /* 防止 panel中的iframe出现不必要的滚动条 */
 	</style>
 
 	<script type="text/javascript">
@@ -48,7 +49,7 @@
 			<span>
 				欢迎您,<strong><?php echo ($_SESSION['user_auth']['username']); ?></strong>
 			</span>
-			<a href="#" class="easyui-menubutton" data-options="menu:'#mm1',iconCls:'icon-advancedsettings'">控制面板</a>
+			<a href="#" class="easyui-menubutton" data-options="menu:'#mm1',iconCls:'icon-cologne-settings'">控制面板</a>
 		</div>
 	</div> <!-- /layout-north -->
 	<div id="layout-west" data-options="region:'west',title:'导航菜单',width:180,split:true" >
@@ -97,7 +98,11 @@
 <script type="text/javascript" src="/Public/Static/jquery.cookie.js"></script>
 <script type="text/javascript" src="/Public/Static/easyui-extensions/jquery.jdirk.min.js"></script>
 <script type="text/javascript" src="/Public/Static/easyui-extensions/jeasyui.extensions.all.min.js"></script>
+
 <script type="text/javascript" src="/Public/Static/easyui-extensions/jeasyui.icons.all.min.js"></script>
+<script type="text/javascript" src="/Public/Static/easyui-extensions/jeasyui.extensions.icons.js"></script>
+<script type="text/javascript" src="/Public/Static/easyui-extensions/jquery.toolbar.js"></script>
+<script type="text/javascript" src="/Public/Static/easyui-extensions/jquery.comboicons.js"></script>
 <script type="text/javascript" src="/Public/Admin/js/index.js"></script>
 <script type="text/javascript">
 	if (<?php echo ($isLockScreen); ?>) {

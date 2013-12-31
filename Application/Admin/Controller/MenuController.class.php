@@ -24,9 +24,23 @@ class MenuController extends AdminController
 
 	public function add() {
 		$id = I('get.id');
-		$this->id = $id;
+		$ac = I('get.ac');
+		if($ac) {
+			$data = D('Menu')->where('id='.$id)->find();
+
+			$this->data = $data;
+			$this->id = $data['pid'];
+		} else {
+			$this->id = $id;	
+		}
+		
 		// echo "string";exit();
 		$this->display('add');
+	}
+
+	public function edit() {
+
+		$this->display();
 	}
 
 	public function addMenuSave() {
@@ -54,6 +68,19 @@ class MenuController extends AdminController
 		} else {
 			$info['status'] =   false;
 	        $info['info']   =   '删除失败!';
+		}
+		$this->ajaxReturn($info);
+	}
+
+	public function dnd(){
+		$data = I('post.');
+		$rs = M('Menu')->where('id='.$data['id'])->save($data);
+		if($rs >= 0) {
+			$info['status'] =   true;
+	        $info['info']   =   '修改成功!';
+		} else {
+			$info['status'] =   false;
+	        $info['info']   =   '修改失败!';
 		}
 		$this->ajaxReturn($info);
 	}

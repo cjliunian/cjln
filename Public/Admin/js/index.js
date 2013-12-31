@@ -12,7 +12,7 @@ $(function($){
 				nav.accordion('add',{
 					title: val.text,
 					iconCls: val.iconCls,
-					content:'<ul id="menu-'+val.id+'" class="easyui-tree" data-options="lines:true,onClick:menuAc" url="'+MODULE_NAME+'/Index/getMenu?id='+val.id+'"></ul>'
+					content:'<ul id="menu-'+val.id+'" class="easyui-tree nav-menu" data-options="lines:true,onClick:menuAc" url="'+MODULE_NAME+'/Index/getMenu?id='+val.id+'"></ul>'
 				});
 			});
 			// 选中第一个面板
@@ -174,3 +174,6 @@ function logout () {
 		}
 	});
 }
+
+
+

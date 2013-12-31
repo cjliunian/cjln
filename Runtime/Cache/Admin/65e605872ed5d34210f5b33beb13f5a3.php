@@ -34,7 +34,9 @@
 <script type="text/javascript" src="/Public/Static/jquery.cookie.js"></script>
 <script type="text/javascript" src="/Public/Static/easyui-extensions/jquery.jdirk.min.js"></script>
 <script type="text/javascript" src="/Public/Static/easyui-extensions/jeasyui.extensions.all.min.js"></script>
-<script type="text/javascript" src="/Public/Static/easyui-extensions/jeasyui.icons.all.min.js"></script>
+
+
+
 <script type="text/javascript" src="/Public/Admin/js/common.js"></script>
 
 	<script type="text/javascript">

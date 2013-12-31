@@ -1,4 +1,10 @@
+<extend name="Public/base"/>
+<block name="link">
 <link rel="stylesheet" type="text/css" href="__STATIC__/Validform/Validform.css">
+</block>
+
+<block name="body"> 
+
 <form id="addmenu-fm" method="post" action="__URL__/addMenuSave" >
 
     <table class="fm-tb">
@@ -13,7 +19,7 @@
         <tr>
             <td class="w100 tar bdr-r"><label class="label" for="m-name"><span class="required">*</span>名称：</label></td>
             <td>
-                <input type="text" class="inputxt" name="name" id="m-name" />
+                <input type="text" class="inputxt" name="name" id="m-name" value="{$data.name}" />
                     
             </td>
         </tr>
@@ -21,17 +27,27 @@
         <tr>
             <td class="w100 tar bdr-r"><label class="label" for="m-url"><span class="required">*</span>链接：</label></td>
             <td>
-                <input class="inputxt" type="text" id="m-url" name="url" data-options="required:true" />
+                <input class="inputxt" type="text" id="m-url" name="url" value="{$data.url}" />
             </td>
         </tr>
         <tr>
-            <td class="w100 tar bdr-r"><label class="label" for="m-iconCls"><span class="required">*</span>图标：</label></td>
+            <td class="w100 tar bdr-r"><label class="label" for="iconCls"><span class="required">*</span>图标：</label></td>
             <td>
-                <input class="inputxt" type="text" name="iconCls" id="m-iconCls" data-options="" />
+                <!-- <select id="iconCls" name="iconCls" ></select> -->
+                <input class="inputxt" type="text" id="iconCls" name="iconCls" value="{$data.iconCls}" />
             </td>
         </tr>
     </table>
 </form>
+</block>
+
+<block name="script">
+
+<script type="text/javascript" src="__STATIC__/easyui-extensions/jeasyui.icons.all.min.js"></script>
+
+<script type="text/javascript" src="__STATIC__/easyui-extensions/jeasyui.extensions.icons.js"></script>
+<script type="text/javascript" src="__STATIC__/easyui-extensions/jquery.toolbar.js"></script>
+<script type="text/javascript" src="__STATIC__/easyui-extensions/jquery.comboicons.js"></script>
 
 <script type="text/javascript" src="__STATIC__/Validform/Validform.min.js"></script>
 <script type="text/javascript" src="__JS__/common.js"></script>
@@ -39,6 +55,14 @@
 <script type="text/javascript">
     var vdfm = $("#addmenu-fm").Validform({tiptype:3});
     $(function($){
+
+        $("#iconCls").click(function(){
+            $.easyui.icons.showSelector({
+                onSelect: function (val) {
+                    $("#iconCls").val(val);
+                }
+            });
+        });
         
         vdfm.addRule([{
             ele:"#m-name",
@@ -51,16 +75,12 @@
             nullmsg:"请填写URL！",
             errormsg:"URL范围在2~50个字符之间！"
         },{
-            ele:"#m-iconCls",
-            datatype:"*2-16",
+            ele:"#iconCls",
+            datatype:"*2-100",
             nullmsg:"请填写图标！",
-            errormsg:"图标范围在6~16个字符之间！"
+            errormsg:"图标范围在2~100个字符之间！"
         }]);
     });
-
-    function testFn (ag1) {
-        console.info(ag1);
-    }
     
     function doOK () {
 
@@ -79,20 +99,10 @@
                 data:fmdata,
                 success:function(rsp){
                     if(rsp.status) {
-                        // dlg.dialog('close');
-                        // tt.treegrid('reload');
-                        $.messager.show({
-                            title:'提示信息',
-                            msg:rsp.info,
-                            showType:'show',
-                            position:'bottomRight'
-                        });
                         isAdded = true;
-                        // return false;
                     }
                 }
             });
-            console.info(isAdded);
             return isAdded;
         } else {
             return false;
@@ -101,3 +111,4 @@
 
     
 </script>
+</block>
