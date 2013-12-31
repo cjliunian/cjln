@@ -82,7 +82,7 @@
         				if(rsp.status) {
         					// $(this).treegrid('reload');
         					// 更新导航菜单
-        					parent.$(".nav-menu").tree('reload');
+        					parent.updateNav(true);
         				}
         			});
         		},
@@ -123,8 +123,11 @@
 			                async:false,
 			                data:fmdata,
 			                success:function(rsp){
-			                	console.info(rsp);
-			                    if(rsp.status) $("#tt").treegrid('reload');
+			                	// console.info(rsp);
+			                    if(rsp.status) {
+			                    	$("#tt").treegrid('reload');
+			                    	parent.updateNav(true);
+			                    }
 			                    $.messager.show({
 			                        title:lang.tip,
 			                        msg:rsp.info,
@@ -164,7 +167,10 @@
 				                async:false,
 				                data:fmdata,
 				                success:function(rsp){
-				                    if(rsp.status) $("#tt").treegrid('reload');
+				                    if(rsp.status) {
+				                    	$("#tt").treegrid('reload');
+				                    	parent.updateNav(true);
+				                    }
 				                    $.messager.show({
 				                        title:lang.tip,
 				                        msg:rsp.info,

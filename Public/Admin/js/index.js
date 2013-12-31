@@ -1,25 +1,41 @@
 
 
 // 加载导航菜单
-var nav;
+var nav = $("#acc-nav").accordion({border:false,fit:true});
+
 $(function($){
-	nav = $("#acc-nav").accordion({border:false,fit:true});
+	updateNav(false);
+});
+
+
+function updateNav (isUpadte) {
 	$.ajax({
 		url: MODULE_NAME+'/Index/getMenu?id=0',
 		dataType:'json',
 		success: function(rsp) {
 			$.each(rsp,function(i,val){
-				nav.accordion('add',{
-					title: val.text,
-					iconCls: val.iconCls,
-					content:'<ul id="menu-'+val.id+'" class="easyui-tree nav-menu" data-options="lines:true,onClick:menuAc" url="'+MODULE_NAME+'/Index/getMenu?id='+val.id+'"></ul>'
-				});
+				var sltAcc = nav.accordion('select',val.text);
+				// console.info(sltAcc);
+				if(sltAcc && isUpadte) {
+					nav.accordion('remove',val.text);
+					nav.accordion('add',{
+						title: val.text,
+						iconCls: val.iconCls,
+						content:'<ul id="menu-'+val.id+'" class="easyui-tree nav-menu" data-options="lines:true,onClick:menuAc" url="'+MODULE_NAME+'/Index/getMenu?id='+val.id+'"></ul>'
+					});
+				} else {
+					nav.accordion('add',{
+						title: val.text,
+						iconCls: val.iconCls,
+						content:'<ul id="menu-'+val.id+'" class="easyui-tree nav-menu" data-options="lines:true,onClick:menuAc" url="'+MODULE_NAME+'/Index/getMenu?id='+val.id+'"></ul>'
+					});
+				}
+				
 			});
-			// 选中第一个面板
-			nav.accordion('select',0);
+			nav.accordion('select',0); // 选中第一个面板
 		}
 	});
-});
+}
 
 var mainTabs = $('#main-tabs').tabs({
 	lineHeight:0
