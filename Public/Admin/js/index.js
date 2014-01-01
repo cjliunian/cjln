@@ -58,6 +58,9 @@ function doSearch(value,name){
 	alert(value+":"+name);
 }
 
+
+
+
 /**
  * 菜单操作
  *

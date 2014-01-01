@@ -1,17 +1,17 @@
-<style type="text/css">
+<?php if (!defined('THINK_PATH')) exit();?><style type="text/css">
 	.tree-checkbox2 {
     	background: url("/Public/Static/easyui/themes/default/images/tree_icons.png") no-repeat scroll -224px -18px rgba(0, 0, 0, 0);
 	}
 </style>
-<block name="body">
+
 	<!-- <table id="dl-tg"></table> -->
 	<!-- <div style="padding-left: 20px;"> -->
 		<ul id="auth-set-tree"></ul>	
 	<!-- </div> -->
-</block>
 
-<block name="script">
-<script type="text/javascript" src="__JS__/common.js"></script>
+
+
+<script type="text/javascript" src="/Public/Admin/js/common.js"></script>
 <script type="text/javascript">
 
 	$(function($){
@@ -19,7 +19,7 @@
 			border:false,
 			height:379,
 			// width:600,
-			url:'__URL__/get_rules_json',
+			url:'/index.php/Admin/AuthManager/get_rules_json',
 			idField:'id',
 			treeField:'title',
 			checkbox:true,
@@ -33,7 +33,7 @@
 		});*/
 
 		var authTree = $("#auth-set-tree").tree({
-			url:'__URL__/get_rules_json',
+			url:'/index.php/Admin/AuthManager/get_rules_json',
 			checkbox:true,
 			// cascadeCheck:false,
 			lines:true,
@@ -74,4 +74,3 @@
 		console.info(cnodes);
 	}
 </script>
-</block>

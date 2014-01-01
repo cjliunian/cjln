@@ -20,7 +20,11 @@ class NodeController extends AdminController {
 			$post = I('post.');
 			if(M('AuthRule')->create($post)) {
 				$rs = M('AuthRule')->add();
-			} 
+			} else {
+				// --- 
+				$info['tip'] = M()->_sql();
+			}
+			
 			if($rs) {
 				$info['status'] =   true;
 		        $info['info']   =   '添加成功!';

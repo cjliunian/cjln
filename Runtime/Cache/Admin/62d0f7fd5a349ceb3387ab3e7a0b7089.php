@@ -1,29 +1,27 @@
-<link rel="stylesheet" type="text/css" href="__STATIC__/Validform/Validform.css">
-<form id="add-fm" method="post" action="__SELF__" >
+<?php if (!defined('THINK_PATH')) exit();?><link rel="stylesheet" type="text/css" href="/Public/Static/Validform/Validform.css">
+<form id="add-fm" method="post" action="/index.php/Admin/AuthManager/addUsergroup?_=1388565825977" >
 
     <table class="fm-tb">
         <tr>
             <td class="w100 tar"><label class="label" for="title"><span class="required">*</span>用户组：</label></td>
             <td>
-                <input type="text" class="inputxt" name="title" id="title" value="{$data.title}" />
+                <input type="text" class="inputxt" name="title" id="title" value="<?php echo ($data["title"]); ?>" />
             </td>
         </tr>
 
         <tr>
             <td class="w100 tar"><label class="label" for="description">描述：</label></td>
             <td>
-                <textarea name="description" class="inputxt" id="description">{$data.description}</textarea>
+                <textarea name="description" class="inputxt" id="description"><?php echo ($data["description"]); ?></textarea>
             </td>
         </tr>
-        <notempty name="data">
-            <input type="hidden" name="id" value="{$data.id}" />
-        </notempty>
+        <?php if(!empty($data)): ?><input type="hidden" name="id" value="<?php echo ($data["id"]); ?>" /><?php endif; ?>
 
     </table>
 </form>
 
-<script type="text/javascript" src="__STATIC__/Validform/Validform.min.js"></script>
-<script type="text/javascript" src="__JS__/common.js"></script>
+<script type="text/javascript" src="/Public/Static/Validform/Validform.min.js"></script>
+<script type="text/javascript" src="/Public/Admin/js/common.js"></script>
 
 <script type="text/javascript">
     var vdfm = $("#add-fm").Validform({tiptype:3});
@@ -46,7 +44,7 @@
             $.ajax({
                 type:'post',
                 async:false,
-                url:'__SELF__',
+                url:'/index.php/Admin/AuthManager/addUsergroup?_=1388565825977',
                 data:fmdata,
                 success:function(rsp){
                     noty(rsp);

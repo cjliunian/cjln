@@ -3,9 +3,9 @@
 <head>
 	<title> 后台管理</title>
 	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui-extensions/icons/icon-all.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/css/common.css">
 	<link rel="stylesheet" type="text/css" id="theme" href="/Public/Static/easyui/themes/<?php echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default'; ?>/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/css/common.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui-extensions/icons/icon-all.css">
 	
 	<script type="text/javascript">
 		// 初始化全局变量定义
@@ -42,15 +42,15 @@
 	<script type="text/javascript">
 		var toolbar = [{
 				text:'增加',
-				iconCls:'icon-add',
+				iconCls:'icon-cologne-plus',
 				handler:add
 			},{
 				text:'删除',
-				iconCls:'icon-remove',
+				iconCls:'icon-cologne-bank',
 				handler:del
 			},'-',{
 				text:'刷新',
-				iconCls:'icon-reload',
+				iconCls:'icon-cologne-refresh',
 				handler:function(){$("#dg").datagrid('reload');}
 			}];
 		var ulist;
@@ -62,6 +62,8 @@
 				rownumbers:true,
 				pagination:true,
 				singleSelect: true,
+				enableHeaderClickMenu: false,
+        		enableHeaderContextMenu: false,
 				idField:'uid',
 				columns:[[
 					{title:'UID',field:'uid'},
@@ -83,18 +85,20 @@
 		});
 
 		function add() {
-			$.showModalDialog({
-				title:'增加用户',
-				href:CONTROLLER+'/Add',
-				data:{ele:$("#dg")},
-				buttons:[{
-					text:'增加',
-					handler:'doOK'
-				},{
-					text:'取消',
-					handler:function(win){ win.close();}
-				}]
-			});
+			$.easyui.showDialog({
+	            title: "增加菜单",
+	            enableHeaderContextMenu:false,
+	            autoRestore:false,
+	            // iniframe:true,
+	            href:CONTROLLER+'/Add',
+	            topMost: true,
+	            enableApplyButton:false,
+	            onSave:function(){
+	            	var rs = parent.doOK(this);
+	            	if(rs) $("#dg").datagrid('reload');
+	            	return rs;
+	            }
+	        });
 		}
 
 		function del() {
@@ -104,7 +108,7 @@
 				$.messager.confirm('确认对话框', '您想要删除选择中的数据吗？', function(r){
 					if (r){
 					    $.post(CONTROLLER+'/del',{uid:sltRow.uid},function(rsp){
-							console.info(rsp);
+							// console.info(rsp);
 							noty(rsp);
 							if(rsp.status) ulist.datagrid('reload');
 						});

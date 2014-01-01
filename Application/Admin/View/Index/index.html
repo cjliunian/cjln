@@ -29,18 +29,19 @@
 	.north-style {
 		background:#DBEAF9;
 	}
+
 	/*#main-tabs .panel-body { line-height: 0;}*/
 	.panel-body{line-height: 0;} /* 防止 panel中的iframe出现不必要的滚动条 */
+	#search-panel .searchbox {border: none;}
+	#search-panel .searchbox-text{padding-left: 5px;}
 	</style>
 
 	<script type="text/javascript">
 		// 初始化全局变量定义
 		var MODULE_NAME = '__MODULE__';
 	</script>
-
-
 </head>
-<body class="easyui-layout">
+<body class="easyui-layout" id="body-layout">
 	<div id="layout-north" data-options="region:'north',height:60,bodyCls:'north-style'" >
 		<div>
 			
@@ -53,9 +54,11 @@
 		</div>
 	</div> <!-- /layout-north -->
 	<div id="layout-west" data-options="region:'west',title:'导航菜单',width:180,split:true" >
-
-		<!-- <input class="easyui-searchbox" data-options="prompt:'请输入查找的内容关键词',searcher:doSearch,border:false"  /> -->
-		<div id="acc-nav"></div>
+		<div id="acc-nav">
+			<!-- <div id="search-panel" data-options="collapsed:false,collapsible:false">
+				<input class="easyui-searchbox" prompt="快捷搜索" data-options="height:25,width:175,fit:true" >
+			</div> -->
+		</div>
 	</div> <!-- /layout-west -->
 
 	<div id="layout-center" data-options="region:'center'">

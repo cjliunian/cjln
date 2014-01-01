@@ -3,9 +3,9 @@
 <head>
 	<title> 后台管理</title>
 	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui-extensions/icons/icon-all.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/css/common.css">
 	<link rel="stylesheet" type="text/css" id="theme" href="/Public/Static/easyui/themes/<?php echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default'; ?>/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/css/common.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui-extensions/icons/icon-all.css">
 	
 	<script type="text/javascript">
 		// 初始化全局变量定义
@@ -42,26 +42,26 @@
 	<script type="text/javascript">
 		var toolbar = [{
 				text:'增加',
-				iconCls:'icon-add',
+				iconCls:'icon-cologne-plus',
 				handler:add
 			},{
 				text:'修改',
-				iconCls:'icon-cologne-edit',
+				iconCls:'icon-cologne-pencil',
 				handler:edit
 			},{
 				text:'删除',
-				iconCls:'icon-remove',
+				iconCls:'icon-cologne-bank',
 				handler:del
 			},'-',{
 				text:'成员管理',
-				iconCls:'icon-user',
+				// iconCls:'icon-user',
 				handler:groupMebManager
 			},{
 				text:'权限设置',
 				handler:authSet
 			},'-',{
 				text:'刷新',
-				iconCls:'icon-reload',
+				iconCls:'icon-cologne-refresh',
 				handler:function(){$("#dg").datagrid('reload');}
 			}];
 		var dlist;
@@ -72,6 +72,8 @@
 				url:'/index.php/Admin/AuthManager/get_usergroup_json',
 				rownumbers:true,
 				pagination:true,
+				enableHeaderClickMenu: false,
+        		enableHeaderContextMenu: false,
 				singleSelect: true,
 				idField:'id',
 				columns:[[
@@ -87,102 +89,109 @@
 		});
 
 		function add() {
-			$.showModalDialog({
-				title:'增加用户组',
-				href:CONTROLLER+'/addUsergroup',
-				data:{ele:$("#dg")},
-				buttons:[{
-					text:'增加',
-					handler:'doOK'
-				},{
-					text:'取消',
-					handler:function(win){ win.close();}
-				}]
-			});
+			$.easyui.showDialog({
+	            title: "增加用户组",
+	            enableHeaderContextMenu:false,
+	            autoRestore:false,
+	            // iniframe:true,
+	            href:CONTROLLER+'/addUsergroup',
+	            topMost: true,
+	            enableApplyButton:false,
+	            onSave:function(){
+	            	var rs = parent.doOK(this);
+	            	if(rs) $("#dg").datagrid('reload');
+	            	return rs;
+	            }
+	        });
 		}
 
 		function del() {
 			var sltRow = dlist.datagrid('getSelected');
-			isSlted(sltRow);
 			
-			console.info(sltRow);
-			$.messager.confirm('确认对话框', '您想要删除选择中的数据吗？', function(r){
-				if (r){
-				    $.post(CONTROLLER+'/delUserGroup',{id:sltRow.id},function(rsp){
-						console.info(rsp);
-						noty(rsp);
-						if(rsp.status) dlist.datagrid('reload');
-					});
-				}
-			});
-			
+			if(isSlted(sltRow)) {
+				$.messager.confirm('确认对话框', '您想要删除选择中的数据吗？', function(r){
+					if (r){
+					    $.post(CONTROLLER+'/delUserGroup',{id:sltRow.id},function(rsp){
+							// console.info(rsp);
+							noty(rsp);
+							if(rsp.status) dlist.datagrid('reload');
+						});
+					}
+				});
+			}
 		}
 
 		function edit() {
 			var sltRow = dlist.datagrid('getSelected');
-			isSlted(sltRow);
-			$.showModalDialog({
-				title:'修改用户组',
-				href:CONTROLLER+'/addUsergroup?id='+sltRow.id,
-				data:{ele:$("#dg")},
-				buttons:[{
-					text:'确定',
-					handler:'doOK'
-				},{
-					text:'取消',
-					handler:function(win){ win.close();}
-				}]
-			});
+			if(isSlted(sltRow)){
+				$.easyui.showDialog({
+		            title: "修改用户组",
+		            // iniframe:true,
+		            href:CONTROLLER+'/addUsergroup?id='+sltRow.id,
+		            topMost: true,
+		            enableApplyButton:false,
+		            autoRestore:false,
+		            enableHeaderContextMenu:false,
+		            onSave:function(){
+		            	var rs = parent.doOK(this);
+		            	if(rs) $("#dg").datagrid('reload');
+		            	return rs;
+		            }
+		        });
+			}
 			
 		}
 		// 成员管理
 		function groupMebManager() {
 			var sltRow = dlist.datagrid('getSelected');
-			if(sltRow) {
-				$.showModalDialog({
-					title: sltRow.title+'-成员管理',
-					height:406,
-					href:'/index.php/Admin/AuthManager/groupMebManager?groupid='+sltRow.id,
-					buttons:[{
-						text:'取消',
-						handler:function(win){ win.close();}
-					}]
-				});
-			} else {
-				parent.$.messager.alert('提示信息','未选择数据!','warning');
+			if(isSlted(sltRow)) {
+				$.easyui.showDialog({
+		            title: sltRow.title+'-成员管理',
+		            height:371,
+		            // iniframe:true,
+		            href:'/index.php/Admin/AuthManager/groupMebManager?groupid='+sltRow.id,
+		            topMost: true,
+		            enableApplyButton:false,
+		            enableSaveButton:false,
+		            enableCloseButton:false,
+		            autoRestore:false,
+		            enableHeaderContextMenu:false
+		        });
 			}
 			
 		}
 
 		function authSet() {
 			var sltRow = dlist.datagrid('getSelected');
-			if(!sltRow) {
-				parent.$.messager.alert('提示信息','未选择数据!','warning');
-				return false;
+			if(isSlted(sltRow)) {
+				$.easyui.showDialog({
+					title:'权限设置',
+					height:450,
+					href:CONTROLLER+'/authSet?groupid'+sltRow.id,
+					topMost: true,
+		            enableApplyButton:false,
+		            // enableSaveButton:false,
+		            // enableCloseButton:false,
+		            autoRestore:false,
+		            enableHeaderContextMenu:false,
+		            onSave:function () {
+		            	parent.getChecked();
+		            	return false;
+		            }
+
+				});
 			}
-			$.showModalDialog({
-				title:'权限设置',
-				// useiframe:true,
-				// content: 'url:'+CONTROLLER+'/authSet',
-				height:450,
-				href:CONTROLLER+'/authSet?groupid'+sltRow.id,
-				buttons:[{
-					text:'确定',
-					handler:'doOK'
-				},{
-					text:'取消',
-					handler:function(win){ win.close();}
-				}]
-			});
+			
 		}
+
 
 		function isSlted(sltRow){
 			if(!sltRow) {
 				parent.$.messager.alert('提示信息','未选择数据!','warning');
 				return false;
+			} else {
+				return true;
 			}
-
-
 		}
 
 	</script>

@@ -187,7 +187,8 @@ class AuthManagerController extends AdminController{
     }
 
     public function get_rules_json() {
-        $list = $this->AuthRule->select();
+        $list = $this->AuthRule->field('id,pid,module,title as text')->select();
+        // var_dump($list);exit();
         $rules = list_to_tree($list,'id','pid','children');
         $this->ajaxReturn($rules);
     }

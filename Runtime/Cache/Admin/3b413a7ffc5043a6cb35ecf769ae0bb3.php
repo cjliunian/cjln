@@ -3,9 +3,9 @@
 <head>
 	<title> 后台管理</title>
 	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui/themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui-extensions/icons/icon-all.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/css/common.css">
 	<link rel="stylesheet" type="text/css" id="theme" href="/Public/Static/easyui/themes/<?php echo $_COOKIE['theme'] ? $_COOKIE['theme'] : 'default'; ?>/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/css/common.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/easyui-extensions/icons/icon-all.css">
 	
 	<script type="text/javascript">
 		// 初始化全局变量定义
@@ -42,15 +42,15 @@
     <script type="text/javascript">
 		var toolbar = [{
 				text:'增加',
-				iconCls:'icon-add',
+				iconCls:'icon-cologne-plus',
 				handler:add
 			},{
 				text:'删除',
-				iconCls:'icon-remove',
+				iconCls:'icon-cologne-bank',
 				handler:del
 			},'-',{
 				text:'刷新',
-				iconCls:'icon-reload',
+				iconCls:'icon-cologne-refresh',
 				handler:function(){$("#data-list").treegrid('reload');}
 			}];
 		$(function($){
@@ -62,6 +62,8 @@
 				height:550,
 				pagination:true,
 				rownumbers:true,
+				enableHeaderClickMenu: false,
+        		enableHeaderContextMenu: false,
 				toolbar:toolbar,
 				onBeforeLoad: function(row,param){
 					if (!row) { param.id = 0;}
@@ -80,7 +82,7 @@
 					}}
 				]],
 		        onDblClickRow: function(row){
-		        	console.info(row);
+		        	// console.info(row);
 		        }
 			});
 			eyResize({'#data-list':'treegrid'});
@@ -89,18 +91,19 @@
 		function add () {
 			var sltRow = $("#data-list").treegrid('getSelected');
 			var id = sltRow ? sltRow.id : '';
-			$.showModalDialog({
-				title:'增加节点',
-				data:{ele:$("#data-list")},
-				href:CONTROLLER+'/Add?id='+id,
-				buttons:[{
-					text:'增加',
-					handler:'doOK'
-				},{
-					text:'取消',
-					handler:function(win){ win.close();}
-				}]
-			});
+			$.easyui.showDialog({
+	            title: "增加节点",
+	            enableHeaderContextMenu:false,
+	            autoRestore:false,
+	            href:CONTROLLER+'/Add?id='+id,
+	            topMost: true,
+	            enableApplyButton:false,
+	            onSave:function(){
+	            	var rs = parent.doOK();
+	            	if(rs) $("#data-list").treegrid('reload');
+	            	return rs;
+	            }
+	        });
 		}
 
 		function del () {
@@ -117,7 +120,7 @@
 								console.info(rsp);
 								if(rsp.status) {
 									$("#data-list").treegrid('remove',sltRow.id);
-									$.messager.show({title:lang.tipTitle,msg:rsp.info,showType:'show'});
+									$.messager.show({title:lang.tipTitle,msg:rsp.info,showType:'show',position:'bottomRight'});
 								}
 							});
 						}

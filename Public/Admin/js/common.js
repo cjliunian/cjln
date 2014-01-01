@@ -41,7 +41,7 @@ function getImg(img,path) {
  */
 function noty(rsp) {
 	if (rsp.status) {
-		$.messager.show({title:'提示信息',msg:rsp.info,showType:'show'});
+		$.messager.show({title:'提示信息',msg:rsp.info,showType:'show',position:'bottomRight'});
 	} else{
 		parent.$.messager.alert('提示信息',rsp.info,'error');
 	}

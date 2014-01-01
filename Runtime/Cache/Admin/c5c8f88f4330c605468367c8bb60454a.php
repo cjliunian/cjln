@@ -1,5 +1,5 @@
-<link rel="stylesheet" type="text/css" href="__STATIC__/Validform/Validform.css">
-<form id="add-fm" method="post" action="__SELF__" >
+<?php if (!defined('THINK_PATH')) exit();?><link rel="stylesheet" type="text/css" href="/Public/Static/Validform/Validform.css">
+<form id="add-fm" method="post" action="/index.php/Admin/User/Add?_=1388554110861" >
 
     <table class="fm-tb">
         <tr>
@@ -31,14 +31,14 @@
         <!-- <tr>
             <td class="w100 tar"><label class="label" for="email">用户组：</label></td>
             <td>
-                <input id="cc" class="easyui-combobox" name="group_id" data-options="valueField:'id',textField:'title',url:'{:U('AuthManager/get_usergroup_json')}'" />
+                <input id="cc" class="easyui-combobox" name="group_id" data-options="valueField:'id',textField:'title',url:'<?php echo U('AuthManager/get_usergroup_json');?>'" />
             </td>
         </tr> -->
     </table>
 </form>
 
-<script type="text/javascript" src="__STATIC__/Validform/Validform.min.js"></script>
-<script type="text/javascript" src="__JS__/common.js"></script>
+<script type="text/javascript" src="/Public/Static/Validform/Validform.min.js"></script>
+<script type="text/javascript" src="/Public/Admin/js/common.js"></script>
 
 <script type="text/javascript">
     var vdfm = $("#add-fm").Validform({tiptype:3});
@@ -75,7 +75,7 @@
             $.ajax({
                 type:'post',
                 async:false,
-                url:'__URL__/add',
+                url:'/index.php/Admin/User/add',
                 data:fmdata,
                 success:function(rsp){
                     if(rsp.status) {
@@ -93,6 +93,7 @@
         } else {
             isOk = false;
         }
+        // console.info(dlg);
         return isOk;
     }
 
