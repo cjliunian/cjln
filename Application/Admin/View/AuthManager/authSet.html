@@ -31,28 +31,55 @@
 				{title:'权限代码',field:'name'}
 			]]
 		});*/
-
+		var curId1,curId2 = '';
 		var authTree = $("#auth-set-tree").tree({
 			url:'__URL__/get_rules_json',
 			checkbox:true,
-			// cascadeCheck:false,
+			cascadeCheck:false,
+			enableContextMenu:false,
 			lines:true,
-			onCheck:function(node, checked){
-				// 节点勾选事件
+			onBeforeCheck:function(node, checked){
+				curId1 = node.id;
 				// console.info(node);
 				// console.info(checked);
-				if(checked) {
-					// 当节点选中时
-					// var pnode = $("#auth-set-tree").tree('getParent',node.target);
-					// if(pnode) {
-					// 	authTree.tree('check',pnode.target);
-					// }
-					// if(node.children) {
-					// 	console.info('有子节点');
-					// }
+				// var pnode = $("#auth-set-tree").tree('getParent',node.target);
+				// 	if(pnode) {
+				// 		authTree.tree('check',pnode.target);
+				// 	}
+					// return false;
+					console.log(curId1);
+				
+			},
+			onCheck:function(node, checked){
+				// 节点勾选事件
+
+				curId2 = node.id;
+				console.info(curId2);
+				if(checked) { // 当节点选中时
+					if(node && node.children) { // 有子节点 就选中所有子节点
+						if(curId1 == curId2) {
+							$.each(node.children,function(i,k){
+							authTree.tree('check',$('#'+k.domId));
+						});
+						} else {
+							return false;
+						}
+						
+					}
+					// console.info(curId2);
+					var pnode = $("#auth-set-tree").tree('getParent',node.target);
+					if(pnode) {
+						if(pnode.checked){
+							return false;
+						} else {
+							authTree.tree('check',pnode.target);
+						}
+					} else {
+						return false;
+					}
 					// console.info(pnode);
 				} else {
-					// 当节点选中时
+					// 当节点未选中时
 					// var pnode = $("#auth-set-tree").tree('getParent',node.target);
 					// console.info(pnode);
 					
@@ -64,6 +91,7 @@
 					// 	}
 					// }
 				}
+				curId2 = '';
 			}
 		});
 
