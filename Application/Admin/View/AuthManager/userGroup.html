@@ -133,18 +133,16 @@
 				$.easyui.showDialog({
 					title:'权限设置',
 					height:450,
-					href:CONTROLLER+'/authSet?groupid'+sltRow.id,
+					href:CONTROLLER+'/authSet?groupid='+sltRow.id,
 					topMost: true,
 		            enableApplyButton:false,
 		            // enableSaveButton:false,
 		            // enableCloseButton:false,
 		            autoRestore:false,
 		            enableHeaderContextMenu:false,
-		            onSave:function () {
-		            	parent.getChecked();
-		            	return false;
+		            onSave:function(){
+		            	return parent.getChecked();
 		            }
-
 				});
 			}
 			

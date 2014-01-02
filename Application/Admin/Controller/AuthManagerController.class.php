@@ -119,12 +119,24 @@ class AuthManagerController extends AdminController{
         $this->ajaxReturn($rsp);
     }
 
-    public function authSet() {
-
+    public function authSet($groupid, $rules = '') {
         if (IS_POST) {
+
+            $data['rules'] = $rules;
+            $data['id'] = $groupid;
+            if($this->AuthGroup->save($data)){
+                $rsp['status'] = true;
+                $rsp['info'] = '权限设置成功!';
+            } else {
+                $rsp['status'] = false;
+                $rsp['info'] = '权限设置失败!';
+                $rsp['tip'] = $this->AuthGroup->_sql();
+            }
             
+            $this->ajaxReturn($rsp);
+
         } else {
-            
+            $this->assign('groupid',$groupid);
             $this->display();    
         }
         
@@ -186,9 +198,16 @@ class AuthManagerController extends AdminController{
         
     }
 
-    public function get_rules_json() {
-        $list = $this->AuthRule->field('id,pid,module,title as text')->select();
-        // var_dump($list);exit();
+    public function get_rules_json($groupid) {
+        $map = 'id ='.$groupid;
+        $checkedRules = $this->AuthGroup->where($map)->getField('rules');
+        $checkedRules = explode(',', $checkedRules);
+        $list = $this->AuthRule->field('id,pid,module,title,name')->select();
+        if($checkedRules) {
+            foreach ($list as $k => $line) {
+                if(in_array($line['id'], $checkedRules)) $list[$k]['checked'] = true;
+            }
+        }
         $rules = list_to_tree($list,'id','pid','children');
         $this->ajaxReturn($rules);
     }
@@ -217,11 +236,14 @@ class AuthManagerController extends AdminController{
         
     }
     
-
+    // public function __construct() {
+    //     $this->AuthGroup = D('AuthGroup');
+    //     $this->AuthRule = D('AuthRule');
+    // }
     public function _initialize(){
         $this->AuthGroup = D('AuthGroup');
         $this->AuthRule = D('AuthRule');
-        // parent::_initialize();
+        parent::_initialize();
     }
     
 

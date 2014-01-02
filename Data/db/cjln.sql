@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50614
 File Encoding         : 65001
 
-Date: 2013-12-24 18:02:54
+Date: 2014-01-02 18:04:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,20 +28,15 @@ CREATE TABLE `cj_auth_group` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '用户组状态：为1正常，为0禁用,-1为删除',
   `rules` varchar(500) NOT NULL DEFAULT '' COMMENT '用户组拥有的规则id，多个规则 , 隔开',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cj_auth_group
 -- ----------------------------
-INSERT INTO `cj_auth_group` VALUES ('8', 'admin', '0', 'xxxxxxxx', '看你怎么写都可以', '1', '');
-INSERT INTO `cj_auth_group` VALUES ('6', 'admin', '1', '管理组', '系统管理组拥有一定的权限', '1', '1,220,221,222,223');
-INSERT INTO `cj_auth_group` VALUES ('7', 'admin', '1', '默认组', '默认组', '1', '');
-INSERT INTO `cj_auth_group` VALUES ('9', 'admin', '1', '123', '123123', '1', '');
-INSERT INTO `cj_auth_group` VALUES ('10', 'admin', '1', 'ssssssssss', '1111111111', '1', '');
-INSERT INTO `cj_auth_group` VALUES ('11', 'admin', '1', '1123', '123', '1', '');
-INSERT INTO `cj_auth_group` VALUES ('12', 'admin', '1', 'qqqqqqqqqqq', '123', '1', '');
-INSERT INTO `cj_auth_group` VALUES ('13', 'admin', '1', '123123', '122', '1', '');
-INSERT INTO `cj_auth_group` VALUES ('14', 'module', '1', 'sdfsdfsdf', 'sdfsd', '1', '');
+INSERT INTO `cj_auth_group` VALUES ('6', 'admin', '1', '管理组', '系统管理组拥有一定的权限', '1', '1,8,10,11,12,9,14,35,32,33,36,38,37,2,5,3,22,39');
+INSERT INTO `cj_auth_group` VALUES ('7', 'admin', '1', '默认组', '默认组', '1', '1,8,10,11,12,9,43,14,35,32,33,36,38,37,3,22,39,44,45');
+INSERT INTO `cj_auth_group` VALUES ('15', 'module', '1', '测试用户组一', '测试用户组一', '1', '2,4,3,22,39');
+INSERT INTO `cj_auth_group` VALUES ('16', 'module', '1', '测试用户组二', '测试用户组二', '1', '');
 
 -- ----------------------------
 -- Table structure for cj_auth_group_access
@@ -58,43 +53,8 @@ CREATE TABLE `cj_auth_group_access` (
 -- ----------------------------
 -- Records of cj_auth_group_access
 -- ----------------------------
-INSERT INTO `cj_auth_group_access` VALUES ('4', '6');
-INSERT INTO `cj_auth_group_access` VALUES ('4', '9');
-INSERT INTO `cj_auth_group_access` VALUES ('4', '10');
-INSERT INTO `cj_auth_group_access` VALUES ('4', '11');
-INSERT INTO `cj_auth_group_access` VALUES ('4', '12');
-INSERT INTO `cj_auth_group_access` VALUES ('15', '6');
-INSERT INTO `cj_auth_group_access` VALUES ('15', '10');
-INSERT INTO `cj_auth_group_access` VALUES ('15', '11');
-INSERT INTO `cj_auth_group_access` VALUES ('15', '12');
-INSERT INTO `cj_auth_group_access` VALUES ('16', '9');
-INSERT INTO `cj_auth_group_access` VALUES ('16', '11');
-INSERT INTO `cj_auth_group_access` VALUES ('16', '12');
-INSERT INTO `cj_auth_group_access` VALUES ('17', '6');
-INSERT INTO `cj_auth_group_access` VALUES ('17', '11');
-INSERT INTO `cj_auth_group_access` VALUES ('17', '12');
-INSERT INTO `cj_auth_group_access` VALUES ('18', '6');
-INSERT INTO `cj_auth_group_access` VALUES ('18', '12');
-INSERT INTO `cj_auth_group_access` VALUES ('20', '6');
-INSERT INTO `cj_auth_group_access` VALUES ('20', '12');
-INSERT INTO `cj_auth_group_access` VALUES ('21', '6');
-INSERT INTO `cj_auth_group_access` VALUES ('21', '12');
-INSERT INTO `cj_auth_group_access` VALUES ('22', '6');
-INSERT INTO `cj_auth_group_access` VALUES ('22', '7');
-INSERT INTO `cj_auth_group_access` VALUES ('22', '12');
-INSERT INTO `cj_auth_group_access` VALUES ('23', '6');
-INSERT INTO `cj_auth_group_access` VALUES ('23', '11');
-INSERT INTO `cj_auth_group_access` VALUES ('23', '12');
-INSERT INTO `cj_auth_group_access` VALUES ('24', '11');
-INSERT INTO `cj_auth_group_access` VALUES ('24', '12');
-INSERT INTO `cj_auth_group_access` VALUES ('25', '6');
-INSERT INTO `cj_auth_group_access` VALUES ('25', '7');
-INSERT INTO `cj_auth_group_access` VALUES ('25', '12');
-INSERT INTO `cj_auth_group_access` VALUES ('26', '6');
-INSERT INTO `cj_auth_group_access` VALUES ('26', '11');
-INSERT INTO `cj_auth_group_access` VALUES ('26', '12');
-INSERT INTO `cj_auth_group_access` VALUES ('27', '6');
-INSERT INTO `cj_auth_group_access` VALUES ('27', '12');
+INSERT INTO `cj_auth_group_access` VALUES ('16', '7');
+INSERT INTO `cj_auth_group_access` VALUES ('26', '7');
 
 -- ----------------------------
 -- Table structure for cj_auth_rule
@@ -111,7 +71,7 @@ CREATE TABLE `cj_auth_rule` (
   `condition` varchar(300) NOT NULL DEFAULT '' COMMENT '规则附加条件',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`module`,`name`,`type`)
-) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cj_auth_rule
@@ -136,6 +96,12 @@ INSERT INTO `cj_auth_rule` VALUES ('32', '1', 'admin', '1', 'AuthManager/index',
 INSERT INTO `cj_auth_rule` VALUES ('36', '33', 'admin', '1', 'user-group-add', '增加', '1', '');
 INSERT INTO `cj_auth_rule` VALUES ('37', '33', 'admin', '1', 'user-group-edit', '修改', '1', '');
 INSERT INTO `cj_auth_rule` VALUES ('38', '36', 'admin', '1', 'test-1', '测试1', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('39', '3', 'admin', '1', '123', '123123', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('43', '9', 'Admin', '1', 'menu-add', '增加', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('41', '0', 'admin', '1', '654321', '963369', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('42', '41', 'admin', '1', '654321444', '78kjkjkjk', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('44', '0', 'admin', '1', 'Admin/Index/index', '后台首页', '1', '');
+INSERT INTO `cj_auth_rule` VALUES ('45', '44', 'admin', '1', 'Admin/Index/dashboard', '后台仪表盘', '1', '');
 
 -- ----------------------------
 -- Table structure for cj_config
@@ -181,26 +147,39 @@ CREATE TABLE `cj_member` (
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '会员状态',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `ix_uid` (`uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='会员表\r\n@author   麦当苗儿\r\n@version  2013-05-27';
+) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COMMENT='会员表\r\n@author   麦当苗儿\r\n@version  2013-05-27';
 
 -- ----------------------------
 -- Records of cj_member
 -- ----------------------------
 INSERT INTO `cj_member` VALUES ('15', '那一年', '0', '0000-00-00', '', '0', '0', '0', '0', '2130706433', '1387791641', '1');
-INSERT INTO `cj_member` VALUES ('1', 'admin', '0', '0000-00-00', '', '0', '0', '0', '0', '2130706433', '1387874744', '1');
-INSERT INTO `cj_member` VALUES ('16', 'imya', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('1', 'admin', '0', '0000-00-00', '', '0', '0', '0', '0', '2130706433', '1388657010', '1');
+INSERT INTO `cj_member` VALUES ('16', 'imya', '0', '0000-00-00', '', '0', '0', '0', '0', '2130706433', '1388657059', '1');
 INSERT INTO `cj_member` VALUES ('26', '12323', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('24', '12312312', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('17', '1111', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
-INSERT INTO `cj_member` VALUES ('23', 'wrqwerwr', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
-INSERT INTO `cj_member` VALUES ('22', '111111111111111', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('25', '12323', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
-INSERT INTO `cj_member` VALUES ('20', '2312312', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('21', 'ASDFDFDFDF', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('18', '12424', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('27', '123123zzzzzzzzzz', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('28', 'liunian', '0', '0000-00-00', '', '0', '0', '0', '0', '2130706433', '1387776203', '1');
 INSERT INTO `cj_member` VALUES ('29', '这一城', '0', '0000-00-00', '', '0', '0', '0', '0', '2130706433', '1387779301', '1');
+INSERT INTO `cj_member` VALUES ('30', 'cy2014', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('31', '2014', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('32', '123123213', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('33', '123213', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('34', '1233aaaaa', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('35', '123123', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('36', '123123213123aaaa', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('37', '123123333', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('38', '01233', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('39', '这是一个测试用户', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('40', '0122211', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('41', 'bbcbcvb', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('42', 'zxc131323', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('43', '1232130234', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('44', 'imya11', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
+INSERT INTO `cj_member` VALUES ('45', '963123', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 
 -- ----------------------------
 -- Table structure for cj_menu
@@ -214,29 +193,43 @@ CREATE TABLE `cj_menu` (
   `iconCls` varchar(100) DEFAULT NULL COMMENT '图标',
   `status` tinyint(4) DEFAULT '0' COMMENT '状态默认0使用，1禁止',
   `remark` varchar(200) DEFAULT NULL COMMENT '菜单描述',
+  `sort` int(11) DEFAULT '0' COMMENT '排序',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cj_menu
 -- ----------------------------
-INSERT INTO `cj_menu` VALUES ('1', '0', '全局', '', 'icon-text_list_bullets', '0', null);
-INSERT INTO `cj_menu` VALUES ('2', '0', '设置', null, 'icon-text_list_bullets', '0', null);
-INSERT INTO `cj_menu` VALUES ('3', '0', '扩展', null, 'icon-text_list_bullets', '0', null);
-INSERT INTO `cj_menu` VALUES ('4', '2', '站点设置', null, 'icon-text_list_bullets', '0', null);
-INSERT INTO `cj_menu` VALUES ('5', '2', '水印设置', null, 'icon-text_list_bullets', '0', null);
-INSERT INTO `cj_menu` VALUES ('6', '5', '小调设置', null, 'icon-text_list_bullets', '1', null);
-INSERT INTO `cj_menu` VALUES ('7', '5', '大小设置', null, 'icon-text_list_bullets', '0', null);
-INSERT INTO `cj_menu` VALUES ('8', '1', '菜单项1', null, 'icon-text_list_bullets', '0', null);
-INSERT INTO `cj_menu` VALUES ('9', '1', '菜单管理', 'Menu/index', 'icon-text_list_bullets', '0', null);
-INSERT INTO `cj_menu` VALUES ('10', '8', '菜单项1.1', null, 'icon-text_list_bullets', '0', null);
-INSERT INTO `cj_menu` VALUES ('11', '10', '菜单项1.1.惺惺惜惺惺', '', 'icon-text_list_bullets', '1', null);
-INSERT INTO `cj_menu` VALUES ('12', '11', '菜单项', 'Menu/mlist', 'icon-text_list_bullets', '0', null);
-INSERT INTO `cj_menu` VALUES ('14', '1', '用户管理', 'User/index', 'icon-text_list_bullets', '0', null);
-INSERT INTO `cj_menu` VALUES ('22', '3', '123123', '12312', 'icon-text_list_bullets', '0', null);
-INSERT INTO `cj_menu` VALUES ('33', '32', '用户组管理', 'AuthManager/userGroup', 'icon-text_list_bullets', '0', null);
-INSERT INTO `cj_menu` VALUES ('35', '1', '节点管理', 'Node/index', 'icon-text_list_bullets', '0', null);
-INSERT INTO `cj_menu` VALUES ('32', '1', '权限管理', 'AuthManager/index', 'icon-text_list_bullets', '0', null);
+INSERT INTO `cj_menu` VALUES ('1', '0', '全局', '123', 'icon-standard-text-list-bullets', '1', null, null);
+INSERT INTO `cj_menu` VALUES ('2', '0', '设置', '123', 'icon-standard-text-list-bullets', '1', null, null);
+INSERT INTO `cj_menu` VALUES ('3', '0', '扩展', '123', 'icon-standard-text-list-bullets', '1', null, null);
+INSERT INTO `cj_menu` VALUES ('4', '2', '站点设置', '111', 'icon-standard-text-list-bullets', '1', null, null);
+INSERT INTO `cj_menu` VALUES ('5', '2', '水印设置', '22', 'icon-standard-text-list-bullets', '1', null, null);
+INSERT INTO `cj_menu` VALUES ('6', '5', '小调设置', '2222', 'icon-standard-text-list-bullets', '1', null, null);
+INSERT INTO `cj_menu` VALUES ('7', '5', '大小设置', '12', 'icon-standard-text-list-bullets', '1', null, null);
+INSERT INTO `cj_menu` VALUES ('8', '1', '菜单项1', '123', 'icon-standard-text-list-bullets', '1', null, null);
+INSERT INTO `cj_menu` VALUES ('9', '1', '菜单管理', 'Menu/index', 'icon-standard-text-list-bullets', '1', null, null);
+INSERT INTO `cj_menu` VALUES ('10', '8', '菜单项1.1', '13', 'icon-standard-text-list-bullets', '1', null, null);
+INSERT INTO `cj_menu` VALUES ('45', '3', '11111', '123', '123213', '1', null, null);
+INSERT INTO `cj_menu` VALUES ('14', '32', '用户管理', 'User/index', 'icon-standard-text-list-bullets', '1', null, null);
+INSERT INTO `cj_menu` VALUES ('33', '32', '用户组管理', 'AuthManager/userGroup', 'icon-standard-text-list-bullets', '1', null, null);
+INSERT INTO `cj_menu` VALUES ('35', '32', '节点管理', 'Node/index', 'icon-standard-text-list-bullets', '1', null, null);
+INSERT INTO `cj_menu` VALUES ('32', '1', '权限管理', 'AuthManager/index', 'icon-standard-text-list-bullets', '1', null, null);
+INSERT INTO `cj_menu` VALUES ('47', '8', '11111', '23232', '1111', '1', null, null);
+INSERT INTO `cj_menu` VALUES ('50', '3', '123123', '123123', 'icon-standard-award-star-gold-1', '1', null, '0');
+INSERT INTO `cj_menu` VALUES ('51', '3', '123', '12312', 'icon-hamburg-bug', '1', null, '0');
+INSERT INTO `cj_menu` VALUES ('53', '3', '测试菜单', '12323', 'icon-standard-application-view-columns', '1', null, '0');
+INSERT INTO `cj_menu` VALUES ('54', '3', '测试菜单二', '12323', 'icon-munich-product-1', '1', null, '0');
+INSERT INTO `cj_menu` VALUES ('55', '45', '12123', '1231221', 'icon-standard-application-side-list', '1', null, '0');
+INSERT INTO `cj_menu` VALUES ('56', '4', '合建顶替', 'dsdfsdf', 'icon-standard-arrow-inout', '1', null, '0');
+INSERT INTO `cj_menu` VALUES ('57', '58', '123123', '1232', 'icon-standard-application-split', '1', null, '0');
+INSERT INTO `cj_menu` VALUES ('58', '55', '111111', '123213', 'icon-standard-arrow-refresh-small', '1', null, '0');
+INSERT INTO `cj_menu` VALUES ('59', '58', '123213', '123', '', '1', null, '0');
+INSERT INTO `cj_menu` VALUES ('60', '53', '1232', '13213', '', '1', null, '0');
+INSERT INTO `cj_menu` VALUES ('61', '10', '1232', '12321', '', '1', null, '0');
+INSERT INTO `cj_menu` VALUES ('62', '58', '123', '1111', 'icon-standard-application-side-tree', '1', null, '0');
+INSERT INTO `cj_menu` VALUES ('63', '61', '123', '123213', 'icon-standard-book-addresses', '1', null, '0');
+INSERT INTO `cj_menu` VALUES ('64', '63', '123213', '1321', 'icon-standard-application-split', '1', null, '0');
 
 -- ----------------------------
 -- Table structure for cj_ucenter_admin
@@ -296,25 +289,38 @@ CREATE TABLE `cj_ucenter_member` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   KEY `status` (`status`)
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of cj_ucenter_member
 -- ----------------------------
 INSERT INTO `cj_ucenter_member` VALUES ('15', '那一年', 'a129b591bd914facca99a0152a2d37aa', '1013385@163.com', '', '1386744697', '2130706433', '1387791641', '2130706433', '1386744697', '1');
-INSERT INTO `cj_ucenter_member` VALUES ('1', 'admin', 'a129b591bd914facca99a0152a2d37aa', 'cjliunian@163.com', '', '1386661607', '2130706433', '1387874744', '2130706433', '1386661607', '1');
-INSERT INTO `cj_ucenter_member` VALUES ('16', 'imya', 'a129b591bd914facca99a0152a2d37aa', '123456@163.com', '', '1386744916', '2130706433', '0', '0', '1386744916', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('1', 'admin', 'a129b591bd914facca99a0152a2d37aa', 'cjliunian@163.com', '', '1386661607', '2130706433', '1388657010', '2130706433', '1386661607', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('16', 'imya', 'a129b591bd914facca99a0152a2d37aa', '123456@163.com', '', '1386744916', '2130706433', '1388657059', '2130706433', '1386744916', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('18', '12424', 'a129b591bd914facca99a0152a2d37aa', '124@qq.com', '', '1386751177', '2130706433', '0', '0', '1386751177', '1');
-INSERT INTO `cj_ucenter_member` VALUES ('23', 'wrqwerwr', 'a129b591bd914facca99a0152a2d37aa', 'mdfgg@163.com', '', '1386811471', '2130706433', '0', '0', '1386811471', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('25', '1111xxxxx', 'a129b591bd914facca99a0152a2d37aa', '12323123@qq.com', '', '1386820301', '2130706433', '0', '0', '1386820301', '1');
-INSERT INTO `cj_ucenter_member` VALUES ('22', '111111111111111', 'a129b591bd914facca99a0152a2d37aa', '1xvsddsfd@163.com', '', '1386811439', '2130706433', '0', '0', '1386811439', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('21', 'ASDFDFDFDF', 'a129b591bd914facca99a0152a2d37aa', 'qqqqwerewrr@163.com', '', '1386751865', '2130706433', '0', '0', '1386751865', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('24', '12312312', 'a129b591bd914facca99a0152a2d37aa', '11111@qqwer.com', '', '1386811497', '2130706433', '0', '0', '1386811497', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('29', '这一城', 'aed2a19beabdf4b1666538bd57601254', '1233@163.com', '', '1387779261', '2130706433', '1387779301', '2130706433', '1387779261', '1');
-INSERT INTO `cj_ucenter_member` VALUES ('20', '2312312', 'a129b591bd914facca99a0152a2d37aa', '11111@qq.com', '', '1386751815', '2130706433', '0', '0', '1386751815', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('17', '1111', 'a129b591bd914facca99a0152a2d37aa', 'wr@qq.com', '', '1386751160', '2130706433', '0', '0', '1386751160', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('28', 'liunian', 'a129b591bd914facca99a0152a2d37aa', 'ssff@163.com', '', '1387764249', '2130706433', '1387776203', '2130706433', '1387764249', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('27', '123123zzzzzzzzzz', 'a129b591bd914facca99a0152a2d37aa', '2424234@qqq.com', '', '1386820705', '2130706433', '0', '0', '1386820705', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('30', 'cy2014', 'a129b591bd914facca99a0152a2d37aa', '12323@qq.com', '', '1388552188', '2130706433', '0', '0', '1388552188', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('31', '2014', 'a129b591bd914facca99a0152a2d37aa', '123123123@qq.com', '', '1388552273', '2130706433', '0', '0', '1388552273', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('32', '123123213', 'a129b591bd914facca99a0152a2d37aa', '111@123.com', '', '1388552444', '2130706433', '0', '0', '1388552444', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('33', '123213', 'a129b591bd914facca99a0152a2d37aa', '1232@qq.com', '', '1388552509', '2130706433', '0', '0', '1388552509', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('34', '1233aaaaa', 'a129b591bd914facca99a0152a2d37aa', 'qewee@xx.com', '', '1388552550', '2130706433', '0', '0', '1388552550', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('35', '123123', 'a129b591bd914facca99a0152a2d37aa', '132132@qq.com', '', '1388553144', '2130706433', '0', '0', '1388553144', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('36', '123123213123aaaa', 'a129b591bd914facca99a0152a2d37aa', 'sdfsfdf@qq.com', '', '1388553578', '2130706433', '0', '0', '1388553578', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('37', '123123333', 'a129b591bd914facca99a0152a2d37aa', 'sdf@qq.com', '', '1388553651', '2130706433', '0', '0', '1388553651', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('38', '01233', 'a129b591bd914facca99a0152a2d37aa', '456@qq.com', '', '1388553808', '2130706433', '0', '0', '1388553808', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('39', '这是一个测试用户', 'a129b591bd914facca99a0152a2d37aa', 'qwrw@qq.com', '', '1388553851', '2130706433', '0', '0', '1388553851', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('40', '0122211', 'a129b591bd914facca99a0152a2d37aa', 'sfsf@qq.com', '', '1388553919', '2130706433', '0', '0', '1388553919', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('41', 'bbcbcvb', 'a129b591bd914facca99a0152a2d37aa', '78879@qq.com', '', '1388553998', '2130706433', '0', '0', '1388553998', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('42', 'zxc131323', 'a129b591bd914facca99a0152a2d37aa', '12323444@ss.com', '', '1388554156', '2130706433', '0', '0', '1388554156', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('43', '1232130234', 'a129b591bd914facca99a0152a2d37aa', '8881232@qq.com', '', '1388554228', '2130706433', '0', '0', '1388554228', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('44', 'imya11', 'a129b591bd914facca99a0152a2d37aa', '87754466@qq.com', '', '1388554289', '2130706433', '0', '0', '1388554289', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('45', '963123', 'a129b591bd914facca99a0152a2d37aa', '988878798454@qq.com', '', '1388554322', '2130706433', '0', '0', '1388554322', '1');
 
 -- ----------------------------
 -- Table structure for cj_ucenter_setting

@@ -2,6 +2,8 @@
 
 namespace Admin\Controller;
 use Think\Controller;
+use Admin\Model\AuthRuleModel;
+use Admin\Model\AuthGroupModel;
 
 /**
 * 后台公共控制器
@@ -47,16 +49,25 @@ class AdminController extends Controller {
             if( $dynamic === null ){
                 //检测非动态权限
                 $rule  = strtolower(MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME);
-                // echo $rule;exit();
-                if ( !$this->checkRule($rule,array('in','1,2')) ){
-                    $this->error('提示:无权访问,您可能需要联系管理员为您授权!');
+                
+                // 只验证存在的规则
+                if(in_array($rule, $this->getAllRules)) {
+                    if ( !$this->checkRule($rule,array('in','1,2')) ){
+                        $this->error('提示:无权访问,您可能需要联系管理员为您授权!');
+                    }
                 }
+                
             }elseif( $dynamic === false ){
                 $this->error('提示:无权访问,您可能需要联系管理员为您授权!');
             }
         }
         
 	}
+
+    // public function index() {
+    
+    //     $this->_initialize();
+    // }
 
     /**
      * 权限检测
@@ -66,6 +77,7 @@ class AdminController extends Controller {
      * @author 朱亚杰  <xcoolcc@gmail.com>
      */
     final protected function checkRule($rule, $type=AuthRuleModel::RULE_URL, $mode='url'){
+        // var_dump($type);exit();
         if(IS_ROOT){
             return true;//管理员允许访问任何页面
         }
@@ -170,6 +182,14 @@ class AdminController extends Controller {
             }
         }
         return $data;
+    }
+
+    public function getAllRules() {
+        $allRules = M('AuthRule')->getField('name',true);
+        foreach ($allRules as $k => $line) {
+            $allRules[$k] = strtolower($line);
+        }
+        return $allRules;
     }
 }
 
