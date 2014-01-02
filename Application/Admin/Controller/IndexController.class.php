@@ -13,6 +13,7 @@ class IndexController extends AdminController {
     static protected $allow = array();
 
     public function index(){
+        // var_dump($_SESSION);exit();
         // var_dump(UID);exit();
         // $allRules = $this->getAllRules();
 
@@ -23,7 +24,7 @@ class IndexController extends AdminController {
 
 
     public function getMenu($id) {
-        $AUTH = new \Think\Auth();
+        $Auth = new \Org\Util\Auth();
         $pid = I('id',$id,'int');
         if (!$pid) { // 获取顶级菜谱
             $menus = D('Menu')->getTopMenu();
@@ -32,13 +33,23 @@ class IndexController extends AdminController {
             if($menus) {
                 foreach ($menus as $key => $line) {
                     // 后面可增加权限检测
-
-                    if(UID == 1) {
+                    // echo UID;exit();
+                    if(IS_ROOT) {
                         $hasChild = D('Menu')->field('id')->where('pid='.$line['id'].' and status = 1')->find();
                         $menus[$key]['state'] = empty($hasChild) ? 'open' : 'closed';
                         $menus[$key]['attributes'] = array('url'=> U($line['url']));
                     } else {
-                        if($AUTH->check($line, UID)){
+                        $rule = strtolower($line['url']);
+                        if(in_array($rule, $this->getAllRules())) {
+                            if($Auth->check($rule, UID)){
+                            // if(authentication($rule, UID)){
+                                $hasChild = D('Menu')->field('id')->where('pid='.$line['id'].' and status = 1')->find();
+                                $menus[$key]['state'] = empty($hasChild) ? 'open' : 'closed';
+                                $menus[$key]['attributes'] = array('url'=> U($line['url']));
+                            } else {
+                                unset($menus[$key]);
+                            }
+                        } else {
                             $hasChild = D('Menu')->field('id')->where('pid='.$line['id'].' and status = 1')->find();
                             $menus[$key]['state'] = empty($hasChild) ? 'open' : 'closed';
                             $menus[$key]['attributes'] = array('url'=> U($line['url']));

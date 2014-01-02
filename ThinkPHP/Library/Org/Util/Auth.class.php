@@ -8,7 +8,7 @@
 // +----------------------------------------------------------------------
 // | Author: luofei614 <weibo.com/luofei614>　
 // +----------------------------------------------------------------------
-namespace Think;
+namespace Org\Util;
 /**
  * 权限认证类
  * 功能特性：
@@ -74,7 +74,7 @@ class Auth{
     //默认配置
     protected $_config = array(
         'AUTH_ON'           => true,                      // 认证开关
-        'AUTH_TYPE'         => 1,                         // 认证方式，1为实时认证；2为登录认证。
+        'AUTH_TYPE'         => 2,                         // 认证方式，1为实时认证；2为登录认证。
         'AUTH_GROUP'        => 'auth_group',        // 用户组数据表名
         'AUTH_GROUP_ACCESS' => 'auth_group_access', // 用户-用户组关系表
         'AUTH_RULE'         => 'auth_rule',         // 权限规则表
@@ -105,6 +105,8 @@ class Auth{
         if (!$this->_config['AUTH_ON'])
             return true;
         $authList = $this->getAuthList($uid,$type); //获取用户需要验证的所有有效规则列表
+        // echo $uid;
+        // var_dump($authList);exit();
         if (is_string($name)) {
             $name = strtolower($name);
             if (strpos($name, ',') !== false) {
@@ -230,6 +232,26 @@ class Auth{
              $userinfo[$uid]=M()->where(array('uid'=>$uid))->table($this->_config['AUTH_USER'])->find();
         }
         return $userinfo[$uid];
+    }
+
+    /**
+     * 获取规则表中所有已经存在的规则
+     * 
+     * @param mix $fields 查询的字段
+     * @param string $module 模块
+     * @param string $ident 权限标识字段
+     */
+    public function getAllRules ($fields='name', $module='admin', $ident='name') {
+        if(empty($fields)) $fields = M()->table($this->_config['AUTH_RULE'])->getDbFields();
+        $allRules = M()->table($this->_config['AUTH_RULE'])->field($fields)->select();
+
+        if($fields == $ident) {
+            foreach ($allRules as $key => $line) {
+                $allRules[$key] = strtolower($line[$ident]);
+            }
+        }
+        
+        return $allRules;
     }
 
 }

@@ -30,7 +30,9 @@ class AdminController extends Controller {
             S('DB_CONFIG_DATA',$config);
         }
         C($config); //添加配置
-
+        // $rs = $this->authCheck('node/index',UID);
+        // var_dump($rs);
+        // exit();
         // 是否是超级管理员
         define('IS_ROOT',   is_administrator());
         // 非管理员IP访问控制
@@ -83,7 +85,7 @@ class AdminController extends Controller {
         }
         static $Auth    =   null;
         if (!$Auth) {
-            $Auth       =   new \Think\Auth();
+            $Auth       =   new \Org\Util\Auth();
         }
         if(!$Auth->check($rule,UID,$type,$mode)){
             return false;
@@ -185,12 +187,39 @@ class AdminController extends Controller {
     }
 
     public function getAllRules() {
-        $allRules = M('AuthRule')->getField('name',true);
-        foreach ($allRules as $k => $line) {
-            $allRules[$k] = strtolower($line);
-        }
+        $Auth       =   new \Org\Util\Auth();
+        $allRules = $Auth->getAllRules();
         return $allRules;
     }
+
+    /**
+ * 权限认证
+ *
+ */
+public function authCheck($rule, $uid, $relation='or', $module='admin') {
+    // $Auth = new \Org\Util\Auth();
+    // $allRules = $Auth->getAllRules('name');
+
+    // var_dump($allRules);exit();
+
+    //判断当前用户UID是否在定义的超级管理员参数里
+    if(is_administrator()){    
+        return true;    //如果是，则直接返回真值，不需要进行权限验证
+    }else{
+        //如果不是，则进行权限验证；
+        $Auth = new \Org\Util\Auth();
+        $allRules = $Auth->getAllRules('name', $module); // 获取所有规则
+        if(in_array($rule, $allRules)) { // 只检测存在的规则
+            return $Auth->check($rule,$uid,$relation) ? true : false;
+        } else {
+            return true;
+        }
+        // $rule = 'Node/index';
+        // $uid = 16;
+        // echo $rule .'--'.$uid;
+        // var_dump($Auth->check($rule,$uid,$relation));
+    }
+}
 }
 
 ?>
