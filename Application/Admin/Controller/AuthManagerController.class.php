@@ -214,11 +214,14 @@ class AuthManagerController extends AdminController{
 
     
     public function temp() {
-        // $Auth = new \Org\Util\Auth();
-        // echo UID;
-        // $rs = $this->authCheck('node/index',UID);
-        // // $rs = authentication('node/index',UID);
-        // var_dump($rs);
+
+        var_dump($_SESSION);
+        echo "----------------";
+        $Auth = new \Org\Util\Auth();
+        // // echo UID;
+        $rs = $Auth->check('17',UID,array('in','1,2'));
+        // $rs = authentication('node/index',UID);
+        var_dump($rs);
         exit();
         $menus = D('Menu')->select();
         // dump($menus);exit();
