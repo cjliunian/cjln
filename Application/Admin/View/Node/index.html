@@ -6,19 +6,8 @@
 
 <block name="script">
     <script type="text/javascript">
-		var toolbar = [{
-				text:'增加',
-				iconCls:'icon-cologne-plus',
-				handler:add
-			},{
-				text:'删除',
-				iconCls:'icon-cologne-bank',
-				handler:del
-			},'-',{
-				text:'刷新',
-				iconCls:'icon-cologne-refresh',
-				handler:function(){$("#data-list").treegrid('reload');}
-			}];
+		
+		var toolbar = {$toolbar};
 		$(function($){
 			$('#data-list').treegrid({
 				title:'节点列表',
@@ -93,6 +82,10 @@
 					});
 				}
 			}
+		}
+
+		function doRefresh() {
+			$("#data-list").treegrid('reload');
 		}
 		
     </script>

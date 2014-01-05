@@ -294,9 +294,9 @@ function api($name,$vars=array()){
 
 /**
  * 权限认证
- *
+ * check($name, $uid, $type=1, $mode='url', $relation='or')
  */
-function authentication($rule, $uid, $relation='or', $module='admin') {
+function authentication($rule, $uid, $type=1, $mode='url',$relation='or', $module='admin') {
     // $Auth = new \Org\Util\Auth();
     // $allRules = $Auth->getAllRules('name');
 
@@ -307,10 +307,19 @@ function authentication($rule, $uid, $relation='or', $module='admin') {
         return true;    //如果是，则直接返回真值，不需要进行权限验证
     }else{
         //如果不是，则进行权限验证；
-        $Auth = new \Org\Util\Auth();
+        static $Auth    =   null;
+        if (!$Auth) {
+            $Auth = new \Org\Util\Auth();
+        }
+        // static 
+        // var_dump($type);
+        // var_dump($uid);
         $allRules = $Auth->getAllRules('name', $module); // 获取所有规则
+        $rule = strtolower($rule);
+        // echo $rule;
         if(in_array($rule, $allRules)) { // 只检测存在的规则
-            return $Auth->check($rule,$uid,$relation) ? true : false;
+            // echo "string";
+            return $Auth->check($rule,$uid,$type,$mode,$relation) ? true : false;
         } else {
             return true;
         }

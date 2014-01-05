@@ -10,7 +10,7 @@
 	<script type="text/javascript">
 		// 初始化全局变量定义
 		var MODULE_NAME = '/index.php/Admin';
-		var CONTROLLER = '/index.php/Admin/Node';
+		var CONTROLLER = '/index.php/Admin/User';
 	</script>
 
 
@@ -18,7 +18,7 @@
 <body> <!-- style="margin: 5px;" -->
 <div class="wrap" style="margin: 5px;">
 	
-	<table id="data-list" ></table>	
+	<table id="dg"></table>
 
 </div>
 <!--[if lt IE 9]>
@@ -39,90 +39,96 @@
 
 <script type="text/javascript" src="/Public/Admin/js/common.js"></script>
 
-    <script type="text/javascript">
-		
-		var toolbar = <?php echo ($toolbar); ?>;
+	<script type="text/javascript">
+		var toolbar = [{
+				text:'增加',
+				iconCls:'icon-cologne-plus',
+				handler:add
+			},{
+				text:'删除',
+				iconCls:'icon-cologne-bank',
+				handler:del
+			},'-',{
+				text:'刷新',
+				iconCls:'icon-cologne-refresh',
+				handler:function(){$("#dg").datagrid('reload');}
+			}];
+		var ulist;
 		$(function($){
-			$('#data-list').treegrid({
-				title:'节点列表',
-				url: CONTROLLER+'/get_node_json',
-				idField:'id',
-				treeField:'text',
-				height:550,
-				pagination:true,
+			ulist = $('#dg').datagrid({
+				title:'用户列表',
+				toolbar:toolbar,
+				url:'/index.php/Admin/User/getUserJson',
 				rownumbers:true,
+				pagination:true,
+				singleSelect: true,
 				enableHeaderClickMenu: false,
         		enableHeaderContextMenu: false,
-				toolbar:toolbar,
-				onBeforeLoad: function(row,param){
-					if (!row) { param.id = 0;}
-				},
+				idField:'uid',
 				columns:[[
-					{title:'名称',field:'text'},
-					{title:'模块',field:'module'},
-					{title:'RID',field:'id'},
-					{title:'URL',field:'name'},
-					{title:'状态',field:'status',align:'center',editor:'text',formatter:function(value,row,index){
-						if(value == 1) {
-							return '<span class="icons icon-status0">&nbsp;&nbsp;&nbsp;</span>';
-						} else {
-							return '<span class="icons icon-status1">&nbsp;&nbsp;&nbsp;</span>';
-						}
+					{title:'UID',field:'uid'},
+					{title:'用户名',field:'nickname'},
+					{title:'登录次数',field:'login_num'},
+					{title:'最后登录IP',field:'last_login_ip',formatter:function(value,row,index){
+						return long2ip(value);
+					}},
+					{title:'最后登录时间',field:'last_login_time',formatter:function(value,row,index){
+						// var last_login_time  = ;
+						return $.date.format(new Date(value*1000),'yy-mm-dd hh:mi:ss');
+						
+						// return 
+					}},
+					{title:'生日',field:'birthday'},
+					{title:'QQ',field:'qq'},
+					{title:'性别',field:'sex'},
+					{title:'注册时间',field:'reg_time'},
+					{title:'状态',field:'status',editor:'text',formatter:function(value,row,index){
+						return '<span class="icons icon-status'+value+'">&nbsp;&nbsp;&nbsp;</span>';
 					}}
-				]],
-		        onDblClickRow: function(row){
-		        	// console.info(row);
-		        }
+				]]
 			});
-			eyResize({'#data-list':'treegrid'});
+
+			eyResize({'#dg':'datagrid'});
 		});
 
-		function add () {
-			var sltRow = $("#data-list").treegrid('getSelected');
-			var id = sltRow ? sltRow.id : '';
+		function add() {
 			$.easyui.showDialog({
-	            title: "增加节点",
+	            title: "增加菜单",
 	            enableHeaderContextMenu:false,
 	            autoRestore:false,
-	            href:CONTROLLER+'/Add?id='+id,
+	            // iniframe:true,
+	            href:CONTROLLER+'/Add',
 	            topMost: true,
 	            enableApplyButton:false,
 	            onSave:function(){
-	            	var rs = parent.doOK();
-	            	if(rs) $("#data-list").treegrid('reload');
+	            	var rs = parent.doOK(this);
+	            	if(rs) $("#dg").datagrid('reload');
 	            	return rs;
 	            }
 	        });
 		}
 
-		function del () {
-			var sltRow = $("#data-list").treegrid('getSelected');
-			if(sltRow == null) {
-				$.messager.alert(lang.tipTitle,'请选择要删除的数据！','warning');
+		function del() {
+			var sltRow = ulist.datagrid('getSelected');
+			if(sltRow) {
+				console.info(sltRow);
+				$.messager.confirm('确认对话框', '您想要删除选择中的数据吗？', function(r){
+					if (r){
+					    $.post(CONTROLLER+'/del',{uid:sltRow.uid},function(rsp){
+							// console.info(rsp);
+							noty(rsp);
+							if(rsp.status) ulist.datagrid('reload');
+						});
+					}
+				});
 			} else {
-				if(sltRow.children) {
-					$.messager.alert(lang.tipTitle,sltRow.text+'还有下级节点,不能直接删除!','warning');
-				} else {
-					$.messager.confirm('确认','确定要删除选中的节点吗?',function(r){
-						if(r) {
-							$.post('/index.php/Admin/Node/del',{id:sltRow.id},function(rsp){
-								console.info(rsp);
-								if(rsp.status) {
-									$("#data-list").treegrid('remove',sltRow.id);
-									$.messager.show({title:lang.tipTitle,msg:rsp.info,showType:'show',position:'bottomRight'});
-								}
-							});
-						}
-					});
-				}
+				parent.$.messager.alert('提示信息','未选择数据!','warning');
 			}
 		}
 
-		function doRefresh() {
-			$("#data-list").treegrid('reload');
-		}
 		
-    </script>
+
+	</script>
 
 <script type="text/javascript">
 	$(function($){

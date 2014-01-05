@@ -24,7 +24,7 @@ class IndexController extends AdminController {
 
 
     public function getMenu($id) {
-        $Auth = new \Org\Util\Auth();
+        
         $pid = I('id',$id,'int');
         if (!$pid) { // 获取顶级菜谱
             $menus = D('Menu')->getTopMenu();
@@ -33,37 +33,18 @@ class IndexController extends AdminController {
             if($menus) {
                 foreach ($menus as $key => $line) {
                     // 后面可增加权限检测
-                    // echo UID;exit();
-                    if(IS_ROOT) {
+                    if(authentication($line['url'], UID, array('in','1,2'))){
                         $hasChild = D('Menu')->field('id')->where('pid='.$line['id'].' and status = 1')->find();
                         $menus[$key]['state'] = empty($hasChild) ? 'open' : 'closed';
                         $menus[$key]['attributes'] = array('url'=> U($line['url']));
                     } else {
-                        $rule = strtolower($line['url']);
-                        if(in_array($rule, $this->getAllRules())) {
-                            if($Auth->check($rule, UID)){
-                            // if(authentication($rule, UID)){
-                                $hasChild = D('Menu')->field('id')->where('pid='.$line['id'].' and status = 1')->find();
-                                $menus[$key]['state'] = empty($hasChild) ? 'open' : 'closed';
-                                $menus[$key]['attributes'] = array('url'=> U($line['url']));
-                            } else {
-                                unset($menus[$key]);
-                            }
-                        } else {
-                            $hasChild = D('Menu')->field('id')->where('pid='.$line['id'].' and status = 1')->find();
-                            $menus[$key]['state'] = empty($hasChild) ? 'open' : 'closed';
-                            $menus[$key]['attributes'] = array('url'=> U($line['url']));
-                        }
+                        unset($menus[$key]);
                     }
                 }
             }
         }
-        if(empty($menus)) {
-            $this->error('无下级节点！');
-        } else {
-            $this->ajaxReturn($menus,'JSON');
-        }
-        
+        $menus = array_values($menus);
+        $this->ajaxReturn($menus,'JSON');
     }
 
     public function add() {

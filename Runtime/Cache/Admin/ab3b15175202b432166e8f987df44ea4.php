@@ -1,12 +1,12 @@
-<link rel="stylesheet" type="text/css" href="__STATIC__/Validform/Validform.css">
-<form id="addmenu-fm" method="post" action="__URL__/add" >
+<?php if (!defined('THINK_PATH')) exit();?><link rel="stylesheet" type="text/css" href="/Public/Static/Validform/Validform.css">
+<form id="addmenu-fm" method="post" action="/index.php/Admin/Node/add" >
 
     <table class="fm-tb">
         <tr>
             <td class="w100 tar bdr-r"><label class="label" for="pid">父级：</label></td>
             <td>
                 <input class="easyui-combotree" name="pid" id="pid"
-                    data-options="url:'__URL__/get_node_json?isCombo=1',width:300,required:true,lines:true,novalidate:true,value:'{$id}'" />
+                    data-options="url:'/index.php/Admin/Node/get_node_json?isCombo=1',width:300,required:true,lines:true,novalidate:true,value:'<?php echo ($id); ?>'" />
             </td>
         </tr>
         <tr>
@@ -19,7 +19,7 @@
             <td class="w100 tar bdr-r"><label class="label" for="type"><span class="required">*</span>节点类型：</label></td>
             <td>
                 <!-- <input class="inputxt" type="text" name="type" id="type" data-options="" /> -->
-                <input id="node-type" class="easyui-combobox" name="type"  data-options='data:{$nodeTypes},valueField:"id",textField:"text",panelHeight:80' >
+                <input id="node-type" class="easyui-combobox" name="type"  data-options='data:<?php echo ($nodeTypes); ?>,valueField:"id",textField:"text",panelHeight:80' >
 
             </td>
         </tr>
@@ -45,8 +45,8 @@
     </table>
 </form>
 
-<script type="text/javascript" src="__STATIC__/Validform/Validform.min.js"></script>
-<script type="text/javascript" src="__JS__/common.js"></script>
+<script type="text/javascript" src="/Public/Static/Validform/Validform.min.js"></script>
+<script type="text/javascript" src="/Public/Admin/js/common.js"></script>
 
 <script type="text/javascript">
     var vdfm = $("#addmenu-fm").Validform({tiptype:3});
@@ -79,7 +79,7 @@
             $.ajax({
                 type:'post',
                 async:false,
-                url:'__URL__/add',
+                url:'/index.php/Admin/Node/add',
                 data:fmdata,
                 success:function(rsp){
                     // console.info(rsp);

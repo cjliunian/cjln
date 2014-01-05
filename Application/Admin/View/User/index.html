@@ -35,8 +35,15 @@
 					{title:'UID',field:'uid'},
 					{title:'用户名',field:'nickname'},
 					{title:'登录次数',field:'login_num'},
-					{title:'最后登录IP',field:'last_login_ip'},
-					{title:'最后登录时间',field:'last_login_time'},
+					{title:'最后登录IP',field:'last_login_ip',formatter:function(value,row,index){
+						return long2ip(value);
+					}},
+					{title:'最后登录时间',field:'last_login_time',formatter:function(value,row,index){
+						// var last_login_time  = ;
+						return $.date.format(new Date(value*1000),'yy-mm-dd hh:mi:ss');
+						
+						// return 
+					}},
 					{title:'生日',field:'birthday'},
 					{title:'QQ',field:'qq'},
 					{title:'性别',field:'sex'},

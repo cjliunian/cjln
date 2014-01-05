@@ -29,9 +29,9 @@
 	.north-style {
 		background:#DBEAF9;
 	}
-
-	/*#main-tabs .panel-body { line-height: 0;}*/
-	.panel-body{line-height: 0;} /* 防止 panel中的iframe出现不必要的滚动条 */
+	/* 防止 panel中的iframe出现不必要的滚动条 */
+	#main-tabs .panel-body { line-height: 0;}
+	/*.panel-body{line-height: 0;} */
 	#search-panel .searchbox {border: none;}
 	#search-panel .searchbox-text{padding-left: 5px;}
 	</style>
@@ -56,7 +56,7 @@
 	<div id="layout-west" data-options="region:'west',title:'导航菜单',width:180,split:true" >
 		<div id="acc-nav">
 			<!-- <div id="search-panel" data-options="collapsed:false,collapsible:false">
-				<input class="easyui-searchbox" prompt="快捷搜索" data-options="height:25,width:175,fit:true" >
+				<input class="easyui-searchbox" id="searchbox" prompt="快捷搜索" data-options="height:25,width:175,fit:true" >
 			</div> -->
 		</div>
 	</div> <!-- /layout-west -->
@@ -111,6 +111,20 @@
 	if (<?php echo ($isLockScreen); ?>) {
 		lockScreen();	
 	}
+
+	// $(function($){
+	// 	var wr = $("#body-layout").layout('panel', 'west');
+	// 	$('.layout-split-west').resizable({
+	// 		onResize:function(e){
+	// 			// console.info(e);
+	// 			var lww = $("#layout-west").width();
+	// 			console.info(lww);
+	// 			$("#searchbox").searchbox('resize',lww);
+	// 			// console.info(wr);
+	// 		}
+	// 	});
+		
+	// });
 </script>
 </body>
 </html>

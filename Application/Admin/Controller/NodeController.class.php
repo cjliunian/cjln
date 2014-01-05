@@ -9,7 +9,24 @@ class NodeController extends AdminController {
 
 	
 	public function index() {
-	
+		
+		$toolbar = array(
+			array('text'=>'增加','iconCls'=>'icon-cologne-plus','handler'=>'add','name'=>'node-index-tb-add-btn'),
+			array('text'=>'删除','iconCls'=>'icon-cologne-bank','handler'=>'del','name'=>'node-index-tb-del-btn'),
+			array('text'=>'刷新','iconCls'=>'icon-cologne-refresh','handler'=>'doRefresh'),
+		);
+
+		foreach ($toolbar as $key => $line) {
+			if($line['name'] && !authentication($line['name'], UID,2,'nourl')) {
+				unset($toolbar[$key]);
+			}
+		}
+		$toolbar = array_values($toolbar);
+		$toolbar = json_encode($toolbar);
+
+		$this->assign(array(
+			'toolbar' => $toolbar
+		));
 		
 		$this->display();
 	}
@@ -35,7 +52,12 @@ class NodeController extends AdminController {
 			$this->ajaxReturn($info);
 		} else {
 			$id = I('get.id');
-			$this->id = $id;
+			$nodeTypes = array(array('id'=>1,'text'=>'URL'),array('id'=>2,'text'=>'操作'));
+
+			$this->assign(array(
+				'id' =>$id,
+				'nodeTypes' => json_encode($nodeTypes)
+			));
 			$this->display();
 		}
 	}

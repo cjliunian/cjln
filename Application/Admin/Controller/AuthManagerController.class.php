@@ -212,6 +212,15 @@ class AuthManagerController extends AdminController{
         $this->ajaxReturn($rules);
     }
 
+    public function authCheck() {
+        $rs = authentication('node-index-tb-add-btn', UID,array('in','1,2'),'nourl');
+
+        var_dump($rs);
+
+        // var_dump($_SESSION);
+
+        exit();
+    }
     
     public function temp() {
 

@@ -47,18 +47,14 @@ class AdminController extends Controller {
         if ( $access === false ) {
             $this->error('403:禁止访问');
         }elseif( $access === null ){
+
             $dynamic        =   $this->checkDynamic();//检测分类栏目有关的各项动态权限
             if( $dynamic === null ){
                 //检测非动态权限
-                $rule  = strtolower(MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME);
-                
-                // 只验证存在的规则
-                if(in_array($rule, $this->getAllRules)) {
-                    if ( !$this->checkRule($rule,array('in','1,2')) ){
-                        $this->error('提示:无权访问,您可能需要联系管理员为您授权!');
-                    }
+                $rule  = strtolower(CONTROLLER_NAME.'/'.ACTION_NAME);
+                if(!authentication($rule, UID, array('in','1,2'),'url')){
+                    $this->error('提示:无权访问,您可能需要联系管理员为您授权!');
                 }
-                
             }elseif( $dynamic === false ){
                 $this->error('提示:无权访问,您可能需要联系管理员为您授权!');
             }
@@ -66,32 +62,6 @@ class AdminController extends Controller {
         
 	}
 
-    // public function index() {
-    
-    //     $this->_initialize();
-    // }
-
-    /**
-     * 权限检测
-     * @param string  $rule    检测的规则
-     * @param string  $mode    check模式
-     * @return boolean
-     * @author 朱亚杰  <xcoolcc@gmail.com>
-     */
-    final protected function checkRule($rule, $type=AuthRuleModel::RULE_URL, $mode='url'){
-        // var_dump($type);exit();
-        if(IS_ROOT){
-            return true;//管理员允许访问任何页面
-        }
-        static $Auth    =   null;
-        if (!$Auth) {
-            $Auth       =   new \Org\Util\Auth();
-        }
-        if(!$Auth->check($rule,UID,$type,$mode)){
-            return false;
-        }
-        return true;
-    }
 
     /**
      * 检测是否是需要动态判断的权限
