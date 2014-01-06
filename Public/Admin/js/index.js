@@ -1,7 +1,7 @@
 
 
 // 加载导航菜单
-var nav = $("#acc-nav").accordion({border:false,fit:true});
+var nav = $("#acc-nav");
 
 $(function($){
 	updateNav(false);
@@ -14,9 +14,9 @@ function updateNav (isUpadte) {
 		dataType:'json',
 		success: function(rsp) {
 			$.each(rsp,function(i,val){
-				var sltAcc = nav.accordion('select',val.text);
+				// var sltAcc = nav.accordion('getPanel',val.text);
 				// console.info(sltAcc);
-				if(sltAcc && isUpadte) {
+				if(isUpadte) {
 					nav.accordion('remove',val.text);
 					nav.accordion('add',{
 						title: val.text,
@@ -54,9 +54,7 @@ function lError(XMLHttpRequest, textStatus, errorThrown){
 	// console.info(1);
 }
 
-function doSearch(value,name){
-	alert(value+":"+name);
-}
+
 
 
 
@@ -193,6 +191,9 @@ function logout () {
 		}
 	});
 }
+
+
+
 
 
 

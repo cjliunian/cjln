@@ -15,5 +15,7 @@
 	add:'增加',
 	del:'删除',
 	edit:'编辑',
-	refresh:'刷新'
+	refresh:'刷新',
+	searchResult:'搜索结果'
+
  }

@@ -29,11 +29,19 @@
 	.north-style {
 		background:#DBEAF9;
 	}
+	#left-layout-north .searchbox {
+		border-top: none;
+		border-right: none;
+		/*padding-left: 5px;*/
+	}
+	#left-layout-north .searchbox .searchbox-text {
+		/*padding-left: 5px;*/
+	}
+	
 	/* 防止 panel中的iframe出现不必要的滚动条 */
-	#main-tabs .panel-body { line-height: 0;}
+	#main-tabs .panel-body,.dialog-content { line-height: 0;}
 	/*.panel-body{line-height: 0;} */
-	#search-panel .searchbox {border: none;}
-	#search-panel .searchbox-text{padding-left: 5px;}
+	
 	</style>
 
 	<script type="text/javascript">
@@ -53,11 +61,15 @@
 			<a href="#" class="easyui-menubutton" data-options="menu:'#mm1',iconCls:'icon-cologne-settings'">控制面板</a>
 		</div>
 	</div> <!-- /layout-north -->
-	<div id="layout-west" data-options="region:'west',title:'导航菜单',width:180,split:true" >
-		<div id="acc-nav">
-			<!-- <div id="search-panel" data-options="collapsed:false,collapsible:false">
-				<input class="easyui-searchbox" id="searchbox" prompt="快捷搜索" data-options="height:25,width:175,fit:true" >
-			</div> -->
+	<div id="layout-west" data-options="region:'west',title:'导航菜单',width:180,split:true,minWidth:180"  >
+		<div id="west-ly" class="easyui-layout" data-options="fit:true,border:false">
+			<div id="left-layout-north" data-options="region:'north',height:27,border:false" >
+				<input class="easyui-searchbox" id="searchbox" name="keyword" 
+					prompt="快捷搜索" data-options="width:175,height:28,searcher:doSearch" >
+			</div>
+			<div data-options="region:'center',border:false,onResize:cRegionResize">
+				<div id="acc-nav" class="easyui-accordion" data-options="multiple:false,fit:true,border:false"></div>
+			</div>
 		</div>
 	</div> <!-- /layout-west -->
 
@@ -108,23 +120,44 @@
 <script type="text/javascript" src="__STATIC__/easyui-extensions/jquery.comboicons.js"></script>
 <script type="text/javascript" src="__JS__/index.js"></script>
 <script type="text/javascript">
-	if ({$isLockScreen}) {
-		lockScreen();	
+	if ({$isLockScreen}) {lockScreen();	}
+
+	function cRegionResize () {
+		var westWidth = $("#west-ly").layout('panel', 'north').width();
+		$("#searchbox").searchbox('resize',westWidth+1);
 	}
 
-	// $(function($){
-	// 	var wr = $("#body-layout").layout('panel', 'west');
-	// 	$('.layout-split-west').resizable({
-	// 		onResize:function(e){
-	// 			// console.info(e);
-	// 			var lww = $("#layout-west").width();
-	// 			console.info(lww);
-	// 			$("#searchbox").searchbox('resize',lww);
-	// 			// console.info(wr);
-	// 		}
-	// 	});
-		
-	// });
+	/**
+	 * 搜索功能
+	 * 
+	 */
+	function doSearch(value,name){
+		if(!mainTabs.tabs('exists',lang.searchResult)) {
+			mainTabs.tabs('add',{
+				title: lang.searchResult,
+				href: "{:U('Admin/Search/index')}?"+name+"="+value,
+				iniframe:true,
+				iconCls:false,
+				refreshable:false,
+				closable: true
+			});
+		} else {
+			mainTabs.tabs('select',lang.searchResult);
+			// mainTabs.tabs('refresh',mainTabs.tabs('getSelectedIndex'));
+			mainTabs.tabs('update',{
+				tab:mainTabs.tabs('getSelected'),
+				options:{
+					title: lang.searchResult,
+					href: "{:U('Admin/Search/index')}?"+name+"="+value,
+					iniframe:true,
+					iconCls:false,
+					refreshable:false,
+					closable: true
+				}
+			});
+		}
+	}
+	
 </script>
 </body>
 </html>
