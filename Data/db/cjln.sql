@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50614
 File Encoding         : 65001
 
-Date: 2014-01-02 18:04:59
+Date: 2014-01-07 18:03:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -104,6 +104,32 @@ INSERT INTO `cj_auth_rule` VALUES ('44', '0', 'admin', '1', 'Admin/Index/index',
 INSERT INTO `cj_auth_rule` VALUES ('45', '44', 'admin', '1', 'Admin/Index/dashboard', '后台仪表盘', '1', '');
 
 -- ----------------------------
+-- Table structure for cj_channel
+-- ----------------------------
+DROP TABLE IF EXISTS `cj_channel`;
+CREATE TABLE `cj_channel` (
+  `chanid` int(11) NOT NULL AUTO_INCREMENT COMMENT '栏目ID',
+  `pid` int(11) DEFAULT NULL COMMENT '栏目上级ID',
+  `name` varchar(100) DEFAULT NULL COMMENT '栏目名称',
+  `url` varchar(255) DEFAULT NULL COMMENT '栏目地址URL',
+  `status` tinyint(5) DEFAULT NULL COMMENT '栏目状态0禁用1正常',
+  `sort` int(11) DEFAULT '0' COMMENT '排序',
+  PRIMARY KEY (`chanid`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cj_channel
+-- ----------------------------
+INSERT INTO `cj_channel` VALUES ('1', '0', '关于我们', 'Home/About/index', '1', '0');
+INSERT INTO `cj_channel` VALUES ('2', '0', '资讯中心', 'Home/News/index', '1', '0');
+INSERT INTO `cj_channel` VALUES ('3', '0', '集团产业', 'Home/Group/index', '1', '0');
+INSERT INTO `cj_channel` VALUES ('4', '1', '集团概况', 'Home/About/index1', '1', '0');
+INSERT INTO `cj_channel` VALUES ('5', '1', '组织架构', 'Home/About/index2', '1', '0');
+INSERT INTO `cj_channel` VALUES ('6', '1', '资质荣誉', 'Home/About/index3555', '1', '0');
+INSERT INTO `cj_channel` VALUES ('9', '0', '集团产业', 'Home/GroupCy/index', '1', '0');
+INSERT INTO `cj_channel` VALUES ('10', '0', '联系我们', 'Home/ContusUs', '1', '0');
+
+-- ----------------------------
 -- Table structure for cj_config
 -- ----------------------------
 DROP TABLE IF EXISTS `cj_config`;
@@ -154,7 +180,7 @@ CREATE TABLE `cj_member` (
 -- ----------------------------
 INSERT INTO `cj_member` VALUES ('15', '那一年', '0', '0000-00-00', '', '0', '0', '0', '0', '2130706433', '1387791641', '1');
 INSERT INTO `cj_member` VALUES ('1', 'admin', '0', '0000-00-00', '', '0', '0', '0', '0', '2130706433', '1388657010', '1');
-INSERT INTO `cj_member` VALUES ('16', 'imya', '0', '0000-00-00', '', '0', '0', '0', '0', '2130706433', '1388657059', '1');
+INSERT INTO `cj_member` VALUES ('16', 'imya', '0', '0000-00-00', '', '0', '0', '0', '0', '2130706433', '1389077138', '1');
 INSERT INTO `cj_member` VALUES ('26', '12323', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('24', '12312312', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('17', '1111', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
@@ -187,15 +213,15 @@ INSERT INTO `cj_member` VALUES ('45', '963123', '0', '0000-00-00', '', '0', '0',
 DROP TABLE IF EXISTS `cj_menu`;
 CREATE TABLE `cj_menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pid` int(11) NOT NULL COMMENT '菜单所属父级,默认为0表示顶级',
+  `pid` int(11) NOT NULL DEFAULT '0' COMMENT '菜单所属父级,默认为0表示顶级',
   `name` varchar(50) NOT NULL COMMENT '菜单名称',
   `url` varchar(100) DEFAULT NULL COMMENT 'url地址',
   `iconCls` varchar(100) DEFAULT NULL COMMENT '图标',
-  `status` tinyint(4) DEFAULT '0' COMMENT '状态默认0使用，1禁止',
+  `status` tinyint(4) DEFAULT '1' COMMENT '状态默认0使用，1禁止',
   `remark` varchar(200) DEFAULT NULL COMMENT '菜单描述',
   `sort` int(11) DEFAULT '0' COMMENT '排序',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cj_menu
@@ -203,10 +229,7 @@ CREATE TABLE `cj_menu` (
 INSERT INTO `cj_menu` VALUES ('1', '0', '全局', '123', 'icon-standard-text-list-bullets', '1', null, null);
 INSERT INTO `cj_menu` VALUES ('2', '0', '设置', '123', 'icon-standard-text-list-bullets', '1', null, null);
 INSERT INTO `cj_menu` VALUES ('3', '0', '扩展', '123', 'icon-standard-text-list-bullets', '1', null, null);
-INSERT INTO `cj_menu` VALUES ('4', '2', '站点设置', '111', 'icon-standard-text-list-bullets', '1', null, null);
-INSERT INTO `cj_menu` VALUES ('5', '2', '水印设置', '22', 'icon-standard-text-list-bullets', '1', null, null);
-INSERT INTO `cj_menu` VALUES ('6', '5', '小调设置', '2222', 'icon-standard-text-list-bullets', '1', null, null);
-INSERT INTO `cj_menu` VALUES ('7', '5', '大小设置', '12', 'icon-standard-text-list-bullets', '1', null, null);
+INSERT INTO `cj_menu` VALUES ('67', '2', '站点设置', 'Config/index', 'icon-cologne-settings', '1', null, '0');
 INSERT INTO `cj_menu` VALUES ('8', '1', '菜单项1', '123', 'icon-standard-text-list-bullets', '1', null, null);
 INSERT INTO `cj_menu` VALUES ('9', '1', '菜单管理', 'Menu/index', 'icon-standard-text-list-bullets', '1', null, null);
 INSERT INTO `cj_menu` VALUES ('10', '8', '菜单项1.1', '13', 'icon-standard-text-list-bullets', '1', null, null);
@@ -221,7 +244,6 @@ INSERT INTO `cj_menu` VALUES ('51', '3', '123', '12312', 'icon-hamburg-bug', '1'
 INSERT INTO `cj_menu` VALUES ('53', '3', '测试菜单', '12323', 'icon-standard-application-view-columns', '1', null, '0');
 INSERT INTO `cj_menu` VALUES ('54', '3', '测试菜单二', '12323', 'icon-munich-product-1', '1', null, '0');
 INSERT INTO `cj_menu` VALUES ('55', '45', '12123', '1231221', 'icon-standard-application-side-list', '1', null, '0');
-INSERT INTO `cj_menu` VALUES ('56', '4', '合建顶替', 'dsdfsdf', 'icon-standard-arrow-inout', '1', null, '0');
 INSERT INTO `cj_menu` VALUES ('57', '58', '123123', '1232', 'icon-standard-application-split', '1', null, '0');
 INSERT INTO `cj_menu` VALUES ('58', '55', '111111', '123213', 'icon-standard-arrow-refresh-small', '1', null, '0');
 INSERT INTO `cj_menu` VALUES ('59', '58', '123213', '123', '', '1', null, '0');
@@ -229,7 +251,9 @@ INSERT INTO `cj_menu` VALUES ('60', '53', '1232', '13213', '', '1', null, '0');
 INSERT INTO `cj_menu` VALUES ('61', '10', '1232', '12321', '', '1', null, '0');
 INSERT INTO `cj_menu` VALUES ('62', '58', '123', '1111', 'icon-standard-application-side-tree', '1', null, '0');
 INSERT INTO `cj_menu` VALUES ('63', '61', '123', '123213', 'icon-standard-book-addresses', '1', null, '0');
-INSERT INTO `cj_menu` VALUES ('64', '63', '123213', '1321', 'icon-standard-application-split', '1', null, '0');
+INSERT INTO `cj_menu` VALUES ('64', '63', '123213', '1321vv', 'icon-standard-application-split', '1', null, '0');
+INSERT INTO `cj_menu` VALUES ('65', '0', '内容', 'top-menu', 'icon-standard-text-list-bullets', '1', null, '0');
+INSERT INTO `cj_menu` VALUES ('66', '65', '栏目管理', 'Channel/index', 'icon-standard-text-list-bullets', '1', null, '0');
 
 -- ----------------------------
 -- Table structure for cj_ucenter_admin
@@ -296,7 +320,7 @@ CREATE TABLE `cj_ucenter_member` (
 -- ----------------------------
 INSERT INTO `cj_ucenter_member` VALUES ('15', '那一年', 'a129b591bd914facca99a0152a2d37aa', '1013385@163.com', '', '1386744697', '2130706433', '1387791641', '2130706433', '1386744697', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('1', 'admin', 'a129b591bd914facca99a0152a2d37aa', 'cjliunian@163.com', '', '1386661607', '2130706433', '1388657010', '2130706433', '1386661607', '1');
-INSERT INTO `cj_ucenter_member` VALUES ('16', 'imya', 'a129b591bd914facca99a0152a2d37aa', '123456@163.com', '', '1386744916', '2130706433', '1388657059', '2130706433', '1386744916', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('16', 'imya', 'a129b591bd914facca99a0152a2d37aa', '123456@163.com', '', '1386744916', '2130706433', '1389077138', '2130706433', '1386744916', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('18', '12424', 'a129b591bd914facca99a0152a2d37aa', '124@qq.com', '', '1386751177', '2130706433', '0', '0', '1386751177', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('25', '1111xxxxx', 'a129b591bd914facca99a0152a2d37aa', '12323123@qq.com', '', '1386820301', '2130706433', '0', '0', '1386820301', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('21', 'ASDFDFDFDF', 'a129b591bd914facca99a0152a2d37aa', 'qqqqwerewrr@163.com', '', '1386751865', '2130706433', '0', '0', '1386751865', '1');

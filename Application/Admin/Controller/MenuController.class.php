@@ -41,7 +41,7 @@ class MenuController extends AdminController
 		$post = I('post.');
 
 		$rs = M('Menu')->add($post);
-
+		$info['tip'] = $rs;
 		if($rs) {
 			$info['status'] =   true;
 	        $info['info']   =   '添加成功!';

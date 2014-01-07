@@ -1,0 +1,87 @@
+<extend name="Public/base2"/>
+
+<block name="body">
+	<table id="channel-list" ></table>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+		var toolbar = {$toolbar};
+		$(function($){
+			$('#channel-list').treegrid({
+				title:'栏目列表',
+				url: CONTROLLER+'/get_channel_json',
+				idField:'id',
+				fitColumns:true,
+				rownumbers:true,
+				treeField:'text',
+				fit:true,
+				// fitColumns:true,
+				toolbar:toolbar,
+				enableHeaderClickMenu: false,
+        		enableHeaderContextMenu: false,
+				columns:[[
+					{title:'ChanID',field:'id',align:'center'},
+					{title:'栏目名称',field:'text'},
+					{title:'URL',field:'url'},
+					{title:'状态',field:'status',align:'center',editor:'text',formatter:function(value,row,index){
+						if(value == 1) {
+							return '<span class="status-yes">√</span>';
+						} else {
+							return '<span class="status-no">×</span>';
+						}
+					}}
+				]]
+			});
+		});
+
+		function add () {
+			var sltRow = $("#channel-list").treegrid('getSelected');
+			var id = sltRow ? sltRow.id : '';
+			$.easyui.showDialog({
+	            title: "添加栏目",
+	            enableHeaderContextMenu:false,
+	            autoRestore:false,
+	            href:CONTROLLER+'/Add?id='+id,
+	            topMost: true,
+	            enableApplyButton:false,
+	            onSave:function(){
+	            	var rs = parent.doOK();
+	            	if(rs) $("#channel-list").treegrid('reload');
+	            	return rs;
+	            }
+	        });
+		}
+
+		function del () {
+			var sltRow = $("#channel-list").treegrid('getSelected');
+			// var id = sltRow ? sltRow.id : '';
+
+			if(sltRow == null) {
+				$.messager.alert(lang.tip,'请选择要删除的数据！','warning');
+			} else {
+				if(sltRow.children) {
+					$.messager.alert(lang.tip,sltRow.text+'还有下级栏目,不能直接删除!','warning');
+				} else {
+					$.messager.confirm('确认','确定要删除选中的栏目吗?',function(r){
+						if(r) {
+							$.post('__URL__/del',{id:sltRow.id},function(rsp){
+								// console.info(rsp);
+								if(rsp.status) {
+									$("#channel-list").treegrid('remove',sltRow.id);
+									$.messager.show({title:lang.tip,msg:rsp.info,showType:'show',position:'bottomRight'});
+								}
+							});
+						}
+					});
+				}
+			}
+		}
+
+		function doRefresh () {
+			$("#channel-list").treegrid('reload');
+		}
+
+
+    </script>
+</block>

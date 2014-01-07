@@ -1,0 +1,91 @@
+<extend name="Public/base2"/>
+
+<block name="style">
+	<style type="text/css">
+	.form-actions{
+		margin-top: 10px;
+		text-align: center;
+	}
+	
+</style>
+</block>
+<block name="body">
+	<form id="site-setting-fm" method="" action="">
+	    <div class="easyui-panel" data-options="title:'站点信息设置'" style="margin-bottom: 10px;">
+	    	
+	    		<table class="fm-tb">
+			        <tr>
+			            <td class="w200 tar bdr-r"><label class="label" for="name">站点名称：</label></td>
+			            <td>
+			                <input class="inputxt" type="text" id="name" name="name"  />
+			            </td>
+			            <td>
+			                默认站点名称，显示这个名称
+			            </td>
+			        </tr>
+
+			        <tr>
+			            <td class="w200 tar bdr-r"><label class="label" for="url">站点地址：</label></td>
+			            <td>
+			                <input class="inputxt" type="text" id="url" name="url"  />
+			            </td>
+			            <td>
+			                填写您站点的完整域名。例如: http://www.scfood.net
+			            </td>
+			        </tr>
+			        <tr>
+			            <td class="w200 tar bdr-r"><label class="label" for="url">管理员电子邮箱：</label></td>
+			            <td>
+			                <input class="inputxt" type="text" id="url" name="url"  />
+			            </td>
+			            <td>
+			                填写站点管理员的邮箱地址
+			            </td>
+			        </tr>
+			        <tr>
+			            <td class="w200 tar bdr-r"><label class="label" for="url">ICP 备案信息：</label></td>
+			            <td>
+			                <input class="inputxt" type="text" id="url" name="url"  />
+			            </td>
+			            <td>
+			                填写 ICP 备案的信息，例如: 蜀ICP备05000199号
+			            </td>
+			        </tr>
+		    	</table>
+	    	
+	    </div>
+
+	    <div class="easyui-panel" data-options="title:'站点状态设置'" >
+	    	
+	    		<table class="fm-tb">
+			        <tr>
+			            <td class="w200 tar bdr-r"><label class="label" for="name">站点状态：</label></td>
+			            <td>
+			                <input type="radio" name="site_status" value="正常" checked="checked" />正常
+			                <input type="radio" name="site_status" value="关闭" />关闭
+			            </td>
+			        </tr>
+
+			        <tr >
+			            <td class="w200 tar bdr-r"><label class="label" for="url">限制访问提示信息：</label></td>
+			            <td>
+			                <input class="inputxt" type="text" id="url" name="url" value="站点升级中。。。" />
+			            </td>
+			        </tr>
+			       
+		    	</table>
+	    	
+	    </div>
+
+	    <div class="easyui-panel" data-options="border:false,noheader:true,cls:'form-actions',bodyCls:'form-actions-body'" >
+	    	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-cologne-check'">提交</a>
+	    </div>
+    </form>
+
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+
+    </script>
+</block>

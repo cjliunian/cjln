@@ -18,7 +18,7 @@
 <body> <!-- style="margin: 5px;" -->
 <div class="wrap" style="margin: 5px;">
 	
-	<table id="tt" ></table>	
+	<table id="tt" ></table>
 
 </div>
 <!--[if lt IE 9]>
@@ -119,7 +119,7 @@
 	            		var fmdata = vdfm.forms.serializejson();
 			            $.ajax({
 			                type:'post',
-			                url:'/index.php/Admin/Menu/editSave',
+			                url:'/index.php/Admin/Menu/addMenuSave',
 			                async:false,
 			                data:fmdata,
 			                success:function(rsp){

@@ -14,7 +14,7 @@ return array(
         '__CSS__'    => __ROOT__ . "/Public/" . MODULE_NAME . '/css',
         '__JS__'     => __ROOT__ . "/Public/" . MODULE_NAME . '/js',
     ),
-
+    
     /* SESSION 和 COOKIE 配置 */
     // 'SESSION_PREFIX' => 'onethink_admin', //session前缀
     // 'COOKIE_PREFIX'  => 'onethink_admin_', // Cookie前缀 避免冲突

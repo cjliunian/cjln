@@ -1,7 +1,7 @@
-<extend name="Public/base"/>
+<extend name="Public/base2"/>
 
 <block name="body">
-	<table id="tt" ></table>
+	<table id="category-list" ></table>
 </block>
 
 <block name="script">
@@ -26,32 +26,15 @@
 		$(function($){
 			$('#tt').treegrid({
 				title:'菜单列表',
-				url: CONTROLLER+'/getMenuJson',
+				// url: CONTROLLER+'/getMenuJson',
 				idField:'id',
-				height:480,
 				fitColumns:true,
 				rownumbers:true,
 				treeField:'text',
+				fit:true,
 				toolbar:toolbar,
 				enableHeaderClickMenu: false,
         		enableHeaderContextMenu: false,
-        		dndRow:true,
-        		onDrop:function (target,source,point) {
-        			var data = {
-        				pid:target.id,
-        				id:source.id
-        			};
-        			// console.info(data);
-        			$.post('{:U('Menu/dnd')}',data,function(rsp){
-        				// console.info(rsp);
-        				$.messager.show('提示',rsp.info,'show','bottomRight');
-        				if(rsp.status) {
-        					// $(this).treegrid('reload');
-        					// 更新导航菜单
-        					parent.updateNav(true);
-        				}
-        			});
-        		},
 				columns:[[
 					{title:'名称',field:'text',editor:'text'},
 					{title:'URL',field:'url',editor:'text'},

@@ -38,7 +38,6 @@ class NodeController extends AdminController {
 			if(M('AuthRule')->create($post)) {
 				$rs = M('AuthRule')->add();
 			} else {
-				// --- 
 				$info['tip'] = M()->_sql();
 			}
 			
