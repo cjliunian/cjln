@@ -1,0 +1,125 @@
+<extend name="Public/base"/>
+
+<block name="link">
+	<link rel="stylesheet" type="text/css" href="__STATIC__/kindeditor/themes/default/default.css">
+</block>
+<block name="style">
+	<style type="text/css">
+	.form-actions{
+		margin-top: 10px;
+		text-align: center;
+	}
+	
+</style>
+</block>
+
+
+
+
+<block name="body">
+	<form id="cmadd-fm" method="" action="">
+	    
+	    	
+	    		<table class="fm-tb">
+			        <tr>
+			            <td class="w100 tar bdr-r"><label class="label" for="title">标题：</label></td>
+			            <td>
+			                <input class="inputxt" type="text" id="title" name="title" value="{$data.title}"  />
+			            </td>
+			           
+			        </tr>
+
+			        <tr>
+			            <td class="w100 tar bdr-r"><label class="label" for="description">摘要：</label></td>
+			            <td>
+			                <!-- <input class="inputxt" type="text" id="description" name="description" value="{$data.description}" /> -->
+			                <textarea name="description" class="inputxt" style="width:300px;height:50px;" >{$data.description}</textarea>
+			            </td>
+			          
+			        </tr>
+			         <tr>
+			            <td class="w100 tar bdr-r"><label class="label" for="keywords">关键词：</label></td>
+			            <td>
+			                <input class="inputxt" type="text" id="keywords" name="keywords" value="{$data.keywords}"  />
+			            </td>
+			            
+			        </tr>
+
+			        <tr>
+			            <td class="w100 tar bdr-r"><label class="label" for="editor_id">内容：</label></td>
+			            <td>
+		                	<textarea name="content" id="editor_id" >{$data.content}</textarea>
+			            </td>
+			        </tr>
+
+			        <tr>
+			            
+			            <td colspan="2" style="text-align: center;">
+			            	<input type="hidden" name="type"  value="{$type}" />
+			            	<input type="hidden" name="chaid"  value="{$chaid}" />
+				            <notempty name="data">
+							<input type="hidden" name="id"  value="{$data.id}" />
+							</notempty>
+			                <a href="javascript:void(0);" class="easyui-linkbutton" id="fm-submit-btn" >提交</a>
+			            </td>
+			            
+			        </tr>
+			        
+		    	</table>
+	    	
+	    
+
+
+	    
+
+	    
+    </form>
+
+</block>
+
+<block name="script">
+	<script type="text/javascript" src="__STATIC__/kindeditor/kindeditor-min.js"></script>
+	<script type="text/javascript" src="__STATIC__/kindeditor/lang/zh_CN.js"></script>
+
+    <script type="text/javascript">
+    
+		var editor;
+		KindEditor.ready(function(K) {
+			editor = K.create('#editor_id', {
+				width:850,height:300,
+				afterBlur:function(){
+					editor.sync();
+				}
+			});
+
+			// K('#fm-submit-btn').click(function(e) {
+			// 	alert(editor.html());
+			// });
+		});
+
+		$(function($){
+			$("#fm-submit-btn").click(function(){
+				var fmdata = $("#cmadd-fm").serializejson();
+				console.info(fmdata);
+	            $.ajax({
+	                type:'post',
+	                // async:false,
+	                url:'__URL__/cmAdd',
+	                data:fmdata,
+	                success:function(rsp){
+	                    console.info(rsp);
+	                    if(rsp.status) {
+	                        $.messager.show({
+				                        title:lang.tip,
+				                        msg:rsp.info,
+				                        showType:'show',
+				                        position:'bottomRight'
+				                    });
+	                    }
+	                }
+	            });
+			});
+		});
+    	
+    </script>
+</block>

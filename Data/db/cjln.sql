@@ -10,10 +10,40 @@ Target Server Type    : MYSQL
 Target Server Version : 50614
 File Encoding         : 65001
 
-Date: 2014-01-07 18:03:35
+Date: 2014-01-09 18:04:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for cj_article
+-- ----------------------------
+DROP TABLE IF EXISTS `cj_article`;
+CREATE TABLE `cj_article` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `chaid` int(11) DEFAULT NULL,
+  `title` varchar(160) NOT NULL,
+  `thumb` varchar(100) DEFAULT NULL,
+  `keywords` varchar(80) DEFAULT NULL,
+  `description` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `listorder` tinyint(3) DEFAULT '0',
+  `inputtime` int(10) unsigned DEFAULT '0',
+  `updatetime` int(10) unsigned DEFAULT '0',
+  `islink` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `hits` int(11) DEFAULT NULL,
+  `author` varchar(50) DEFAULT NULL,
+  `content` mediumtext NOT NULL,
+  `status` tinyint(2) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cj_article
+-- ----------------------------
+INSERT INTO `cj_article` VALUES ('1', '4', '集团概况', null, 'abc,qwe,aa', '集团概况', '0', '0', '0', '0', null, null, '&lt;p&gt;\r\n	四川正东农牧集团有限责任公司成立于1998年。是集羊业、猪业、饲料、生物、生态、种植、食品、科研于一体的综合性农牧企业。专注于为社会提供优质种猪、种羊、生态精品猪肉、羊肉、新型无公害饲料等系列产品。\r\n&lt;/p&gt;\r\n&lt;p&gt;\r\n	集团公司现有员工500余人，拥有可控基地50000余亩，辐射四川、贵州两省，生产经营场地近10万平方米，公司生产经营产品100余种，获得知识产权\r\n和专利成果30余项。形成了“产业融入城乡统筹，产业融入新农村建设、产业融入乡村旅游，种养结合循环高效”为一体的现代化农牧体系。\r\n&lt;/p&gt;\r\n&lt;p&gt;\r\n	集团公司始终坚持安全健康和从育种到餐桌、\r\n从田间到市场的发展理念，致力于探索和实践现代农业发展的新路子，突破了产业发展中的诸多难点和瓶颈，其中《环保菌剂在山羊舍饲养殖中零排治污的关键技术\r\n与应用》、《后备母猪饲养零排放圈舍设计》、《节约化养殖用高架式垫料发酵山羊圈舍设计》、《圈养性畜微生态环保菌剂及其应用》、《生猪规模化养殖环保节\r\n能无排放关键技术与示范》等重大可研项目获得科研成果认证和国家专利，饲料产品获得中国质量中心的CQC认证，多个品种被中国绿色食品发展中心确认为“绿\r\n色食品生产资料”。通过多年的不懈努力与中外院校、专家团队紧密合作，基本实现了投资风险可控、四季温度可控、疫病防治可控、粪污治理可控、生产成本可\r\n控、生产指标可控、产品质量可控、效益保障可控的保障体系。\r\n&lt;/p&gt;\r\n&lt;p&gt;\r\n	集团公司历届评为“四川省农业产业化经营重\r\n点龙头企业”、“四川省建设新农村先进示范单位”、“国家公益性行业农业科技项目示范基地”；“中国科技创新型中小企业100强”；“第二届中国畜牧行业\r\n百强优秀企业”；“中国畜牧行业十大新锐企业”，山羊生产基地被国家农业部授予“肉羊标准化示范场”，“国家级山羊标准化养殖基地”；生猪生产基地被确定\r\n为“四川畜科院鑫博养殖科研实验基地”、“四川省生猪健康养殖示范基地”、“四川省精品农业示范区”、“四川农业大学科研教学基地”、“四川省防疫总站猪\r\n鸡主要疫病综合免疫技术示范实验场”、“猪链球生物灾害防控技术研究与实施试验场”。被评为“第二届中国畜牧行业百强优秀企业”；“中国畜牧行业十大新锐\r\n企业”，“2011年中国科技创新型中小企业百强优秀企业”。\r\n&lt;/p&gt;', '1');
+INSERT INTO `cj_article` VALUES ('2', '5', '组织架构', null, 'xyz,123', 'vvvv', '0', '0', '0', '0', null, null, '&lt;p&gt;\r\n	四川正东农牧集团有限责任公司成立于1998年。是集羊业、猪业、饲料、生物、生态、种植、食品、科研于一体的综合性农牧企业。专注于为社会提供优质种猪、种羊、生态精品猪肉、羊肉、新型无公害饲料等系列产品。\r\n&lt;/p&gt;\r\n&lt;p&gt;\r\n	集团公司现有员工500余人，拥有可控基地50000余亩，辐射四川、贵州两省，生产经营场地近10万平方米，公司生产经营产品100余种，获得知识产权\r\n和专利成果30余项。形成了“产业融入城乡统筹，产业融入新农村建设、产业融入乡村旅游，种养结合循环高效”为一体的现代化农牧体系。\r\n&lt;/p&gt;\r\n&lt;p&gt;\r\n	集团公司始终坚持安全健康和从育种到餐桌、\r\n从田间到市场的发展理念，致力于探索和实践现代农业发展的新路子，突破了产业发展中的诸多难点和瓶颈，其中《环保菌剂在山羊舍饲养殖中零排治污的关键技术\r\n与应用》、《后备母猪饲养零排放圈舍设计》、《节约化养殖用高架式垫料发酵山羊圈舍设计》、《圈养性畜微生态环保菌剂及其应用》、《生猪规模化养殖环保节\r\n能无排放关键技术与示范》等重大可研项目获得科研成果认证和国家专利，饲料产品获得中国质量中心的CQC认证，多个品种被中国绿色食品发展中心确认为“绿\r\n色食品生产资料”。通过多年的不懈努力与中外院校、专家团队紧密合作，基本实现了投资风险可控、四季温度可控、疫病防治可控、粪污治理可控、生产成本可\r\n控、生产指标可控、产品质量可控、效益保障可控的保障体系。\r\n&lt;/p&gt;\r\n&lt;p&gt;\r\n	集团公司历届评为“四川省农业产业化经营重\r\n点龙头企业”、“四川省建设新农村先进示范单位”、“国家公益性行业农业科技项目示范基地”；“中国科技创新型中小企业100强”；“第二届中国畜牧行业\r\n百强优秀企业”；“中国畜牧行业十大新锐企业”，山羊生产基地被国家农业部授予“肉羊标准化示范场”，“国家级山羊标准化养殖基地”；生猪生产基地被确定\r\n为“四川畜科院鑫博养殖科研实验基地”、“四川省生猪健康养殖示范基地”、“四川省精品农业示范区”、“四川农业大学科研教学基地”、“四川省防疫总站猪\r\n鸡主要疫病综合免疫技术示范实验场”、“猪链球生物灾害防控技术研究与实施试验场”。被评为“第二届中国畜牧行业百强优秀企业”；“中国畜牧行业十大新锐\r\n企业”，“2011年中国科技创新型中小企业百强优秀企业”。\r\n&lt;/p&gt;', '1');
+INSERT INTO `cj_article` VALUES ('3', '6', '资质荣誉', '', 'vsdf', '资质荣誉', '0', '0', '0', '0', null, '', 'sdfsdfsd', '1');
+INSERT INTO `cj_article` VALUES ('4', '2', '组织架构', '', 'xyz,123', 'vvvv', '0', '1389260846', '1389260846', '0', null, '', '&lt;p&gt;\r\n	四川正东农牧集团有限责任公司成立于1998年。是集羊业、猪业、饲料、生物、生态、种植、食品、科研于一体的综合性农牧企业。专注于为社会提供优质种猪、种羊、生态精品猪肉、羊肉、新型无公害饲料等系列产品。\r\n&lt;/p&gt;\r\n&lt;p&gt;\r\n	集团公司现有员工500余人，拥有可控基地50000余亩，辐射四川、贵州两省，生产经营场地近10万平方米，公司生产经营产品100余种，获得知识产权\r\n和专利成果30余项。形成了“产业融入城乡统筹，产业融入新农村建设、产业融入乡村旅游，种养结合循环高效”为一体的现代化农牧体系。\r\n&lt;/p&gt;\r\n&lt;p&gt;\r\n	集团公司始终坚持安全健康和从育种到餐桌、\r\n从田间到市场的发展理念，致力于探索和实践现代农业发展的新路子，突破了产业发展中的诸多难点和瓶颈，其中《环保菌剂在山羊舍饲养殖中零排治污的关键技术\r\n与应用》、《后备母猪饲养零排放圈舍设计》、《节约化养殖用高架式垫料发酵山羊圈舍设计》、《圈养性畜微生态环保菌剂及其应用》、《生猪规模化养殖环保节\r\n能无排放关键技术与示范》等重大可研项目获得科研成果认证和国家专利，饲料产品获得中国质量中心的CQC认证，多个品种被中国绿色食品发展中心确认为“绿\r\n色食品生产资料”。通过多年的不懈努力与中外院校、专家团队紧密合作，基本实现了投资风险可控、四季温度可控、疫病防治可控、粪污治理可控、生产成本可\r\n控、生产指标可控、产品质量可控、效益保障可控的保障体系。\r\n&lt;/p&gt;\r\n&lt;p&gt;\r\n	集团公司历届评为“四川省农业产业化经营重\r\n点龙头企业”、“四川省建设新农村先进示范单位”、“国家公益性行业农业科技项目示范基地”；“中国科技创新型中小企业100强”；“第二届中国畜牧行业\r\n百强优秀企业”；“中国畜牧行业十大新锐企业”，山羊生产基地被国家农业部授予“肉羊标准化示范场”，“国家级山羊标准化养殖基地”；生猪生产基地被确定\r\n为“四川畜科院鑫博养殖科研实验基地”、“四川省生猪健康养殖示范基地”、“四川省精品农业示范区”、“四川农业大学科研教学基地”、“四川省防疫总站猪\r\n鸡主要疫病综合免疫技术示范实验场”、“猪链球生物灾害防控技术研究与实施试验场”。被评为“第二届中国畜牧行业百强优秀企业”；“中国畜牧行业十大新锐\r\n企业”，“2011年中国科技创新型中小企业百强优秀企业”。\r\n&lt;/p&gt;', '1');
 
 -- ----------------------------
 -- Table structure for cj_auth_group
@@ -114,20 +144,23 @@ CREATE TABLE `cj_channel` (
   `url` varchar(255) DEFAULT NULL COMMENT '栏目地址URL',
   `status` tinyint(5) DEFAULT NULL COMMENT '栏目状态0禁用1正常',
   `sort` int(11) DEFAULT '0' COMMENT '排序',
+  `type` tinyint(5) DEFAULT '0',
   PRIMARY KEY (`chanid`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cj_channel
 -- ----------------------------
-INSERT INTO `cj_channel` VALUES ('1', '0', '关于我们', 'Home/About/index', '1', '0');
-INSERT INTO `cj_channel` VALUES ('2', '0', '资讯中心', 'Home/News/index', '1', '0');
-INSERT INTO `cj_channel` VALUES ('3', '0', '集团产业', 'Home/Group/index', '1', '0');
-INSERT INTO `cj_channel` VALUES ('4', '1', '集团概况', 'Home/About/index1', '1', '0');
-INSERT INTO `cj_channel` VALUES ('5', '1', '组织架构', 'Home/About/index2', '1', '0');
-INSERT INTO `cj_channel` VALUES ('6', '1', '资质荣誉', 'Home/About/index3555', '1', '0');
-INSERT INTO `cj_channel` VALUES ('9', '0', '集团产业', 'Home/GroupCy/index', '1', '0');
-INSERT INTO `cj_channel` VALUES ('10', '0', '联系我们', 'Home/ContusUs', '1', '0');
+INSERT INTO `cj_channel` VALUES ('1', '0', '关于我们', 'Home/About/index', '1', '0', '0');
+INSERT INTO `cj_channel` VALUES ('2', '0', '资讯中心', 'Home/News/index', '1', '0', '0');
+INSERT INTO `cj_channel` VALUES ('3', '0', '集团产业', 'Home/Group/index', '1', '0', '0');
+INSERT INTO `cj_channel` VALUES ('4', '1', '集团概况', 'Home/About/index1', '1', '0', '1');
+INSERT INTO `cj_channel` VALUES ('5', '1', '组织架构', 'Home/About/index2', '1', '0', '1');
+INSERT INTO `cj_channel` VALUES ('6', '1', '资质荣誉', 'Home/About/index3555', '1', '0', '1');
+INSERT INTO `cj_channel` VALUES ('11', '0', '正东产品', 'Home/index/111', '1', '0', '0');
+INSERT INTO `cj_channel` VALUES ('10', '0', '联系我们', 'Home/ContusUs', '1', '0', '0');
+INSERT INTO `cj_channel` VALUES ('12', '0', '技术支持', '123', '1', '0', '0');
+INSERT INTO `cj_channel` VALUES ('13', '0', '发展战略', '123123', '1', '0', '0');
 
 -- ----------------------------
 -- Table structure for cj_config
@@ -180,7 +213,7 @@ CREATE TABLE `cj_member` (
 -- ----------------------------
 INSERT INTO `cj_member` VALUES ('15', '那一年', '0', '0000-00-00', '', '0', '0', '0', '0', '2130706433', '1387791641', '1');
 INSERT INTO `cj_member` VALUES ('1', 'admin', '0', '0000-00-00', '', '0', '0', '0', '0', '2130706433', '1388657010', '1');
-INSERT INTO `cj_member` VALUES ('16', 'imya', '0', '0000-00-00', '', '0', '0', '0', '0', '2130706433', '1389077138', '1');
+INSERT INTO `cj_member` VALUES ('16', 'imya', '0', '0000-00-00', '', '0', '0', '0', '0', '2130706433', '1389260846', '1');
 INSERT INTO `cj_member` VALUES ('26', '12323', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('24', '12312312', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `cj_member` VALUES ('17', '1111', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
@@ -221,7 +254,7 @@ CREATE TABLE `cj_menu` (
   `remark` varchar(200) DEFAULT NULL COMMENT '菜单描述',
   `sort` int(11) DEFAULT '0' COMMENT '排序',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cj_menu
@@ -230,6 +263,7 @@ INSERT INTO `cj_menu` VALUES ('1', '0', '全局', '123', 'icon-standard-text-lis
 INSERT INTO `cj_menu` VALUES ('2', '0', '设置', '123', 'icon-standard-text-list-bullets', '1', null, null);
 INSERT INTO `cj_menu` VALUES ('3', '0', '扩展', '123', 'icon-standard-text-list-bullets', '1', null, null);
 INSERT INTO `cj_menu` VALUES ('67', '2', '站点设置', 'Config/index', 'icon-cologne-settings', '1', null, '0');
+INSERT INTO `cj_menu` VALUES ('68', '65', '内容管理', 'ContentsManage/index', 'icon-standard-text-list-bullets', '1', null, '0');
 INSERT INTO `cj_menu` VALUES ('8', '1', '菜单项1', '123', 'icon-standard-text-list-bullets', '1', null, null);
 INSERT INTO `cj_menu` VALUES ('9', '1', '菜单管理', 'Menu/index', 'icon-standard-text-list-bullets', '1', null, null);
 INSERT INTO `cj_menu` VALUES ('10', '8', '菜单项1.1', '13', 'icon-standard-text-list-bullets', '1', null, null);
@@ -320,7 +354,7 @@ CREATE TABLE `cj_ucenter_member` (
 -- ----------------------------
 INSERT INTO `cj_ucenter_member` VALUES ('15', '那一年', 'a129b591bd914facca99a0152a2d37aa', '1013385@163.com', '', '1386744697', '2130706433', '1387791641', '2130706433', '1386744697', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('1', 'admin', 'a129b591bd914facca99a0152a2d37aa', 'cjliunian@163.com', '', '1386661607', '2130706433', '1388657010', '2130706433', '1386661607', '1');
-INSERT INTO `cj_ucenter_member` VALUES ('16', 'imya', 'a129b591bd914facca99a0152a2d37aa', '123456@163.com', '', '1386744916', '2130706433', '1389077138', '2130706433', '1386744916', '1');
+INSERT INTO `cj_ucenter_member` VALUES ('16', 'imya', 'a129b591bd914facca99a0152a2d37aa', '123456@163.com', '', '1386744916', '2130706433', '1389260846', '2130706433', '1386744916', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('18', '12424', 'a129b591bd914facca99a0152a2d37aa', '124@qq.com', '', '1386751177', '2130706433', '0', '0', '1386751177', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('25', '1111xxxxx', 'a129b591bd914facca99a0152a2d37aa', '12323123@qq.com', '', '1386820301', '2130706433', '0', '0', '1386820301', '1');
 INSERT INTO `cj_ucenter_member` VALUES ('21', 'ASDFDFDFDF', 'a129b591bd914facca99a0152a2d37aa', 'qqqqwerewrr@163.com', '', '1386751865', '2130706433', '0', '0', '1386751865', '1');

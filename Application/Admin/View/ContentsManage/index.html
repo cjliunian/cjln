@@ -1,0 +1,50 @@
+<extend name="Public/base2"/>
+
+<block name="link">
+	<link rel="stylesheet" type="text/css" href="__STATIC__/kindeditor/themes/default/default.css">
+</block>
+<block name="style">
+    
+</block>
+<block name="body">
+    <div class="easyui-layout" id="cm-layout" fit="true" style="width:100%;">
+        <div data-options="region:'west',split:true,width:200,title:'内容分类'">
+            <ul id="channel-list-tree"></ul>
+        </div>
+        <div data-options="region:'center',title:'内容管理',href:'__URL__/cmCate'" style="line-height: 0;">
+        </div>
+    </div>
+</block>
+
+<block name="script">
+    <script type="text/javascript" src="__STATIC__/kindeditor/kindeditor-min.js"></script>
+    <script type="text/javascript" src="__STATIC__/kindeditor/lang/zh_CN.js"></script>
+
+    <script type="text/javascript">
+    	$(function($){
+    		$("#channel-list-tree").tree({
+    			url:"{:U('Channel/get_channel_json')}",
+    			lines:true,
+    			onClick:function(node) {
+    				console.info(node);
+    				if(!node.children) {
+	    				
+                        $("#cm-layout").layout('panel','center').panel('setTitle',node.text);
+                        $("#cm-layout").layout('panel','center').panel('options').iniframe = true;
+                     
+	    				if(node.type == "1") {
+	    					$("#cm-layout").layout('panel','center').panel("refresh", "__URL__/cmAbc/?type=1&chaid="+node.id);
+	    				} else {
+	    					$("#cm-layout").layout('panel','center').panel("refresh", "__URL__/cmAbc/?type=0&chaid="+node.id);
+	    				}
+    				}
+    				
+    				// $("#cm-layout").layout('panel','center').panel('options').iniframe=true;
+    				// $("#cm-layout").layout('panel','center').panel('options').href="";
+    				// var pop = $("#cm-layout").layout('panel','center').panel('options');
+    				// console.info(pop);
+    			}
+    		});
+    	});
+    </script>
+</block>

@@ -78,10 +78,8 @@ class ChannelController extends AdminController {
 	public function get_channel_json() {
 		$mdl = D('Channel');
 
-		// if($isCombo) {
-
-		// } else {}
-		$fields = "chanid as id,pid,name as text,url,status,sort";
+		
+		$fields = "chanid as id,pid,name as text,url,status,sort,type";
 		$map = "status = 1";
 		$list = $mdl->lists($fields,$map);
 		$tree = list_to_tree($list,'id','pid','children');
