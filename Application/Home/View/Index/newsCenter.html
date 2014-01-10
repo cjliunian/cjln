@@ -1,0 +1,99 @@
+<extend name="Public/base"/>
+<block name="link">
+	<link href="__CSS__/ej.css" rel="stylesheet" />
+</block>
+
+<block name="main">
+<!--中间开始-->
+
+    <!--banner开始-->
+    <div class="w_100 fleft">
+		<div class="banner_zixun"></div> 
+    </div>
+   <!--banner结束-->
+   
+    <div class="w_100 fleft main_bg">
+      <div class="w_100 fleft ejdb_bg">
+	  <div class="w1000 center">
+	  <table width="998" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+		  <tr>
+			<td width="136" valign="top" class="ej_dh_zbg">
+			   <div class="ejtitlebg"><span class="ejdh_txt">资讯中心</span></div>
+			   <div class="ej_dh_w">
+			      <ul>
+				     <foreach name="subChan" item="vo" >
+				    <li>
+						<a href="{$vo.url}" <if condition="$vo['chanid'] eq  $chanid">class="select"</if> >{$vo.name}</a>
+					</li>
+				    </foreach>
+				  </ul>
+			   </div>
+			</td>
+			<td width="862" valign="top" class="bg_pb2">
+			     <div class="zswz_w">您的位置：<a href="#">首页</a> > <a href="#">资讯中心</a> > <span class="dqwz_color">{$data.name}</span></div>	
+				 <div class="dh_biti">{$data.name}</div>
+				 <div class="neirong_w">
+				       <div class="yw_tt">
+							<div class="yw_tt_pic"><a href="" target="_blank"><img src="__IMG__/xwpt.jpg" border="0" width="210" height="148"/></a></div>
+							<div class="yw_tt_txt_w">
+								<div class="yw_tt_txt"><a href="index.php?m=Home&c=Index&a=newsShow&chanid={$chanid}&id={$arLists['0']['id']}" target="_blank">{$arLists['0']['title']}</a></div>
+								<div class="yw_tt_yz"><a href="index.php?m=Home&c=Index&a=newsShow&chanid={$chanid}&id={$arLists['0']['id']}" target="_blank">{$arLists['0']['description']|msubstr=0,130,'utf-8',true}</a><br />
+							  【{$arLists['0']['inputtime']|date='Y.m.d',###}】</div>
+							</div>
+					 </div>
+					 
+					 <div  class="ej_newslist">	 
+					 <ul>
+					 	<foreach name="arLists" item="vo" key="k" >
+					 	<if condition="$k egt 1">
+					 		
+					 	
+					   <li>
+					   	<span class="fleft">
+					   		<a href="#" target="_blank">{$vo.title|msubstr=0,50,'utf-8',false}</a>
+					   	</span>
+					   	<span class="fright">{$vo['inputtime']|date='Y.m.d',###}</span>
+					   </li>
+					   </if>
+					   </foreach>
+					   
+					 </ul>
+					 <div id="page" class="page">
+
+							<div class="page_num">
+							{$page}
+								<!-- <span class="unprev"><</span>
+								<span class="current">1</span>
+								<a href="#">&nbsp;2&nbsp;</a>
+								<a href="#">&nbsp;3&nbsp;</a>
+								<a href="#">&nbsp;4&nbsp;</a>
+								<a href="#">&nbsp;5&nbsp;</a>
+								<span class="etc">...</span>
+								<a href="#">12</a>
+								<a href="#" class="next">></a> -->
+							</div>
+	                </div>
+				 </div>
+					 
+				 </div>		
+			</td>
+		   </tr>
+		  <tr>
+			<td colspan="2" valign="top" class="bg_bottom"></td>
+		  </tr>
+		</table>
+      </div>
+	  
+	  </div>
+	  <div class="clear"></div>
+	</div>
+  
+ 
+<!--中间结束-->
+
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+    </script>
+</block>

@@ -28,7 +28,7 @@ class ContentsManageController extends AdminController {
 
 
 	public function cmAbc($type,$chaid) {
-		$$issgl = I('issgl');
+		$issgl = I('issgl');
 		$p = array('chaid' => $chaid,'type'=>$type,'issgl'=>$issgl);
 		// echo $chaid;exit();
 		if($type) {
@@ -45,6 +45,7 @@ class ContentsManageController extends AdminController {
 		if(IS_POST) {
 
 			$posts = I('post.');
+			$posts['inputtime'] = time();
 			if($posts['id']) {
 				$rs = M('Article')->save($posts);
 			} else {
@@ -60,8 +61,8 @@ class ContentsManageController extends AdminController {
 			}
 			$this->ajaxReturn($rsp);
 		} else {
-			// $issgl = I('issgl');
-			var_dump($issgl);
+			$issgl = I('issgl');
+			// var_dump($issgl);
 			if($issgl) {
 				$this->assign(array(
 					'type' => $type,

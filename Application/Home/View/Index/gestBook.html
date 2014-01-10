@@ -1,0 +1,157 @@
+<extend name="Public/base"/>
+<block name="link">
+	<link href="__CSS__/ej.css" rel="stylesheet" />
+</block>
+<block name="header_script">
+	<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+</block>
+<block name="main">
+<!--中间开始-->
+
+    <!--banner开始-->
+    <div class="w_100 fleft">
+		<div class="banner_zhanlue"></div> 
+    </div>
+   <!--banner结束-->
+   
+    <div class="w_100 fleft main_bg">
+      <div class="w_100 fleft ejdb_bg">
+	  <div class="w1000 center">
+	  <table width="998" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+		  <tr>
+			<td width="136" valign="top" class="ej_dh_zbg">
+			   <div class="ejtitlebg"><span class="ejdh_txt">联系我们</span></div>
+			   <div class="ej_dh_w">
+			      <ul>
+				    <foreach name="subChan" item="vo" >
+				    <li>
+						<a href="{$vo.url}" <if condition="$vo['chanid'] eq  $chanid">class="select"</if> >{$vo.name}</a>
+					</li>
+				    </foreach>
+				  </ul>
+			   </div>
+			</td>
+			<td width="862" valign="top" class="bg_pb2">
+			     <div class="zswz_w">您的位置：<a href="#">首页</a> > <a href="#">联系我们</a> > <span class="dqwz_color">在线留言</span></div>	
+				 <div class="dh_biti">在线留言</div>
+				 <div class="neirong_w">
+				     
+					 <div class="zxly_w">
+					      <div class="zxly_ts"><img src="__IMG__/zxlyicon_03.jpg" align="absmiddle"/> 在线填写您的建议或意见</div>
+						  <div class="yj_box">
+						  		
+						  		<form id="gb-fm" method="" action="">
+						      <div class="ly_xmk">
+							     <input name="title" type="text" class="shurukuang" value="您的名字" onfocus="if(this.value=='您的名字'){this.value=''}" onblur="if(this.value==''){this.value='您的名字'}" />
+							     <input name="description" type="text" class="shurukuang" value="您的邮箱" onfocus="if(this.value=='您的邮箱'){this.value=''}" onblur="if(this.value==''){this.value='您的邮箱'}"/><input name="keywords" type="text" class="shurukuang" value="您的电话" onfocus="if(this.value=='您的电话'){this.value=''}" onblur="if(this.value==''){this.value='您的电话'}"/>
+							  </div>
+							  <div class="ly_quyu">
+							  <textarea name="content" cols="" rows="" class="wbq_box"></textarea>
+							  </div>
+							  </form>
+							  <div class="ly_tj"><a href="javascript:void(0);" id="gb-btn"><img src="__IMG__/tjly_07.jpg" border="0"/></a></div>
+							  
+							  <div class="clear"></div>
+						  </div>
+						  
+					 </div>
+					 
+					 
+					 <div class="lyxx_tt">
+					     <span class="title_txt">留言信息</span>
+					 </div>
+					 
+					 <div class="ly_nr_w">
+					 	<foreach name="arLists" item="vo" >
+
+					    <div class="lyk_box">
+						   <div class="ly_name">
+						       <div class="ly_text"><span class="fontwb12">{$vo.title}</span> {$vo['inputtime']|date='Y-m-d',###}</div>
+						   </div>
+						   <div class="ly_xinxi">
+						        <div class="ly_wenzi">{$vo['content']|stripcslashes|htmlspecialchars_decode}</div>
+						   </div>
+						</div>
+						</foreach>
+						
+						
+						
+						<div id="page" class="page">
+							<div class="page_num">
+								{$page}
+							</div>
+	                </div>
+						
+					 </div>
+					
+				 </div>		
+			</td>
+		   </tr>
+		  <tr>
+			<td colspan="2" valign="top" class="bg_bottom"></td>
+		  </tr>
+		</table>
+      </div>
+	  
+	  </div>
+	  <div class="clear"></div>
+	</div>
+  
+ 
+<!--中间结束-->
+
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+    /**
+ * 将表单序列化成json数据 扩展
+ *
+ **/
+(function($) {
+    $.fn.serializejson = function() {
+        var serializeObj = {};
+        var array = this.serializeArray();
+        var str = this.serialize();
+        $(array).each(function() {
+            if (serializeObj[this.name]) {
+                if ($.isArray(serializeObj[this.name])) {
+                    serializeObj[this.name].push(this.value);
+                } else {
+                    serializeObj[this.name] = [serializeObj[this.name], this.value];
+                }
+            } else {
+                serializeObj[this.name] = this.value;
+            }
+        });
+        return serializeObj;
+    };
+})(jQuery);
+    $(function($){
+    	$("#gb-btn").click(function(){
+    		var fmdata = $("#gb-fm").serializejson();
+    		
+    		if(fmdata.title == "您的名字" || fmdata.content =="") {
+    			alert('请填写您的名字或留内容!');
+    			return false;
+    		} else {
+    			if(fmdata.description=='您的邮箱') fmdata.description = '';
+    			if(fmdata.keywords=='您的电话') fmdata.keywords = '';
+    			$.ajax({
+    				url:'__URL__/addGestbook',
+    				type:'post',
+    				data:fmdata,
+    				success:function(rsp){
+    					if(rsp.status){
+    						window.location.reload();
+    					} else {
+    						alert(rsp.info);
+    					}
+    				}
+    			});
+    		}
+    	});
+    });
+    
+</script>
+</block>

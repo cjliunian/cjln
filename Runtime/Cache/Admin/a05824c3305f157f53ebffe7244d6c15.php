@@ -29,7 +29,7 @@
         <div data-options="region:'west',split:true,width:200,title:'内容分类'">
             <ul id="channel-list-tree"></ul>
         </div>
-        <div data-options="region:'center',title:'内容管理',href:'/index.php/Admin/ContentsManage/cmCate'" style="line-height: 0;">
+        <div data-options="region:'center',title:'内容管理'" style="line-height: 0;">
         </div>
     </div>
 

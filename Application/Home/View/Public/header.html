@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>正东农牧</title>
+<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+<link href="__CSS__/foucs.css" rel="stylesheet" />
+<block name="link"></block>
+<script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js"></script>
+<script src="__JS__/jquery.foucs.js" type="text/javascript"></script>
+<block name="header_script"></block>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.box a').mouseover(function(){
+			$(this).stop().animate({"top":"-114px"}, 200); 
+		})
+		$('.box a').mouseout(function(){
+			$(this).stop().animate({"top":"0"}, 200); 
+		})
+	});
+</script>
+
+</head>
+
+<body>
+<!--头部开始-->
+<div class="w_100 fleft head">
+	<div class="w1000 center">
+		<div class="hd_xd_w">
+			<div class="logo">
+				<a href="#">
+					<img src="__IMG__/logo.png"  border="0"/>
+				</a>
+			</div>
+			<div class="daohang_w">
+				<ul>
+					<php>$curChaid = I('get.chanid');$curPid = M('Channel')->where('chanid='.$curChaid)->getField('pid');</php>
+					<li>
+						<a href="/" <if condition="!$curChaid">class="select"</if>>网站首页</a>
+					</li>
+				    <foreach name="channels" item="vo" >
+				    <li >
+						<a href="{$vo.url}" <if condition="$vo['chanid'] eq  $curPid">class="select"</if> >{$vo.name}</a>
+					</li>
+				    </foreach>
+					
+
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<!--头部结束-->

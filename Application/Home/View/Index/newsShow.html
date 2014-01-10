@@ -1,0 +1,65 @@
+<extend name="Public/base"/>
+<block name="link">
+	<link href="__CSS__/ej.css" rel="stylesheet" />
+</block>
+
+<block name="main">
+<!--中间开始-->
+
+    <!--banner开始-->
+    <div class="w_100 fleft">
+		<div class="banner_zixun"></div> 
+    </div>
+   <!--banner结束-->
+   
+    <div class="w_100 fleft main_bg">
+      <div class="w_100 fleft ejdb_bg">
+	  <div class="w1000 center">
+	  <table width="998" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+		  <tr>
+			<td width="136" valign="top" class="ej_dh_zbg">
+			   <div class="ejtitlebg"><span class="ejdh_txt">资讯中心</span></div>
+			   <div class="ej_dh_w">
+			      <ul>
+				     <foreach name="subChan" item="vo" >
+				    <li>
+						<a href="{$vo.url}" <if condition="$vo['chanid'] eq  $chanid">class="select"</if> >{$vo.name}</a>
+					</li>
+				    </foreach>
+				  </ul>
+			   </div>
+			</td>
+			<td width="862" valign="top" class="bg_pb2">
+			     <div class="zswz_w">您的位置：<a href="#">首页</a> > <a href="#">资讯中心</a> > <span class="dqwz_color">{$data.name}</span></div>	
+				 <div class="dh_biti">{$data.name}</div>
+				 <div class="neirong_w">
+				 	<div class="head_word_w">
+					    <div class="key_word">{$data.title}</div>
+						<div class="other_word">发布日期:{$data['inputtime']|date='Y-m-d H:i:s',###}  阅读数:{$data.hits}</div>
+					 </div>
+					 <div class="zhengwen">
+					 {$data['content']|stripcslashes|htmlspecialchars_decode}
+					 </div>
+				 
+				 </div>		
+			</td>
+		   </tr>
+		  <tr>
+			<td colspan="2" valign="top" class="bg_bottom"></td>
+		  </tr>
+		</table>
+      </div>
+	  
+	  </div>
+	  <div class="clear"></div>
+	</div>
+  
+ 
+<!--中间结束-->
+
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+    </script>
+</block>
